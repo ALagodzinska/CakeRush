@@ -5,3 +5,11 @@ My project is **a game and a memory exercise** where the user plays as a baker w
 
 ## Who will use the game and why it interests me
 This game is great for people who enjoy **time-bound challenges** that **train memory and focus**. It can be played by students to improve their memory skills or simply as a good recreational activity. The reason why I chose this idea is because I want to challenge myself and create a game. As well I plan to draw the cake elements myself and include them in the game to make it more visual. Besides, I enjoy baking, which is why I am excited to create a game about cakes.
+
+## User stories
+- As a user, I want to be able to save the round of the game to the game session.
+- As a user, I want to be able to view the list of played rounds in the game session.
+- As a user, I want to be able to view the game’s journal and see the list of all games sessions.
+- As a user, I want to be able to preview the cake before the round starts so I would be able to recreate it.
+- As a user, I want to be able to select different cake elements to recreate a cake.
+- As a user, I want to be able to see the total score at the end of the game. 
