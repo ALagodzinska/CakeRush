@@ -21,10 +21,10 @@ public class TestCake {
     @Test
     void testDefaultConstructor() {
         assertEquals(1, defaultCake.getNumberOfTiers());
-        assertEquals("white", defaultCake.getCakeColor());
-        assertEquals("none", defaultCake.getGlaze());
-        assertEquals("none", defaultCake.getTopping());
-        assertEquals("none", defaultCake.getDecoration());
+        assertEquals(Cake.CAKE_COLORS[0], defaultCake.getCakeColor());
+        assertEquals(Cake.GLAZES[0], defaultCake.getGlaze());
+        assertEquals(Cake.TOPPINGS[0], defaultCake.getTopping());
+        assertEquals(Cake.DECORATIONS[0], defaultCake.getDecoration());
     }
 
     @Test
@@ -38,37 +38,90 @@ public class TestCake {
     @Test
     void testCompareSame() {
         defaultCake.setNumberOfTiers(2);
-        defaultCake.setCakeColor("blue");
-        defaultCake.setGlaze("pink");
-        defaultCake.setTopping("sprinkles");
-        defaultCake.setDecoration("note");
+        defaultCake.setCakeColor(Cake.CAKE_COLORS[2]);
+        defaultCake.setGlaze(Cake.GLAZES[1]);
+        defaultCake.setTopping(Cake.TOPPINGS[3]);
+        defaultCake.setDecoration(Cake.DECORATIONS[4]);
 
         assertEquals(2, defaultCake.getNumberOfTiers());
-        assertEquals("blue", defaultCake.getCakeColor());
-        assertEquals("pink", defaultCake.getGlaze());
-        assertEquals("sprinkles", defaultCake.getTopping());
-        assertEquals("note", defaultCake.getDecoration());
+        assertEquals(Cake.CAKE_COLORS[2], defaultCake.getCakeColor());
+        assertEquals(Cake.GLAZES[1], defaultCake.getGlaze());
+        assertEquals(Cake.TOPPINGS[3], defaultCake.getTopping());
+        assertEquals(Cake.DECORATIONS[4], defaultCake.getDecoration());
 
         Cake secondCake = new Cake();
         secondCake.setNumberOfTiers(2);
-        secondCake.setCakeColor("blue");
-        secondCake.setGlaze("pink");
-        secondCake.setTopping("sprinkles");
-        secondCake.setDecoration("note");
+        secondCake.setCakeColor(Cake.CAKE_COLORS[2]);
+        secondCake.setGlaze(Cake.GLAZES[1]);
+        secondCake.setTopping(Cake.TOPPINGS[3]);
+        secondCake.setDecoration(Cake.DECORATIONS[4]);
 
         assertTrue(defaultCake.compare(secondCake));
     }
 
     @Test
-    void testCompareDifferent() {
-        defaultCake.setNumberOfTiers(2);
-        defaultCake.setCakeColor("blue");
-        defaultCake.setGlaze("pink");
-        defaultCake.setTopping("sprinkles");
-        defaultCake.setDecoration("note");
-
+    void testCompareDifferentNumberOfTiers() {
         Cake secondCake = new Cake();
+        secondCake.setNumberOfTiers(2);
 
         assertFalse(defaultCake.compare(secondCake));
+    }
+
+    @Test
+    void testCompareDifferentCakeColor() {
+        Cake secondCake = new Cake();
+        secondCake.setCakeColor(Cake.CAKE_COLORS[2]);
+
+        assertFalse(defaultCake.compare(secondCake));
+    }
+
+    @Test
+    void testCompareDifferentGlaze() {
+        Cake secondCake = new Cake();
+        secondCake.setGlaze(Cake.GLAZES[2]);
+
+        assertFalse(defaultCake.compare(secondCake));
+    }
+
+    @Test
+    void testCompareDifferentTopping() {
+        Cake secondCake = new Cake();
+        secondCake.setTopping(Cake.TOPPINGS[2]);
+
+        assertFalse(defaultCake.compare(secondCake));
+    }
+
+    @Test
+    void testCompareDifferentDecoration() {
+        Cake secondCake = new Cake();
+        secondCake.setDecoration(Cake.DECORATIONS[2]);
+
+        assertFalse(defaultCake.compare(secondCake));
+    }
+
+    @Test
+    void testSetNumberOfTiersLowerBoundary() {
+        defaultCake.setNumberOfTiers(1);
+        assertEquals(1, defaultCake.getNumberOfTiers());
+    }
+
+    @Test
+    void testSetNumberOfTiersUpperBoundary() {
+        defaultCake.setNumberOfTiers(Cake.maxNumberOfTiers);
+        assertEquals(Cake.maxNumberOfTiers, defaultCake.getNumberOfTiers());
+    }
+
+    @Test
+    void testSetNumberOfTiersNumberOverUpperBoundary() {
+        assertEquals(1, defaultCake.getNumberOfTiers());
+        defaultCake.setNumberOfTiers(10);
+        assertEquals(1, defaultCake.getNumberOfTiers());
+    }
+
+    @Test
+    void testSetNumberOfTiersNumberUnderLowerBoundary() {
+        assertEquals(1, defaultCake.getNumberOfTiers());
+        defaultCake.setNumberOfTiers(0);
+        assertEquals(1, defaultCake.getNumberOfTiers());
     }
 }
