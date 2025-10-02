@@ -25,10 +25,10 @@ public class TestGameRound {
         assertNotNull(gameRound.getTargetCake());
         // Check that in the beginning of the round the user have a default cake.
         assertEquals(1, gameRound.getUserCake().getNumberOfTiers());
-        assertEquals(Cake.CAKE_COLORS[0], gameRound.getUserCake().getCakeColor());
-        assertEquals(Cake.GLAZES[0], gameRound.getUserCake().getGlaze());
-        assertEquals(Cake.TOPPINGS[0], gameRound.getUserCake().getTopping());
-        assertEquals(Cake.DECORATIONS[0], gameRound.getUserCake().getDecoration());
+        assertEquals(Cake.CakeColor.WHITE, gameRound.getUserCake().getCakeColor());
+        assertEquals(Cake.Glaze.NONE, gameRound.getUserCake().getGlaze());
+        assertEquals(Cake.Topping.NONE, gameRound.getUserCake().getTopping());
+        assertEquals(Cake.Decoration.NONE, gameRound.getUserCake().getDecoration());
 
         assertEquals(0, gameRound.getCompletionTime());
         assertEquals(0, gameRound.getScore());
