@@ -16,13 +16,12 @@ public class TestGameRound {
 
     @BeforeEach
     void runBefore() {
-        gameRound = new GameRound(1, random);
+        gameRound = new GameRound(random);
     }
 
     
     @Test
     void testConstructor() {
-        assertEquals(1, gameRound.getRoundNumber());
         assertNotNull(gameRound.getTargetCake());
         // Check that in the beginning of the round the user have a default cake.
         assertEquals(1, gameRound.getUserCake().getNumberOfTiers());
@@ -32,11 +31,12 @@ public class TestGameRound {
         assertEquals(Cake.DECORATIONS[0], gameRound.getUserCake().getDecoration());
 
         assertEquals(0, gameRound.getCompletionTime());
-        assertEquals(false, gameRound.getIsVictory());
+        assertEquals(0, gameRound.getScore());
+        assertEquals(false, gameRound.isVictory());
     }
 
     @Test
-    void testFinishRoundSuccessfulRound() {
+    void testFinishRoundSuccessfulRoundMaxScore() {
         Cake targetCake = gameRound.getTargetCake();
         Cake userCake = gameRound.getUserCake();
         // Match cake
@@ -46,13 +46,55 @@ public class TestGameRound {
         userCake.setTopping(targetCake.getTopping());
         userCake.setDecoration(targetCake.getDecoration());
 
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
+
+        gameRound.finishRound(10);
+
+        assertEquals(GameRound.MAX_SCORE_TIME_LIMIT, gameRound.getCompletionTime());
+        assertTrue(gameRound.isVictory());
+        assertEquals(GameRound.MAX_SCORE, gameRound.getScore());
+    }
+
+    @Test
+    void testFinishRoundSuccessfulRoundMediumScore() {
+        Cake targetCake = gameRound.getTargetCake();
+        Cake userCake = gameRound.getUserCake();
+        // Match cake
+        userCake.setNumberOfTiers(targetCake.getNumberOfTiers());
+        userCake.setCakeColor(targetCake.getCakeColor());
+        userCake.setGlaze(targetCake.getGlaze());
+        userCake.setTopping(targetCake.getTopping());
+        userCake.setDecoration(targetCake.getDecoration());
+
+        assertFalse(gameRound.isVictory());
 
         gameRound.finishRound(20);
 
-        assertEquals(20, gameRound.getCompletionTime());
-        assertTrue(gameRound.getIsVictory());
+        assertEquals(GameRound.MEDIUM_SCORE_TIME_LIMIT, gameRound.getCompletionTime());
+        assertTrue(gameRound.isVictory());
+        assertEquals(GameRound.MEDIUM_SCORE, gameRound.getScore());
     }
+
+    @Test
+    void testFinishRoundTimeSuccessfulMaxAllowedTime() {
+        Cake targetCake = gameRound.getTargetCake();
+        Cake userCake = gameRound.getUserCake();
+        // Match cake
+        userCake.setNumberOfTiers(targetCake.getNumberOfTiers());
+        userCake.setCakeColor(targetCake.getCakeColor());
+        userCake.setGlaze(targetCake.getGlaze());
+        userCake.setTopping(targetCake.getTopping());
+        userCake.setDecoration(targetCake.getDecoration());
+
+        assertFalse(gameRound.isVictory());
+
+        gameRound.finishRound(GameRound.MAX_ROUND_TIME);
+
+        assertEquals(GameRound.MAX_ROUND_TIME, gameRound.getCompletionTime());
+        assertTrue(gameRound.isVictory());
+        assertEquals(GameRound.MIN_SCORE, gameRound.getScore());
+    }
+
 
     @Test
     void testFinishRoundFailedRound() {
@@ -62,51 +104,34 @@ public class TestGameRound {
         targetCake.setNumberOfTiers(2);
         userCake.setNumberOfTiers(3);
 
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
 
         gameRound.finishRound(20);
 
         assertEquals(20, gameRound.getCompletionTime());
-        assertFalse(gameRound.getIsVictory());
-    }
-
-    @Test
-    void testFinishRoundTimeZero() {
-        assertFalse(gameRound.getIsVictory());
-
-        gameRound.finishRound(0);
-
-        assertEquals(0, gameRound.getCompletionTime());
-        assertFalse(gameRound.getIsVictory());
-    }
-
-    @Test
-    void testFinishRoundTimeMaxAllowed() {
-        assertFalse(gameRound.getIsVictory());
-
-        gameRound.finishRound(GameRound.MAX_ROUND_TIME);
-
-        assertEquals(GameRound.MAX_ROUND_TIME, gameRound.getCompletionTime());
-        assertFalse(gameRound.getIsVictory());
-    }
+        assertFalse(gameRound.isVictory());
+        assertEquals(0, gameRound.getScore());
+    } 
 
     @Test
     void testFinishRoundTimeUnderLowerBoundary() {
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
 
         gameRound.finishRound(-1);
 
         assertEquals(0, gameRound.getCompletionTime());
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
+        assertEquals(0, gameRound.getScore());
     }
 
     @Test
     void testFinishRoundTimeOverUpperBoundary() {
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
 
         gameRound.finishRound(GameRound.MAX_ROUND_TIME + 1);
 
         assertEquals(0, gameRound.getCompletionTime());
-        assertFalse(gameRound.getIsVictory());
+        assertFalse(gameRound.isVictory());
+        assertEquals(0, gameRound.getScore());
     }
 }
