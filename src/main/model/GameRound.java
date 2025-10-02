@@ -6,7 +6,6 @@ import java.util.Random;
 // and the round outcome.
 public class GameRound {
     public static final int MAX_ROUND_TIME = 30;
-    private static int nextRoundNumber = 1;     // Round number for next new round instance.
 
     private int roundNumber;
     private Cake targetCake;
@@ -16,10 +15,8 @@ public class GameRound {
 
     // EFFECTS: Creates a game round with assigned round number, random target cake, default user cake, 
     // zero time, and victory status set to false.
-    public GameRound(Random random) {
-        this.roundNumber = nextRoundNumber;
-        nextRoundNumber++;
-
+    public GameRound(int roundNumber, Random random) {
+        this.roundNumber = roundNumber;
         this.targetCake = new Cake(random);
         this.userCake = new Cake(); 
         this.completionTime = 0;
