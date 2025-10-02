@@ -13,6 +13,7 @@ public class GameRound {
     private int completionTime;
     private boolean isVictory;
 
+    // REQUIRES: Round number must be one greater than the previous round.
     // EFFECTS: Creates a game round with assigned round number, random target cake, default user cake, 
     // zero time, and victory status set to false.
     public GameRound(int roundNumber, Random random) {

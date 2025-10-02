@@ -63,6 +63,7 @@ public class Cake {
         return this.cakeColor;
     }
 
+    // REQUIRES: The cake color must be an element from the CAKE_COLORS array.
     public void setCakeColor(String cakeColor) {
         this.cakeColor = cakeColor;
     }
@@ -70,7 +71,8 @@ public class Cake {
     public String getGlaze() {
         return this.glaze;
     }
-
+    
+    // REQUIRES: The glaze must be an element from the GLAZES array.
     public void setGlaze(String glaze) {
         this.glaze = glaze;
     }
@@ -78,7 +80,8 @@ public class Cake {
     public String getTopping() {
         return this.topping;
     }
-
+    
+    // REQUIRES: The topping must be an element from the TOPPINGS array.
     public void setTopping(String topping) {
         this.topping = topping;
     }
@@ -86,7 +89,8 @@ public class Cake {
     public String getDecoration() {
         return this.decoration;
     }
-
+    
+    // REQUIRES: The decoration must be an element from the DECORATIONS array.
     public void setDecoration(String decoration) {
         this.decoration = decoration;
     }
