@@ -2,7 +2,6 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
@@ -11,7 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestCake {
-    private Cake defaultCake;   
+    private static final int SEED = 12;
+    private static final int NUM_OF_ELEMENTS = 5;
+
+    private Cake defaultCake;
 
     @BeforeEach
     void runBefore() {
@@ -29,13 +31,16 @@ public class TestCake {
 
     @Test
     void testRandomConstructor() {
-        // Check with TA how to test random ctor
-        // seed number (test it) how to predict outcomes for the seed 
-        // method to return values in order of the seed 
+        int[] randomNumbersFixedSeed = randomFixedValues();
         
-        Random random = new Random();
+        Random random = new Random(SEED);
         Cake randomCake = new Cake(random);
-        assertNotNull(randomCake);
+
+        assertEquals(randomNumbersFixedSeed[0] + 1, randomCake.getNumberOfTiers());
+        assertEquals(Cake.CakeColor.values()[randomNumbersFixedSeed[1]], randomCake.getCakeColor());
+        assertEquals(Cake.Glaze.values()[randomNumbersFixedSeed[2]], randomCake.getGlaze());
+        assertEquals(Cake.Topping.values()[randomNumbersFixedSeed[3]], randomCake.getTopping());
+        assertEquals(Cake.Decoration.values()[randomNumbersFixedSeed[4]], randomCake.getDecoration());
     }
 
     @Test
@@ -110,8 +115,8 @@ public class TestCake {
 
     @Test
     void testSetNumberOfTiersUpperBoundary() {
-        defaultCake.setNumberOfTiers(Cake.maxNumberOfTiers);
-        assertEquals(Cake.maxNumberOfTiers, defaultCake.getNumberOfTiers());
+        defaultCake.setNumberOfTiers(Cake.MAX_NUM_OF_TIERS);
+        assertEquals(Cake.MAX_NUM_OF_TIERS, defaultCake.getNumberOfTiers());
     }
 
     @Test
@@ -126,5 +131,29 @@ public class TestCake {
         assertEquals(1, defaultCake.getNumberOfTiers());
         defaultCake.setNumberOfTiers(0);
         assertEquals(1, defaultCake.getNumberOfTiers());
+    }
+
+    private int[] randomFixedValues() {
+        int[] fiveRandomValues = new int[NUM_OF_ELEMENTS];
+        int[] optionsForAllElements = getNumberOfOptionsInOrder();
+        Random random = new Random(SEED);
+
+        for (int i = 0; i < fiveRandomValues.length; i++) {
+            fiveRandomValues[i] = random.nextInt(optionsForAllElements[i]);
+        }
+
+        return fiveRandomValues;
+    }
+
+    private int[] getNumberOfOptionsInOrder() {
+        int[] numbersOfOptionsForAllElements = new int[NUM_OF_ELEMENTS];
+
+        numbersOfOptionsForAllElements[0] = Cake.MAX_NUM_OF_TIERS;
+        numbersOfOptionsForAllElements[1] = Cake.CakeColor.values().length;
+        numbersOfOptionsForAllElements[2] = Cake.Glaze.values().length;
+        numbersOfOptionsForAllElements[3] = Cake.Topping.values().length;
+        numbersOfOptionsForAllElements[4] = Cake.Decoration.values().length;
+
+        return numbersOfOptionsForAllElements;
     }
 }

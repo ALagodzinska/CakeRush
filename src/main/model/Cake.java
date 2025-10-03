@@ -4,7 +4,7 @@ import java.util.Random;
 
 // Represents a cake that consists of different elements: number of tiers, cake color, glaze, topping and decoration.
 public class Cake {
-    public static final int maxNumberOfTiers = 3;
+    public static final int MAX_NUM_OF_TIERS = 3;
 
     enum CakeColor { WHITE, PINK, BLUE, GREEN, YELLOW; }
     
@@ -38,7 +38,7 @@ public class Cake {
         Topping[] toppings = Topping.values();
         Decoration[] decorations = Decoration.values();
 
-        this.numberOfTiers = random.nextInt(maxNumberOfTiers) + 1;
+        this.numberOfTiers = random.nextInt(MAX_NUM_OF_TIERS) + 1;
         this.cakeColor = cakeColors[random.nextInt(cakeColors.length)];
         this.glaze = glazes[random.nextInt(glazes.length)];
         this.topping = toppings[random.nextInt(toppings.length)];
@@ -62,7 +62,7 @@ public class Cake {
 
     // REQUIRES: number of tiers must be betweeen 1 and maxNumberOfTiers(inclusive).
     public void setNumberOfTiers(int numberOfTiers) {
-        if (numberOfTiers >= 1 && numberOfTiers <= maxNumberOfTiers) {
+        if (numberOfTiers >= 1 && numberOfTiers <= MAX_NUM_OF_TIERS) {
             this.numberOfTiers = numberOfTiers;
         }
     }
