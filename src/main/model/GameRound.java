@@ -51,32 +51,37 @@ public class GameRound {
 
     public int getScore() {
         return this.score;
-    }
-    
-    // MODIFIES: this
-    // EFFECTS: Calculates score based on whether the round is won and how much time it took for 
-    // the user to replicate a cake.
-    private void calculateScore() {
-        if (!this.isVictory) {
-            this.score = 0;
-        } else if (this.completionTime <= MAX_SCORE_TIME_LIMIT) {
-            this.score = MAX_SCORE;
-        } else if (this.completionTime <= MEDIUM_SCORE_TIME_LIMIT) {
-            this.score = MEDIUM_SCORE;
-        } else {
-            this.score = MIN_SCORE;
-        }
-    }
+    }    
 
     // REQUIRES: The time value between 0 and the maximum allowed round time.
     // MODIFIES: this
     // EFFECTS: Sets round victory state to true if the target cake and user cake are same otherwise sets to false. 
-    // Records the time spent to finish the round and calculates the score.
+    // Records the round statistics.
     public void finishRound(int timePlayed) {
         if (timePlayed >= 0 && timePlayed <= MAX_ROUND_TIME) {
             this.isVictory = targetCake.compare(userCake);
-            this.completionTime = timePlayed;
-            calculateScore();
+            updateStatistics(timePlayed);
+        }
+    }
+
+     // MODIFIES: this
+    // EFFECTS: Records the round time and calculates the round score.
+    private void updateStatistics(int timePlayed) {        
+        this.completionTime = timePlayed;
+        this.score = calculateScore();
+    }
+
+    // EFFECTS: Calculates score based on whether the round is won and how much time it took for 
+    // the user to replicate a cake.
+    private int calculateScore() {
+        if (!this.isVictory) {
+            return 0;
+        } else if (this.completionTime <= MAX_SCORE_TIME_LIMIT) {
+            return MAX_SCORE;
+        } else if (this.completionTime <= MEDIUM_SCORE_TIME_LIMIT) {
+            return MEDIUM_SCORE;
+        } else {
+            return MIN_SCORE;
         }
     }
 }

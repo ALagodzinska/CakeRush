@@ -32,7 +32,7 @@ public class TestGameRound {
 
         assertEquals(0, gameRound.getCompletionTime());
         assertEquals(0, gameRound.getScore());
-        assertEquals(false, gameRound.isVictory());
+        assertFalse(gameRound.isVictory());
     }
 
     @Test
