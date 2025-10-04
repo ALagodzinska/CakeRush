@@ -11,6 +11,7 @@ public class GameSession {
         // stub
     }
 
+    // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
     public void addRound(GameRound round) {
         // stub
     }    
@@ -36,8 +37,8 @@ public class GameSession {
     }
 
     // MODIFIES: this
-    // EFFECTS: Updates the total time played, total score and checks if the round was lost after a new round is added.
-    public void updateAfterRound(GameRound round) {
+    // EFFECTS: Updates the total time played, total score. If round was lost, updates the game state to finished.
+    private void updateAfterRound(GameRound round) {
         // stub
     }
 }
