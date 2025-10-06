@@ -4,7 +4,7 @@ import java.util.Random;
 
 // Represents a cake that consists of different elements: number of tiers, cake color, glaze, topping and decoration.
 public class Cake {
-    public static final int MAX_NUM_OF_TIERS = 3;
+    public static final int MAX_NUM_OF_TIERS = 3;   
 
     enum CakeColor { WHITE, PINK, BLUE, GREEN, YELLOW; }
     
@@ -14,11 +14,11 @@ public class Cake {
 
     enum Decoration { NONE, CANDLE, FLOWER, BALLOON, CARD; }
 
-    private int numberOfTiers;      // number of cake tiers (min: 1, max: maxNumberOfTiers)
+    private int numberOfTiers;         // number of cake tiers (min: 1, max: maxNumberOfTiers)
     private CakeColor cakeColor;       // cake color (must be from the list of CAKE_COLORS)
-    private Glaze glaze;           // glaze type (must be from the list of GLAZES)
-    private Topping topping;         // topping (must be from the list of TOPPINGS)
-    private Decoration decoration;      // decoration (must be from the list of DECORATIONS)
+    private Glaze glaze;               // glaze type (must be from the list of GLAZES)
+    private Topping topping;           // topping (must be from the list of TOPPINGS)
+    private Decoration decoration;     // decoration (must be from the list of DECORATIONS)
 
     // EFFECTS: Creates one tier white color cake, with no glaze, topping and
     // decoration.

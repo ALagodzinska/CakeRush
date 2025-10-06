@@ -17,7 +17,7 @@ public class GameRound {
 
     private Cake targetCake;        // the cake that user has to replicate
     private Cake userCake;          // the cake user modifies to match target cake
-    private int completionTime;     // time it took to complete the round
+    private int completionTime;     // time it took to complete the round (in seconds)
     private int score;              // score calculated based on completion time after the round ends
     private boolean isVictory;      // tracks whether the round is succesfully completed (user cake matches the 
                                     // target cake at the end of the round)
