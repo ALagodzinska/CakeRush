@@ -10,6 +10,11 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.CakeElements.CakeColor;
+import model.CakeElements.Decoration;
+import model.CakeElements.Glaze;
+import model.CakeElements.Topping;
+
 public class TestGameRound {
     private GameRound gameRound;
     private Random random = new Random();
@@ -25,10 +30,10 @@ public class TestGameRound {
         assertNotNull(gameRound.getTargetCake());
         // Check that in the beginning of the round the user have a default cake.
         assertEquals(1, gameRound.getUserCake().getNumberOfTiers());
-        assertEquals(Cake.CakeColor.WHITE, gameRound.getUserCake().getCakeColor());
-        assertEquals(Cake.Glaze.NONE, gameRound.getUserCake().getGlaze());
-        assertEquals(Cake.Topping.NONE, gameRound.getUserCake().getTopping());
-        assertEquals(Cake.Decoration.NONE, gameRound.getUserCake().getDecoration());
+        assertEquals(CakeColor.WHITE, gameRound.getUserCake().getCakeColor());
+        assertEquals(Glaze.NONE, gameRound.getUserCake().getGlaze());
+        assertEquals(Topping.NONE, gameRound.getUserCake().getTopping());
+        assertEquals(Decoration.NONE, gameRound.getUserCake().getDecoration());
 
         assertEquals(0, gameRound.getCompletionTime());
         assertEquals(0, gameRound.getScore());
