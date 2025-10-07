@@ -23,6 +23,7 @@ public class GameSession {
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
         this.totalScore = 0;
+        this.livesLeft = MAX_LIVES;
     }
 
     // REQUIRES: Game not finished
@@ -56,20 +57,33 @@ public class GameSession {
     }
 
     public int getLivesLeft() {
-        // stub
-        return 0;
+        return this.livesLeft;
     }
 
     // MODIFIES: this
     // EFFECTS: Updates the total score. If round was lost, deducts one live, if the live number is zero
     // the game state is changed to finished.
     private void updateAfterRound(GameRound round) {
-        // stub
+        boolean isVictory = round.isVictory();
+        if (!isVictory) {
+            livesLeft--;
+            if (livesLeft <= 0) {
+                this.isFinished = true;
+            }
+        }
+
+        calculateScore(isVictory);
     }
 
     // EFFECTS: If the round is won adds ROUND_SCORE to the total score, otherwise subtracts ROUND_SCORE
     // from the total score, if the total score is less than ROUND_SCORE sets the total score zero.
     private void calculateScore(boolean isRoundWon) {
-        // stub
+        if (isRoundWon) {
+            this.totalScore += GameRound.ROUND_SCORE;
+        } else if (this.totalScore < GameRound.ROUND_SCORE) {
+            this.totalScore = 0;
+        } else {
+            this.totalScore -= GameRound.ROUND_SCORE;
+        }
     }
 }
