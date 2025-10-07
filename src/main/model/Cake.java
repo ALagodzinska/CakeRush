@@ -2,17 +2,17 @@ package model;
 
 import java.util.Random;
 
+import model.CakeElements.CakeColor;
+import model.CakeElements.Decoration;
+import model.CakeElements.Glaze;
+import model.CakeElements.Topping;
+
 // Represents a cake that consists of different elements: number of tiers, cake color, glaze, topping and decoration.
 public class Cake {
+    public static final int MIN_NUM_OF_TIERS = 1; 
     public static final int MAX_NUM_OF_TIERS = 3;   
 
-    enum CakeColor { WHITE, PINK, BLUE, GREEN, YELLOW; }
     
-    enum Glaze { NONE, PINK, PURPLE, GREEN, BLUE; }
-
-    enum Topping { NONE, SPRINKLES, FRUIT, CANDIES, CREAM; }
-
-    enum Decoration { NONE, CANDLE, FLOWER, BALLOON, CARD; }
 
     private int numberOfTiers;         // number of cake tiers (min: 1, max: maxNumberOfTiers)
     private CakeColor cakeColor;       // cake color (must be from the list of CAKE_COLORS)
@@ -23,7 +23,7 @@ public class Cake {
     // EFFECTS: Creates one tier white color cake, with no glaze, topping and
     // decoration.
     public Cake() {        
-        this.numberOfTiers = 1;
+        this.numberOfTiers = MIN_NUM_OF_TIERS;
         this.cakeColor = CakeColor.WHITE;
         this.glaze = Glaze.NONE;
         this.topping = Topping.NONE;
@@ -33,16 +33,11 @@ public class Cake {
     // EFFECTS: Creates a cake with random selection from possible number of tiers, cake colors, glaze, 
     // toppings and decorations.
     public Cake(Random random) {
-        CakeColor[] cakeColors = CakeColor.values();
-        Glaze[] glazes = Glaze.values();
-        Topping[] toppings = Topping.values();
-        Decoration[] decorations = Decoration.values();
-
         this.numberOfTiers = random.nextInt(MAX_NUM_OF_TIERS) + 1;
-        this.cakeColor = cakeColors[random.nextInt(cakeColors.length)];
-        this.glaze = glazes[random.nextInt(glazes.length)];
-        this.topping = toppings[random.nextInt(toppings.length)];
-        this.decoration = decorations[random.nextInt(decorations.length)];
+        this.cakeColor = CakeColor.values()[random.nextInt(CakeColor.length())];
+        this.glaze = Glaze.values()[random.nextInt(Glaze.length())];
+        this.topping = Topping.values()[random.nextInt(Topping.length())];
+        this.decoration = Decoration.values()[random.nextInt(Decoration.length())];
     }
     
     // EFFECTS: Compares every element of the cake. If cake have all elements the same returns true, else returns false.
@@ -62,7 +57,7 @@ public class Cake {
 
     // REQUIRES: number of tiers must be betweeen 1 and maxNumberOfTiers(inclusive).
     public void setNumberOfTiers(int numberOfTiers) {
-        if (numberOfTiers >= 1 && numberOfTiers <= MAX_NUM_OF_TIERS) {
+        if (numberOfTiers >= MIN_NUM_OF_TIERS && numberOfTiers <= MAX_NUM_OF_TIERS) {
             this.numberOfTiers = numberOfTiers;
         }
     }
@@ -97,5 +92,15 @@ public class Cake {
     
     public void setDecoration(Decoration decoration) {
         this.decoration = decoration;
+    }
+
+    @Override
+    public String toString() {
+        return "CAKE:"
+            + "\n\tNUMBER OF TIERS: " + this.numberOfTiers
+            + "\n\tCOLOR: " + this.cakeColor
+            + "\n\tGLAZE: " + this.glaze
+            + "\n\tTOPPING: " + this.topping 
+            + "\n\tDECORATION: " + this.decoration;
     }
 }
