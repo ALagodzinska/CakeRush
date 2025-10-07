@@ -27,12 +27,12 @@ public class TestGameSession {
         userCake.setGlaze(targetCake.getGlaze());
         userCake.setTopping(targetCake.getTopping());
         userCake.setDecoration(targetCake.getDecoration());
-        wonRound.finishRound(10);
+        wonRound.finishRound();
 
         lostRound = new GameRound(random);
         lostRound.getTargetCake().setNumberOfTiers(1);
         lostRound.getUserCake().setNumberOfTiers(3);
-        lostRound.finishRound(20);
+        lostRound.finishRound();
     }
 
     @Test
@@ -41,11 +41,11 @@ public class TestGameSession {
         assertEquals(0, gameSession.getRounds().size());
         assertFalse(gameSession.isFinished());
         assertEquals(0, gameSession.getTotalScore());
-        assertEquals(0, gameSession.getTotalTimePlayed());
+        assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
     }
 
     @Test
-    void testAddRoundOneRound() {
+    void testAddRoundOne() {
         assertEquals(0, gameSession.getRounds().size());  
 
         gameSession.addRound(wonRound);
@@ -53,7 +53,7 @@ public class TestGameSession {
         assertEquals(1, gameSession.getRounds().size());
         assertEquals(wonRound, gameSession.getRounds().get(0));   
         assertEquals(10, gameSession.getTotalScore());
-        assertEquals(10, gameSession.getTotalTimePlayed());
+        assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
         assertFalse(gameSession.isFinished());
     }
 
@@ -68,23 +68,42 @@ public class TestGameSession {
         assertEquals(wonRound, gameSession.getRounds().get(0));  
         assertEquals(wonRound, gameSession.getRounds().get(1));  
         assertEquals(20, gameSession.getTotalScore());
-        assertEquals(20, gameSession.getTotalTimePlayed());
+        assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
         assertFalse(gameSession.isFinished());
     }
 
     @Test
-    void testAddRoundMultipleAfterRoundLoss() {
+    void testAddRoundMultipleAfterOneRoundLoss() {
         assertEquals(0, gameSession.getRounds().size());  
 
         gameSession.addRound(wonRound);
         gameSession.addRound(lostRound);
         gameSession.addRound(wonRound);
 
-        assertEquals(2, gameSession.getRounds().size());
+        assertEquals(3, gameSession.getRounds().size());
         assertEquals(wonRound, gameSession.getRounds().get(0));  
         assertEquals(lostRound, gameSession.getRounds().get(1)); 
+        assertEquals(wonRound, gameSession.getRounds().get(2)); 
         assertEquals(10, gameSession.getTotalScore());
-        assertEquals(30, gameSession.getTotalTimePlayed());
+        assertEquals(2, gameSession.getLivesLeft());
+        assertFalse(gameSession.isFinished());
+    }
+
+    @Test
+    void testAddRoundMultipleGameOver() {
+        assertEquals(0, gameSession.getRounds().size());  
+
+        gameSession.addRound(lostRound);
+        gameSession.addRound(lostRound);
+        gameSession.addRound(lostRound);
+        gameSession.addRound(wonRound);
+
+        assertEquals(3, gameSession.getRounds().size());
+        assertEquals(lostRound, gameSession.getRounds().get(0));  
+        assertEquals(lostRound, gameSession.getRounds().get(1)); 
+        assertEquals(lostRound, gameSession.getRounds().get(2)); 
+        assertEquals(0, gameSession.getTotalScore());
+        assertEquals(0, gameSession.getLivesLeft());
         assertTrue(gameSession.isFinished());
     }
 }
