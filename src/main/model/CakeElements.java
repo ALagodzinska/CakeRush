@@ -1,6 +1,9 @@
 package model;
 
-public class CakeElements {
+public final class CakeElements {
+    private CakeElements() {    // prevents from creating an instance of the class
+    }
+
     public enum CakeColor { 
         WHITE, PINK, BLUE, GREEN, YELLOW; 
 
