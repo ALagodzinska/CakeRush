@@ -9,6 +9,11 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.CakeElements.CakeColor;
+import model.CakeElements.Decoration;
+import model.CakeElements.Glaze;
+import model.CakeElements.Topping;
+
 public class TestCake {
     private static final int SEED = 12;
     private static final int NUM_OF_ELEMENTS = 5;
@@ -22,11 +27,11 @@ public class TestCake {
 
     @Test
     void testDefaultConstructor() {
-        assertEquals(1, defaultCake.getNumberOfTiers());
-        assertEquals(Cake.CakeColor.WHITE, defaultCake.getCakeColor());
-        assertEquals(Cake.Glaze.NONE, defaultCake.getGlaze());
-        assertEquals(Cake.Topping.NONE, defaultCake.getTopping());
-        assertEquals(Cake.Decoration.NONE, defaultCake.getDecoration());
+        assertEquals(Cake.MIN_NUM_OF_TIERS, defaultCake.getNumberOfTiers());
+        assertEquals(CakeColor.WHITE, defaultCake.getCakeColor());
+        assertEquals(Glaze.NONE, defaultCake.getGlaze());
+        assertEquals(Topping.NONE, defaultCake.getTopping());
+        assertEquals(Decoration.NONE, defaultCake.getDecoration());
     }
 
     @Test
@@ -37,32 +42,32 @@ public class TestCake {
         Cake randomCake = new Cake(random);
 
         assertEquals(randomNumbersFixedSeed[0] + 1, randomCake.getNumberOfTiers());
-        assertEquals(Cake.CakeColor.values()[randomNumbersFixedSeed[1]], randomCake.getCakeColor());
-        assertEquals(Cake.Glaze.values()[randomNumbersFixedSeed[2]], randomCake.getGlaze());
-        assertEquals(Cake.Topping.values()[randomNumbersFixedSeed[3]], randomCake.getTopping());
-        assertEquals(Cake.Decoration.values()[randomNumbersFixedSeed[4]], randomCake.getDecoration());
+        assertEquals(CakeColor.values()[randomNumbersFixedSeed[1]], randomCake.getCakeColor());
+        assertEquals(Glaze.values()[randomNumbersFixedSeed[2]], randomCake.getGlaze());
+        assertEquals(Topping.values()[randomNumbersFixedSeed[3]], randomCake.getTopping());
+        assertEquals(Decoration.values()[randomNumbersFixedSeed[4]], randomCake.getDecoration());
     }
 
     @Test
     void testCompareSame() {
         defaultCake.setNumberOfTiers(2);
-        defaultCake.setCakeColor(Cake.CakeColor.BLUE);
-        defaultCake.setGlaze(Cake.Glaze.PINK);
-        defaultCake.setTopping(Cake.Topping.CREAM);
-        defaultCake.setDecoration(Cake.Decoration.CANDLE);
+        defaultCake.setCakeColor(CakeColor.BLUE);
+        defaultCake.setGlaze(Glaze.PINK);
+        defaultCake.setTopping(Topping.CREAM);
+        defaultCake.setDecoration(Decoration.CANDLE);
 
         assertEquals(2, defaultCake.getNumberOfTiers());
-        assertEquals(Cake.CakeColor.BLUE, defaultCake.getCakeColor());
-        assertEquals(Cake.Glaze.PINK, defaultCake.getGlaze());
-        assertEquals(Cake.Topping.CREAM, defaultCake.getTopping());
-        assertEquals(Cake.Decoration.CANDLE, defaultCake.getDecoration());
+        assertEquals(CakeColor.BLUE, defaultCake.getCakeColor());
+        assertEquals(Glaze.PINK, defaultCake.getGlaze());
+        assertEquals(Topping.CREAM, defaultCake.getTopping());
+        assertEquals(Decoration.CANDLE, defaultCake.getDecoration());
 
         Cake secondCake = new Cake();
         secondCake.setNumberOfTiers(2);
-        secondCake.setCakeColor(Cake.CakeColor.BLUE);
-        secondCake.setGlaze(Cake.Glaze.PINK);
-        secondCake.setTopping(Cake.Topping.CREAM);
-        secondCake.setDecoration(Cake.Decoration.CANDLE);
+        secondCake.setCakeColor(CakeColor.BLUE);
+        secondCake.setGlaze(Glaze.PINK);
+        secondCake.setTopping(Topping.CREAM);
+        secondCake.setDecoration(Decoration.CANDLE);
 
         assertTrue(defaultCake.compare(secondCake));
     }
@@ -78,7 +83,7 @@ public class TestCake {
     @Test
     void testCompareDifferentCakeColor() {
         Cake secondCake = new Cake();
-        secondCake.setCakeColor(Cake.CakeColor.GREEN);
+        secondCake.setCakeColor(CakeColor.GREEN);
 
         assertFalse(defaultCake.compare(secondCake));
     }
@@ -86,7 +91,7 @@ public class TestCake {
     @Test
     void testCompareDifferentGlaze() {
         Cake secondCake = new Cake();
-        secondCake.setGlaze(Cake.Glaze.PURPLE);
+        secondCake.setGlaze(Glaze.PURPLE);
 
         assertFalse(defaultCake.compare(secondCake));
     }
@@ -94,7 +99,7 @@ public class TestCake {
     @Test
     void testCompareDifferentTopping() {
         Cake secondCake = new Cake();
-        secondCake.setTopping(Cake.Topping.FRUIT);
+        secondCake.setTopping(Topping.FRUIT);
 
         assertFalse(defaultCake.compare(secondCake));
     }
@@ -102,7 +107,7 @@ public class TestCake {
     @Test
     void testCompareDifferentDecoration() {
         Cake secondCake = new Cake();
-        secondCake.setDecoration(Cake.Decoration.CARD);
+        secondCake.setDecoration(Decoration.CARD);
 
         assertFalse(defaultCake.compare(secondCake));
     }
@@ -149,10 +154,10 @@ public class TestCake {
         int[] numbersOfOptionsForAllElements = new int[NUM_OF_ELEMENTS];
 
         numbersOfOptionsForAllElements[0] = Cake.MAX_NUM_OF_TIERS;
-        numbersOfOptionsForAllElements[1] = Cake.CakeColor.values().length;
-        numbersOfOptionsForAllElements[2] = Cake.Glaze.values().length;
-        numbersOfOptionsForAllElements[3] = Cake.Topping.values().length;
-        numbersOfOptionsForAllElements[4] = Cake.Decoration.values().length;
+        numbersOfOptionsForAllElements[1] = CakeColor.values().length;
+        numbersOfOptionsForAllElements[2] = Glaze.values().length;
+        numbersOfOptionsForAllElements[3] = Topping.values().length;
+        numbersOfOptionsForAllElements[4] = Decoration.values().length;
 
         return numbersOfOptionsForAllElements;
     }
