@@ -5,6 +5,8 @@ import java.util.Random;
 // Represents a single round of the game. A round stores the target cake, tracks the user's attempt to recreate a cake
 // and the round outcome.
 public class GameRound {
+    public static final int ROUND_SCORE = 10;
+
     private Cake targetCake;        // the cake that user has to replicate
     private Cake userCake;          // the cake user modifies to match target cake
     private boolean isVictory;      // tracks whether the round is succesfully completed (user cake matches the 
