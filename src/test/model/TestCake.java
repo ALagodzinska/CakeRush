@@ -138,6 +138,15 @@ public class TestCake {
         assertEquals(1, defaultCake.getNumberOfTiers());
     }
 
+    @Test
+    void testToString() {
+        assertEquals("CAKE:\n\tNUMBER OF TIERS: 1"
+                + "\n\tCOLOR: WHITE"
+                + "\n\tGLAZE: NONE"
+                + "\n\tTOPPING: NONE"
+                + "\n\tDECORATION: NONE", defaultCake.toString());
+    }
+
     private int[] randomFixedValues() {
         int[] fiveRandomValues = new int[NUM_OF_ELEMENTS];
         int[] optionsForAllElements = getNumberOfOptionsInOrder();
