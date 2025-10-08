@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class GameSession {
     public static final int MAX_LIVES = 3;
 
-    private static int nextID = 1;
-
     private int gameID;                     // unique identifier for the game
     private ArrayList<GameRound> rounds;    // all rounds played in the game
     private boolean isFinished;             // true if the game was lost
@@ -16,9 +14,8 @@ public class GameSession {
 
     // EFFECTS: Creates a game session with an empty list of rounds, sets the game finished state to false, 
     // assigns total score to zero and livesLeft to MAX_LIVES. 
-    public GameSession() {
-        this.gameID = nextID;
-        nextID++;
+    public GameSession(int gameID) {
+        this.gameID = gameID;
 
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
@@ -38,10 +35,6 @@ public class GameSession {
     
     public int getGameID() {
         return this.gameID;
-    }
-
-    public int getNextID() {
-        return nextID;
     }
 
     public ArrayList<GameRound> getRounds() {

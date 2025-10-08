@@ -17,7 +17,7 @@ public class TestGameSession {
 
     @BeforeEach
     void runBefore() {
-        gameSession = new GameSession();
+        gameSession = new GameSession(1);
 
         wonRound = new GameRound(random);
         Cake userCake = wonRound.getUserCake();
@@ -37,7 +37,7 @@ public class TestGameSession {
 
     @Test
     void testConstructor() {
-        assertEquals(gameSession.getNextID() - 1, gameSession.getGameID());
+        assertEquals(1, gameSession.getGameID());
         assertEquals(0, gameSession.getRounds().size());
         assertFalse(gameSession.isFinished());
         assertEquals(0, gameSession.getTotalScore());
