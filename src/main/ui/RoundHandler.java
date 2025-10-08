@@ -74,53 +74,32 @@ public class RoundHandler {
     // EFFECTS: Gets user input for all cake elements from console and updates the round user cake 
     // with the chosen values.
     private void setUserInputs(Cake cakeToModify) {
-        int numOfTiers = getValidUserChoice(Constants.NUMBER_OF_TIERS_PROMPT, 
+        int numOfTiers = InputValidator.getValidUserChoice(scanner, Constants.NUMBER_OF_TIERS_PROMPT, 
                 Cake.MIN_NUM_OF_TIERS, Cake.MAX_NUM_OF_TIERS);
         cakeToModify.setNumberOfTiers(numOfTiers);
 
-        System.out.println(Constants.INSTRUCTIONS_FOR_ENUM_INPUT);
-        int cakeColorIndex = getValidUserChoice(Constants.CAKE_COLOR_PROMPT, 1, CakeColor.length()) - 1;
+        System.out.println(Constants.INSTRUCTIONS_FOR_INPUT);
+        int cakeColorIndex = InputValidator.getValidUserChoice(scanner, Constants.CAKE_COLOR_PROMPT, 
+                1, CakeColor.length()) - 1;
         cakeToModify.setCakeColor(CakeColor.values()[cakeColorIndex]);
 
-        int glazeIndex = getValidUserChoice(Constants.GLAZE_PROMPT, 1, Glaze.length()) - 1;
+        int glazeIndex = InputValidator.getValidUserChoice(scanner, Constants.GLAZE_PROMPT, 1, Glaze.length()) - 1;
         cakeToModify.setGlaze(Glaze.values()[glazeIndex]);
 
-        int toppingIndex = getValidUserChoice(Constants.TOPPING_PROMPT, 1, Topping.length()) - 1;
+        int toppingIndex = InputValidator.getValidUserChoice(scanner, Constants.TOPPING_PROMPT, 
+                1, Topping.length()) - 1;
         cakeToModify.setTopping(Topping.values()[toppingIndex]);
 
-        int decorationIndex = getValidUserChoice(Constants.DECORATION_PROMPT, 1, Decoration.length()) - 1;
+        int decorationIndex = InputValidator.getValidUserChoice(scanner, Constants.DECORATION_PROMPT, 
+                1, Decoration.length()) - 1;
         cakeToModify.setDecoration(Decoration.values()[decorationIndex]);
     }
-
-    // EFFECTS: Prompts user with the specified message  for a valid numeric input within the given range
-    // [minValue, maxValue]. Continues to prompt the user until the valid input is entered. 
-    // Returns the recieved valid input.
-    private int getValidUserChoice(String promptMessage, int minValue, int maxValue) {
-        
-        while (true) {
-            System.out.println(promptMessage);
-            try {
-                int optionValue = scanner.nextInt();
-                System.out.println();
-                if (optionValue >= minValue && optionValue <= maxValue) {
-                    return optionValue;
-                } else {
-                    System.out.println(Constants.INVALID_INPUT_MESSAGE);                
-                }
-
-            }   catch (Exception exception) {
-                System.out.println(Constants.INVALID_INPUT_MESSAGE);
-                scanner.next();
-            }            
-        }   
-    }
-
 
     // EFFECTS: Dispalys a victory message if the round is won, otherwise, displays a loss message.
     private void displayRoundEnd(boolean isWon) {
         if (isWon) {
             System.out.println(Constants.VICTORY_MESSAGE);
-        } else {
+        } else {            
             System.out.println(Constants.LOSS_MESSAGE);
         }
     }
