@@ -2,27 +2,40 @@ package ui;
 
 import java.util.Scanner;
 
+// Contains methods for processing and validating user input.
 public class InputValidator {
     // EFFECTS: Prompts user with the specified message  for a valid numeric input within the given range
     // [minValue, maxValue]. Continues to prompt the user until the valid input is entered. 
     // Returns the recieved valid input.
     public static int getValidUserChoice(Scanner scanner, String promptMessage, int minValue, int maxValue) {
+        return getValidUserChoice(scanner, promptMessage, minValue, maxValue, false); 
+    }
+
+    // EFFECTS: Prompts user with the specified message for a valid numeric input within the given range
+    // [minValue, maxValue] or "exit" String. Continues to prompt the user until the valid input is entered. 
+    // Returns the recieved valid input or -1 when canExit is equal to true and the user entered "exit".
+    public static int getValidUserChoice(Scanner scanner, String promptMessage, int minValue, int maxValue, 
+            boolean canExit) {
         
         while (true) {
             System.out.println(promptMessage);
+            String optionValue = scanner.nextLine();
             try {
-                int optionValue = scanner.nextInt();
-                System.out.println();
-                if (optionValue >= minValue && optionValue <= maxValue) {
-                    return optionValue;
+                int optionNumber = Integer.parseInt(optionValue);
+                if (optionNumber >= minValue && optionNumber <= maxValue) {
+                    return optionNumber;
                 } else {
                     System.out.println(Constants.INVALID_INPUT_MESSAGE);                
-                }
-
-            }   catch (Exception exception) {
-                System.out.println(Constants.INVALID_INPUT_MESSAGE);
-                scanner.next();
-            }            
+                }                
+            } catch (NumberFormatException ex) {
+                if (canExit) {
+                    if (optionValue.equals("exit")) {
+                        return -1;
+                    }
+                } else {
+                    System.out.println(Constants.INVALID_INPUT_MESSAGE);
+                }                
+            }         
         }   
     }
 }
