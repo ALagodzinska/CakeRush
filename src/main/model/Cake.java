@@ -96,11 +96,10 @@ public class Cake {
 
     @Override
     public String toString() {
-        return "CAKE:"
-            + "\n\tNUMBER OF TIERS: " + this.numberOfTiers
-            + "\n\tCOLOR: " + this.cakeColor
-            + "\n\tGLAZE: " + this.glaze
-            + "\n\tTOPPING: " + this.topping 
-            + "\n\tDECORATION: " + this.decoration;
+        return "NUMBER OF TIERS: " + this.numberOfTiers
+            + "\tCOLOR: " + this.cakeColor
+            + "\tGLAZE: " + this.glaze
+            + "\tTOPPING: " + this.topping 
+            + "\tDECORATION: " + this.decoration;
     }
 }
