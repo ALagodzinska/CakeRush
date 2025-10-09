@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import model.GameSession;
@@ -8,9 +9,29 @@ import model.GameSession;
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
     enum MainMenuOptions {
-        NEW_GAME,
-        SHOW_GAMES,
-        EXIT;
+        NEW_GAME("Create a new game"),
+        SHOW_GAMES("Show played games"),
+        EXIT("Exit");
+
+        private String text;
+
+        MainMenuOptions(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public static String listAllOptions() {
+            String summary = "";
+
+            for (int i = 1; i <= values().length; i++) {
+                summary += "\t" + i + ": " + values()[ i - 1 ].getText() + "\n";
+            }
+
+            return summary;
+        }
     }
 
     private static int nextGameID = 1;
@@ -21,28 +42,93 @@ public class MainScreenHandler {
     // EFFECTS: Sets up the main screen handler, initializes a new instance of Scanner for user input,  
     // and new instance of GameSessionHandler to manage games. Creates an empty list of all games played.
     public MainScreenHandler() {
-        // stub
+        Random random = new Random();
+        this.scanner = new Scanner(System.in);
+        listOfGames = new ArrayList<>();
+        this.gameSessionHandler = new GameSessionHandler(scanner, new RoundHandler(scanner, random));
     }
 
     // EFFECTS: Displays the main menu and based on user input, either creates the new game or shows 
     // the list of all games. Exits main menu when the user chooses to exit.
     public void runMainMenu() {
+        // stub
+        String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  MainMenuOptions.listAllOptions();
+        MainMenuOptions selectedOption;
+        int selectedIndex;
+
+        do {
+            selectedIndex = InputValidator.getValidUserChoice(scanner, 
+                menuPrompt, 1, MainMenuOptions.values().length) - 1;
+            selectedOption = MainMenuOptions.values()[selectedIndex];
+
+            switch (selectedOption) {
+                case NEW_GAME:     
+                    startNewGame();        
+                    break;
+                case SHOW_GAMES:
+                    printPlayedGames();
+                    break;
+                case EXIT:
+                    System.out.println("Thank you for playing! See you next time!");
+                    break;
+            }
+        } while (selectedOption != MainMenuOptions.EXIT); 
     }
 
     // MODIFIES: this
     // EFFECTS: Creates a new game and adds it to the list of played games and opens a game menu.
     private void startNewGame() {
-        // stub
+        System.out.println("Creating a new game...");
+        GameSession newGame = new GameSession(nextGameID);
+        nextGameID++;
+        listOfGames.add(newGame);
+        System.out.println();     
+        gameSessionHandler.runGameMenu(newGame);
     }
 
     // EFFECTS: Displays a list of all played games. Allows for user to select one of the played games to play. 
     // If no games were played, shows a message to the user. 
-    private void printPlayedGames() {
-        // stub
+    private void printPlayedGames() {        
+        if (listOfGames.size() == 0) {
+            System.out.println("No games played");
+            System.out.println();
+            return;
+        }
+
+        System.out.println("List of played games:");
+        for (int i = 0; i < listOfGames.size(); i++) {
+            gameSessionHandler.printGameSummary(listOfGames.get(i));
+        }
+        System.out.println();
+        startOldGame();
     }
 
     // EFFECTS: Allows to open game menu for the in-progress game, shows a message if the selected game is completed.
-    private void startOldGame(GameSession game) {
-        // stub
+    private void startOldGame() {
+        String prompt = "Select the number of the game you want to continue playing"
+                + " or type 'exit' to go back to the main menu";
+        int userSelection = InputValidator.getValidUserChoice(scanner, prompt, 1, listOfGames.size(), true);
+        
+        if (userSelection != -1) {
+            GameSession game = getGameByID(userSelection);
+            if (game != null) {
+                gameSessionHandler.runGameMenu(game);
+            }            
+        } else {
+            System.out.println("Going back to the main menu...");
+        }
+    }
+
+    // REQUIRES: valid game id
+    // EFFECTS: Returns a game from the list of all games based on the passed id. 
+    // If the game with such id is not present in the list returns null.
+    private GameSession getGameByID(int id) {
+        for (GameSession game: listOfGames) {
+            if (game.getGameID() == id) {
+                return game;
+            }
+        }
+
+        return null;
     }
 }
