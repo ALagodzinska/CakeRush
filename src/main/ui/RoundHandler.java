@@ -111,7 +111,7 @@ public class RoundHandler {
             System.out.println("\tCreated cake: " + round.getTargetCake());            
         } else {
             System.out.println(roundNumber + ": Lost Round");
-            System.out.println("\tTarget cake : " + round.getTargetCake().toString());
+            System.out.println("\tTarget cake : " + round.getTargetCake());
             System.out.println("\tYour cake: " + round.getUserCake());
         }
     }

@@ -49,6 +49,7 @@ public class GameSessionHandler {
     // EFFECTS: Displays the game menu and based on user input, either starts the game, shows 
     // the list of played rounds, or displays the total score. Exits game menu when the user chooses to exit.
     public void runGameMenu(GameSession game) {
+        System.out.println("Game Nr." + game.getGameID());
         String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  GameMenuOptions.listAllOptions();
         GameMenuOptions selectedOption;
         int selectedIndex;
@@ -100,12 +101,13 @@ public class GameSessionHandler {
 
     // EFFECTS: Displays a list of all played rounds in current game. If no rounds were played, 
     // shows a message to the user.
-    private void printPlayedRounds(ArrayList<GameRound> rounds) {
+    private void printPlayedRounds(ArrayList<GameRound> rounds) {        
         if (rounds.size() == 0) {
             System.out.println("No rounds in this game");
             return;
         }
 
+        System.out.println("List of played rounds:");
         for (int i = 0; i < rounds.size(); i++) {
             roundHandler.printRoundSummary(rounds.get(i), i + 1);
         }
