@@ -49,7 +49,7 @@ public class GameSessionHandler {
     // EFFECTS: Displays the game menu and based on user input, either starts the game, shows 
     // the list of played rounds, or displays the total score. Exits game menu when the user chooses to exit.
     public void runGameMenu(GameSession game) {
-        String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" + Constants.GAME_MENU;
+        String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  GameMenuOptions.listAllOptions();
         GameMenuOptions selectedOption;
         int selectedIndex;
 

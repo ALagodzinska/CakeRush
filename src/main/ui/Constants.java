@@ -26,11 +26,4 @@ public class Constants {
     public static final String LOSS_MESSAGE = "Wrong cake! You've lost this round!\n";
     public static final String ROUND_INTRO_MESSAGE = "Generating random cake...\n"
             + "You have 5 seconds to remember all the elements\n";
-
-    // Game constants
-
-    public static final String GAME_MENU = "1. PLAY THE GAME\n"
-                + "2. SEE THE LIST OF PLAYED ROUNDS\n"
-                + "3. SEE TOTAL SCORE\n"
-                + "4. EXIT";
 }
