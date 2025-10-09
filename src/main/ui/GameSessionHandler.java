@@ -13,7 +13,7 @@ public class GameSessionHandler {
         PLAY("Play the game"),
         SHOW_ROUNDS("Show the played rounds"),
         GET_SCORE("Total Score"),
-        EXIT("Exit");
+        EXIT("Exit Current Game");
 
         private String text;
 
@@ -29,7 +29,7 @@ public class GameSessionHandler {
             String summary = "";
 
             for (int i = 1; i <= values().length; i++) {
-                summary += i + ": " + values()[ i - 1 ].getText() + " ";
+                summary += "\t" + i + ": " + values()[ i - 1 ].getText() + "\n";
             }
 
             return summary;
@@ -55,7 +55,7 @@ public class GameSessionHandler {
 
         do {
             selectedIndex = InputValidator.getValidUserChoice(scanner, 
-                menuPrompt, 1, 4) - 1;
+                menuPrompt, 1, GameMenuOptions.values().length) - 1;
             selectedOption = GameMenuOptions.values()[selectedIndex];
 
             switch (selectedOption) {
@@ -116,5 +116,16 @@ public class GameSessionHandler {
     private void displayGameScore(int totalScore) {
         System.out.println("The total score: " + totalScore);
         System.out.println();
+    }
+
+    // EFFECTS: Prints a summary for the round
+    public void printGameSummary(GameSession game) {
+        if (game.isFinished()) {
+            System.out.println(game.getGameID() + ": Completed Game");
+            System.out.println("\tTotal score: " + game.getTotalScore());            
+        } else {
+            System.out.println(game.getGameID() + ": In-Progress Game");
+            System.out.println("\tTotal score : " + game.getTotalScore());
+        }
     }
 }
