@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -104,16 +102,31 @@ public class Cake {
     @Override
     public String toString() {
         return "NUMBER OF TIERS: " + this.numberOfTiers
-            + "\tCOLOR: " + this.cakeColor
-            + "\tGLAZE: " + this.glaze
-            + "\tTOPPING: " + this.topping 
-            + "\tDECORATION: " + this.decoration;
+            + " ;  COLOR: " + this.cakeColor
+            + " ;  GLAZE: " + this.glaze
+            + " ;  TOPPING: " + this.topping 
+            + " ;  DECORATION: " + this.decoration;
     }
 
     // EFFECTS: Generates and returns a string representing information about all cake elements and their 
     // values in random order.
     public String getReorderedSummary() {
-        //stub
-        return null;
+        String result = "";        
+        List<String> listOfFieldsSummary = new ArrayList<String>() {{
+                        add("NUMBER OF TIERS: " + numberOfTiers);
+                        add("COLOR: " + cakeColor);
+                        add("GLAZE: " + glaze);
+                        add("TOPPING: " + topping);
+                        add("DECORATION: " + decoration);
+                    }
+                };
+
+        Collections.shuffle(listOfFieldsSummary);
+
+        for (String fieldSummary: listOfFieldsSummary) {
+            result += fieldSummary + "  |  ";
+        }
+        
+        return result;
     }
 }

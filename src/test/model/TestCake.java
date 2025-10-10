@@ -147,6 +147,18 @@ public class TestCake {
                 + "\tDECORATION: NONE", defaultCake.toString());
     }
 
+    @Test
+    void testGetReorderedSummary() {
+        String reorderedSummary = defaultCake.getReorderedSummary();
+        assertTrue(reorderedSummary.contains("NUMBER OF TIERS: 1"));
+        assertTrue(reorderedSummary.contains("COLOR: WHITE"));
+        assertTrue(reorderedSummary.contains("GLAZE: NONE"));
+        assertTrue(reorderedSummary.contains("TOPPING: NONE"));
+        assertTrue(reorderedSummary.contains("DECORATION: NONE"));
+    }
+
+    // EFFECTS: Returns an array of five values generated using a fixed seed, based on the size of each 
+    // cake element's options.
     private int[] randomFixedValues() {
         int[] fiveRandomValues = new int[NUM_OF_ELEMENTS];
         int[] optionsForAllElements = getNumberOfOptionsInOrder();
@@ -159,6 +171,7 @@ public class TestCake {
         return fiveRandomValues;
     }
 
+    // EFFECTS: Returns an array of 5 values that contains in order the number of each cake element's options.
     private int[] getNumberOfOptionsInOrder() {
         int[] numbersOfOptionsForAllElements = new int[NUM_OF_ELEMENTS];
 

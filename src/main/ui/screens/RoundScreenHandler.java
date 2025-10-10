@@ -44,15 +44,15 @@ public class RoundScreenHandler {
         return round;
     }
 
-    // EFFECTS: Displays an introduction message and the target cake to the user for 5 seconds.
+    // EFFECTS: Displays an introduction message and the target cake to the user for 7 seconds.
     private void displayRoundStart(GameRound round) throws InterruptedException {
         System.out.println(Constants.ROUND_INTRO_MESSAGE);
         System.out.println(Constants.PURPLE_COLOR + "TARGET CAKE:" + Constants.DEFAULT_COLOR);
-        System.out.println(round.getTargetCake());
+        System.out.println(round.getTargetCake().getReorderedSummary());
         System.out.println();
 
-        // Sleep for 5 seconds - time for user to remember the target cake          
-        Thread.sleep(5000);        
+        // Sleep for 7 seconds - time for user to remember the target cake          
+        Thread.sleep(7000);        
     }
 
     // EFFECTS: Prints a long message to the console to hide the target cake from the user.
