@@ -1,42 +1,20 @@
-package ui;
+package ui.screens;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 import model.GameSession;
+import ui.Constants;
+import ui.InputValidator;
+import ui.MenuOptions;
+import ui.MenuOptions.MainMenuOptions;
 
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
-    enum MainMenuOptions {
-        NEW_GAME("Create a new game"),
-        SHOW_GAMES("Show played games"),
-        EXIT("Exit");
-
-        private String text;
-
-        MainMenuOptions(String text) {
-            this.text = text;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public static String listAllOptions() {
-            String summary = "";
-
-            for (int i = 1; i <= values().length; i++) {
-                summary += "\t" + i + ": " + values()[ i - 1 ].getText() + "\n";
-            }
-
-            return summary;
-        }
-    }
-
     private static int nextGameID = 1;
     private Scanner scanner;
-    private GameSessionHandler gameSessionHandler;
+    private GameScreenHandler gameSessionHandler;
     private ArrayList<GameSession> listOfGames;
 
     // EFFECTS: Sets up the main screen handler, initializes a new instance of Scanner for user input,  
@@ -45,7 +23,7 @@ public class MainScreenHandler {
         Random random = new Random();
         this.scanner = new Scanner(System.in);
         listOfGames = new ArrayList<>();
-        this.gameSessionHandler = new GameSessionHandler(scanner, new RoundHandler(scanner, random));
+        this.gameSessionHandler = new GameScreenHandler(scanner, new RoundScreenHandler(scanner, random));
     }
 
     // EFFECTS: Displays the main menu and based on user input, either creates the new game or shows 
@@ -56,14 +34,16 @@ public class MainScreenHandler {
         MainMenuOptions selectedOption;
         int selectedIndex;
 
+        System.out.println(Constants.GAME_TITLE);
+
         do {
+            System.out.println(Constants.SEPARATOR);  
             selectedIndex = InputValidator.getValidUserChoice(scanner, 
                 menuPrompt, 1, MainMenuOptions.values().length) - 1;
-            selectedOption = MainMenuOptions.values()[selectedIndex];
-
+            selectedOption = MainMenuOptions.values()[selectedIndex];            
             switch (selectedOption) {
                 case NEW_GAME:     
-                    startNewGame();        
+                    startNewGame();                                        
                     break;
                 case SHOW_GAMES:
                     printPlayedGames();
@@ -90,8 +70,7 @@ public class MainScreenHandler {
     // If no games were played, shows a message to the user. 
     private void printPlayedGames() {        
         if (listOfGames.size() == 0) {
-            System.out.println("No games played");
-            System.out.println();
+            System.out.println("No games played\n");
             return;
         }
 
@@ -105,17 +84,16 @@ public class MainScreenHandler {
 
     // EFFECTS: Allows to open game menu for the in-progress game, shows a message if the selected game is completed.
     private void startOldGame() {
-        String prompt = "Select the number of the game you want to continue playing"
-                + " or type 'exit' to go back to the main menu";
-        int userSelection = InputValidator.getValidUserChoice(scanner, prompt, 1, listOfGames.size(), true);
-        
+        int userSelection = InputValidator.getValidUserChoice(scanner, Constants.SELECT_OLD_GAME_PROMPT, 
+                1, listOfGames.size(), true);
+                
         if (userSelection != -1) {
             GameSession game = getGameByID(userSelection);
             if (game != null) {
                 gameSessionHandler.runGameMenu(game);
             }            
         } else {
-            System.out.println("Going back to the main menu...");
+            System.out.println(Constants.MESSAGE_GO_BACK_TO_MAIN_MENU);
         }
     }
 
