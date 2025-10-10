@@ -28,7 +28,6 @@ public class MainScreenHandler {
     // EFFECTS: Displays the main menu and based on user input, either creates the new game or shows 
     // the list of all games. Exits main menu when the user chooses to exit.
     public void runMainMenu() {
-        // stub
         String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  MainMenuOptions.listAllOptions();
         MainMenuOptions selectedOption;
         int selectedIndex;

@@ -33,7 +33,8 @@ public class Constants {
     public static final String VICTORY_MESSAGE = "Congratulations! You won this round!\n";
     public static final String LOSS_MESSAGE = "Wrong cake! You've lost this round!\n";
     public static final String ROUND_INTRO_MESSAGE = "Generating random cake...\n"
-            + "You have 5 seconds to remember all the elements\n";
+            + "You have 7 seconds to remember all the elements\n";
+    public static final String UNEXPECTED_ERROR_MESSAGE = "Something went wrong. Try starting a new round.";
 
     // Game screen constants
     public static final String MESSAGE_GO_BACK_TO_MAIN_MENU = "Going back to the main menu...\n";
@@ -76,8 +77,7 @@ public class Constants {
                                             + " | |    / _` | |/ / _ \\  _  / | | / __| '_ \\ \r\n"
                                             + " | |___| (_| |   <  __/ | \\ \\ |_| \\__ \\ | | |\r\n"
                                             + "  \\_____\\__,_|_|\\_\\___|_|  \\_\\__,_|___/_| |_|\r\n" 
-                                            + "                                             \r\n" 
-                                            + "                                             ";
+                                            + "                                             \r\n";
 
     public static final String SEPARATOR = ".oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo."
                                 + ".oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.";
