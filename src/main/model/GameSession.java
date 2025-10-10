@@ -27,10 +27,8 @@ public class GameSession {
     // MODIFIES: this
     // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
     public void addRound(GameRound round) {
-        if (!this.isFinished) {
-            rounds.add(round);
-            updateAfterRound(round);
-        }       
+        rounds.add(round);
+        updateAfterRound(round);
     }   
     
     public int getGameID() {

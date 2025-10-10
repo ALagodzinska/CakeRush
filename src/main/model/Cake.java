@@ -61,9 +61,7 @@ public class Cake {
     // REQUIRES: Number of tiers must be betweeen 1 and maxNumberOfTiers(inclusive).
     // EFFECTS: Sets the number of tiers to the given parameter value.
     public void setNumberOfTiers(int numberOfTiers) {
-        if (numberOfTiers >= MIN_NUM_OF_TIERS && numberOfTiers <= MAX_NUM_OF_TIERS) {
-            this.numberOfTiers = numberOfTiers;
-        }
+        this.numberOfTiers = numberOfTiers;
     }
 
     public CakeColor getCakeColor() {

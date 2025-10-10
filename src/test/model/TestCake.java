@@ -125,26 +125,12 @@ public class TestCake {
     }
 
     @Test
-    void testSetNumberOfTiersNumberOverUpperBoundary() {
-        assertEquals(1, defaultCake.getNumberOfTiers());
-        defaultCake.setNumberOfTiers(10);
-        assertEquals(1, defaultCake.getNumberOfTiers());
-    }
-
-    @Test
-    void testSetNumberOfTiersNumberUnderLowerBoundary() {
-        assertEquals(1, defaultCake.getNumberOfTiers());
-        defaultCake.setNumberOfTiers(0);
-        assertEquals(1, defaultCake.getNumberOfTiers());
-    }
-
-    @Test
     void testToString() {
         assertEquals("NUMBER OF TIERS: 1"
-                + "\tCOLOR: WHITE"
-                + "\tGLAZE: NONE"
-                + "\tTOPPING: NONE"
-                + "\tDECORATION: NONE", defaultCake.toString());
+                + " ;  COLOR: WHITE"
+                + " ;  GLAZE: NONE"
+                + " ;  TOPPING: NONE"
+                + " ;  DECORATION: NONE", defaultCake.toString());
     }
 
     @Test

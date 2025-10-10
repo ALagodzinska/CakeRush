@@ -96,12 +96,13 @@ public class TestGameSession {
         gameSession.addRound(lostRound);
         gameSession.addRound(lostRound);
         gameSession.addRound(lostRound);
-        gameSession.addRound(wonRound);
 
         assertEquals(3, gameSession.getRounds().size());
+
         assertEquals(lostRound, gameSession.getRounds().get(0));  
         assertEquals(lostRound, gameSession.getRounds().get(1)); 
         assertEquals(lostRound, gameSession.getRounds().get(2)); 
+        
         assertEquals(0, gameSession.getTotalScore());
         assertEquals(0, gameSession.getLivesLeft());
         assertTrue(gameSession.isFinished());
