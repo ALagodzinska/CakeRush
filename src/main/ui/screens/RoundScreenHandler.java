@@ -28,7 +28,7 @@ public class RoundScreenHandler {
     // MODIFIES: the created GameRound.
     // EFFECTS: Creates a new GameRound, plays the game: displays the target cake and matches it with user input 
     // values, updates and displays round status and returns the completed GameRound.
-    public GameRound playRound() {
+    public GameRound playRound() throws InterruptedException {
         GameRound round = new GameRound(random); 
 
         displayRoundStart(round);
@@ -45,19 +45,14 @@ public class RoundScreenHandler {
     }
 
     // EFFECTS: Displays an introduction message and the target cake to the user for 5 seconds.
-    private void displayRoundStart(GameRound round) {
+    private void displayRoundStart(GameRound round) throws InterruptedException {
         System.out.println(Constants.ROUND_INTRO_MESSAGE);
         System.out.println(Constants.PURPLE_COLOR + "TARGET CAKE:" + Constants.DEFAULT_COLOR);
         System.out.println(round.getTargetCake());
         System.out.println();
 
-        // Sleep for 5 seconds - time for user to remember the target cake
-        try {            
-            Thread.sleep(5000);
-        } catch (Exception ex) {
-            System.out.println("Something went wrong");
-        }
-        
+        // Sleep for 5 seconds - time for user to remember the target cake          
+        Thread.sleep(5000);        
     }
 
     // EFFECTS: Prints a long message to the console to hide the target cake from the user.

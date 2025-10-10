@@ -61,8 +61,12 @@ public class GameScreenHandler {
                 userSelection = InputValidator.getValidUserChoice(scanner, Constants.START_ROUND_PROMPT, 
             1, 2);
                 if (userSelection == 1) {
-                    game.addRound(roundHandler.playRound());  
-                    System.out.println("Number of lives left: " + game.getLivesLeft() + "\n"); 
+                    try {
+                        game.addRound(roundHandler.playRound());  
+                        System.out.println("Number of lives left: " + game.getLivesLeft() + "\n"); 
+                    } catch (InterruptedException ex) {
+                        System.out.println(Constants.UNEXPECTED_ERROR_MESSAGE);
+                    }                    
                 } else {                    
                     break;
                 }            
