@@ -1,47 +1,22 @@
-package ui;
+package ui.screens;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.GameRound;
 import model.GameSession;
+import ui.Constants;
+import ui.InputValidator;
+import ui.MenuOptions.GameMenuOptions;
 
 // Handler that manages one Game Session.
-public class GameSessionHandler {
-    // stores menu options for the game
-    enum GameMenuOptions {
-        PLAY("Play the game"),
-        SHOW_ROUNDS("Show the played rounds"),
-        GET_SCORE("Total Score"),
-        EXIT("Exit Current Game");
-
-        private String text;
-
-        GameMenuOptions(String text) {
-            this.text = text;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public static String listAllOptions() {
-            String summary = "";
-
-            for (int i = 1; i <= values().length; i++) {
-                summary += "\t" + i + ": " + values()[ i - 1 ].getText() + "\n";
-            }
-
-            return summary;
-        }
-    }
-
+public class GameScreenHandler { 
     private Scanner scanner;
-    private RoundHandler roundHandler;
+    private RoundScreenHandler roundHandler;
 
     // EFFECTS: creates game handler that uses the given Scanner for user input 
     // and the provided RoundHandler to manage rounds within a game.
-    public GameSessionHandler(Scanner scanner, RoundHandler roundHandler) {
+    public GameScreenHandler(Scanner scanner, RoundScreenHandler roundHandler) {
         this.scanner = scanner;
         this.roundHandler = roundHandler;
     }
@@ -49,14 +24,14 @@ public class GameSessionHandler {
     // EFFECTS: Displays the game menu and based on user input, either starts the game, shows 
     // the list of played rounds, or displays the total score. Exits game menu when the user chooses to exit.
     public void runGameMenu(GameSession game) {
+        System.out.println(Constants.SEPARATOR);
         System.out.println("Game Nr." + game.getGameID());
-        String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  GameMenuOptions.listAllOptions();
         GameMenuOptions selectedOption;
         int selectedIndex;
 
         do {
             selectedIndex = InputValidator.getValidUserChoice(scanner, 
-                menuPrompt, 1, GameMenuOptions.values().length) - 1;
+                Constants.GAME_MENU_PROMPT, 1, GameMenuOptions.values().length) - 1;
             selectedOption = GameMenuOptions.values()[selectedIndex];
 
             switch (selectedOption) {
@@ -70,7 +45,7 @@ public class GameSessionHandler {
                     displayGameScore(game.getTotalScore());
                     break;
                 case EXIT:
-                    System.out.println("Going back to the main menu...");
+                    System.out.println(Constants.MESSAGE_GO_BACK_TO_MAIN_MENU);
                     break;
             }
         } while (selectedOption != GameMenuOptions.EXIT); 
@@ -83,7 +58,7 @@ public class GameSessionHandler {
         if (!game.isFinished()) {
             int userSelection;
             do {
-                userSelection = InputValidator.getValidUserChoice(scanner, "Start the round?\n1.YES 2.NO", 
+                userSelection = InputValidator.getValidUserChoice(scanner, Constants.START_ROUND_PROMPT, 
             1, 2);
                 if (userSelection == 1) {
                     game.addRound(roundHandler.playRound());  
@@ -93,21 +68,22 @@ public class GameSessionHandler {
                 }            
             } while (!game.isFinished());
         } else {
-            System.out.println("This game is over!\n Create a new game to start playing.");
+            System.out.println(Constants.GAME_OVER_MESSAGE);
+            System.out.println("Total score: " + game.getTotalScore() + "\n");
         }
         
-        System.out.println("Going back to the game screen...");
+        System.out.println(Constants.MESSAGE_GO_BACK_TO_GAME_MENU);
     }
 
     // EFFECTS: Displays a list of all played rounds in current game. If no rounds were played, 
     // shows a message to the user.
     private void printPlayedRounds(ArrayList<GameRound> rounds) {        
         if (rounds.size() == 0) {
-            System.out.println("No rounds in this game");
+            System.out.println(Constants.EMPTY_ROUNDS_MESSAGE);
             return;
         }
 
-        System.out.println("List of played rounds:");
+        System.out.println(Constants.ROUNDS_MESSAGE);
         for (int i = 0; i < rounds.size(); i++) {
             roundHandler.printRoundSummary(rounds.get(i), i + 1);
         }
@@ -122,12 +98,8 @@ public class GameSessionHandler {
 
     // EFFECTS: Prints a summary for the round
     public void printGameSummary(GameSession game) {
-        if (game.isFinished()) {
-            System.out.println(game.getGameID() + ": Completed Game");
-            System.out.println("\tTotal score: " + game.getTotalScore());            
-        } else {
-            System.out.println(game.getGameID() + ": In-Progress Game");
-            System.out.println("\tTotal score : " + game.getTotalScore());
-        }
+        String gameState = game.isFinished() ? "Completed" : "In-Progress";
+        System.out.println("\t" + game.getGameID() + ": " + gameState + " Game");
+        System.out.println("\t\tTotal score: " + game.getTotalScore());
     }
 }
