@@ -7,15 +7,14 @@ import java.util.Scanner;
 import model.GameSession;
 import ui.Constants;
 import ui.InputValidator;
-import ui.MenuOptions;
 import ui.MenuOptions.MainMenuOptions;
 
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
-    private static int nextGameID = 1;
-    private Scanner scanner;
-    private GameScreenHandler gameSessionHandler;
-    private ArrayList<GameSession> listOfGames;
+    private static int nextGameID = 1;               // id for the next game
+    private Scanner scanner;                         // Scanner for reading user input
+    private GameScreenHandler gameSessionHandler;    // handler that manages the game session
+    private ArrayList<GameSession> listOfGames;      // list of all played games
 
     // EFFECTS: Sets up the main screen handler, initializes a new instance of Scanner for user input,  
     // and new instance of GameSessionHandler to manage games. Creates an empty list of all games played.

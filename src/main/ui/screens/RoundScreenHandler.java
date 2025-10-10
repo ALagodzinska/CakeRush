@@ -15,8 +15,8 @@ import ui.InputValidator;
 // Handler that manages one round.
 public class RoundScreenHandler {
 
-    private Scanner scanner;
-    private Random random;
+    private Scanner scanner;        // Scanner for reading user input
+    private Random random;          // Random used to generate random rounds
 
     // EFFECTS: creates round handler that uses passed Scanner for user input 
     // and Random for generating random game round.

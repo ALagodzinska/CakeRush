@@ -11,8 +11,8 @@ import ui.MenuOptions.GameMenuOptions;
 
 // Handler that manages one Game Session.
 public class GameScreenHandler { 
-    private Scanner scanner;
-    private RoundScreenHandler roundHandler;
+    private Scanner scanner;                    // Scanner for reading user input
+    private RoundScreenHandler roundHandler;    // handler that manages the game round
 
     // EFFECTS: creates game handler that uses the given Scanner for user input 
     // and the provided RoundHandler to manage rounds within a game.
