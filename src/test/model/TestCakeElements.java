@@ -13,7 +13,7 @@ public class TestCakeElements {
 
     @Test
     void testGlazeListAllOptions() {
-        assertEquals("1: NONE 2: PINK 3: PURPLE 4: GREEN 5: BLUE ", CakeElements.Glaze.listAllOptions());
+        assertEquals("1: NONE 2: VANILLA 3: CHOCOLATE 4: STRAWBERRY 5: CARAMEL ", CakeElements.Glaze.listAllOptions());
     }
 
     @Test

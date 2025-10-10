@@ -52,20 +52,20 @@ public class TestCake {
     void testCompareSame() {
         defaultCake.setNumberOfTiers(2);
         defaultCake.setCakeColor(CakeColor.BLUE);
-        defaultCake.setGlaze(Glaze.PINK);
+        defaultCake.setGlaze(Glaze.CARAMEL);
         defaultCake.setTopping(Topping.CREAM);
         defaultCake.setDecoration(Decoration.CANDLE);
 
         assertEquals(2, defaultCake.getNumberOfTiers());
         assertEquals(CakeColor.BLUE, defaultCake.getCakeColor());
-        assertEquals(Glaze.PINK, defaultCake.getGlaze());
+        assertEquals(Glaze.CARAMEL, defaultCake.getGlaze());
         assertEquals(Topping.CREAM, defaultCake.getTopping());
         assertEquals(Decoration.CANDLE, defaultCake.getDecoration());
 
         Cake secondCake = new Cake();
         secondCake.setNumberOfTiers(2);
         secondCake.setCakeColor(CakeColor.BLUE);
-        secondCake.setGlaze(Glaze.PINK);
+        secondCake.setGlaze(Glaze.CARAMEL);
         secondCake.setTopping(Topping.CREAM);
         secondCake.setDecoration(Decoration.CANDLE);
 
@@ -91,7 +91,7 @@ public class TestCake {
     @Test
     void testCompareDifferentGlaze() {
         Cake secondCake = new Cake();
-        secondCake.setGlaze(Glaze.PURPLE);
+        secondCake.setGlaze(Glaze.CHOCOLATE);
 
         assertFalse(defaultCake.compare(secondCake));
     }
@@ -140,11 +140,11 @@ public class TestCake {
 
     @Test
     void testToString() {
-        assertEquals("CAKE:\n\tNUMBER OF TIERS: 1"
-                + "\n\tCOLOR: WHITE"
-                + "\n\tGLAZE: NONE"
-                + "\n\tTOPPING: NONE"
-                + "\n\tDECORATION: NONE", defaultCake.toString());
+        assertEquals("NUMBER OF TIERS: 1"
+                + "\tCOLOR: WHITE"
+                + "\tGLAZE: NONE"
+                + "\tTOPPING: NONE"
+                + "\tDECORATION: NONE", defaultCake.toString());
     }
 
     private int[] randomFixedValues() {
