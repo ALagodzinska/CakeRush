@@ -1,5 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import model.CakeElements.CakeColor;
@@ -103,5 +108,12 @@ public class Cake {
             + "\tGLAZE: " + this.glaze
             + "\tTOPPING: " + this.topping 
             + "\tDECORATION: " + this.decoration;
+    }
+
+    // EFFECTS: Generates and returns a string representing information about all cake elements and their 
+    // values in random order.
+    public String getReorderedSummary() {
+        //stub
+        return null;
     }
 }
