@@ -55,7 +55,8 @@ public class Cake {
         return this.numberOfTiers;
     }
 
-    // REQUIRES: number of tiers must be betweeen 1 and maxNumberOfTiers(inclusive).
+    // REQUIRES: Number of tiers must be betweeen 1 and maxNumberOfTiers(inclusive).
+    // EFFECTS: Sets the number of tiers to the given parameter value.
     public void setNumberOfTiers(int numberOfTiers) {
         if (numberOfTiers >= MIN_NUM_OF_TIERS && numberOfTiers <= MAX_NUM_OF_TIERS) {
             this.numberOfTiers = numberOfTiers;
@@ -94,6 +95,7 @@ public class Cake {
         this.decoration = decoration;
     }
 
+    // EFFECTS: Generates and returns a string representing information about all cake elements and their values.
     @Override
     public String toString() {
         return "NUMBER OF TIERS: " + this.numberOfTiers
