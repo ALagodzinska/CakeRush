@@ -5,10 +5,18 @@ import model.CakeElements.CakeColor;
 import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
+import ui.MenuOptions.GameMenuOptions;
 
+//
 public class Constants {
+    // String colors 
+    public static final String DEFAULT_COLOR = "\u001B[0m";
+    public static final String RED_COLOR = "\u001B[31m";
+    public static final String GREEN_COLOR = "\u001B[32m";
+    public static final String PURPLE_COLOR = "\u001B[35m";
+
     public static final String INVALID_INPUT_MESSAGE = "Invalid input value. Try again.\n";
-    public static final String INSTRUCTIONS_FOR_INPUT = "Choose a number from the list of options.";
+    public static final String INSTRUCTIONS_FOR_INPUT = "Select a number from the list of options.";
 
     // Round constants
     public static final String NUMBER_OF_TIERS_PROMPT = "How many tiers did the cake have?”\n" 
@@ -26,4 +34,51 @@ public class Constants {
     public static final String LOSS_MESSAGE = "Wrong cake! You've lost this round!\n";
     public static final String ROUND_INTRO_MESSAGE = "Generating random cake...\n"
             + "You have 5 seconds to remember all the elements\n";
+
+    // Game screen constants
+    public static final String MESSAGE_GO_BACK_TO_MAIN_MENU = "Going back to the main menu...\n";
+    public static final String MESSAGE_GO_BACK_TO_GAME_MENU = "Going back to the game screen...\n";
+    public static final String START_ROUND_PROMPT = "Start a new round?\n1.YES 2.NO\n";
+    public static final String GAME_MENU_PROMPT = Constants.INSTRUCTIONS_FOR_INPUT + "\n" 
+            + GameMenuOptions.listAllOptions();
+    public static final String GAME_OVER_MESSAGE = "This game is over!\nCreate a new game to start playing.";
+    public static final String EMPTY_ROUNDS_MESSAGE = "This game doesn't have any rounds.\n";
+    public static final String ROUNDS_MESSAGE = "List of played rounds:\n";
+
+    // Main screen constants
+    public static final String SELECT_OLD_GAME_PROMPT = "Select the number of the game you want to continue playing\n"
+            + "or type 'exit' to go back to the main menu";
+
+    // Visual noise 
+    public static final String VISUAL_NOISE = "                       )\\\r\n" 
+                + "                      (__)\r\n" 
+                + "                       /\\\r\n" 
+                + "                      [[]]\r\n"  
+                + "               @@@@@@@[[]]@@@@@@\r\n"  
+                + "         @@@@@@@@@@@@@[[]]@@@@@@@@@@@@@@\r\n"  
+                + "     @@@@@@@          [[]]          @@@@@@@\r\n"  
+                + " @@@@@@@@@            [[]]            @@@@@@@@@\r\n"  
+                + "@@@@@@@               [[]]               @@@@@@@\r\n"  
+                + "!@@@@@@@@@@                          @@@@@@@@@@!\r\n"  
+                + "!      @@@@@@@@@                @@@@@@@@@      !\r\n"  
+                + "!        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        !\r\n"  
+                + "!              @@@@@@@@@@@@@@@@@@@             !\r\n"  
+                + "!                                              !\r\n"  
+                + "!                                              !\r\n"  
+                + "!                                              !\r\n" 
+                + "!!!!!!!!!!!                          !!!!!!!!!!!\r\n" 
+                + "     !!!!!!!!!!!                !!!!!!!!!!!\r\n"
+                + "         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\r\n"; 
+
+    public static final String GAME_TITLE = "   _____      _        _____           _     \r\n" 
+                                            + "  / ____|    | |      |  __ \\         | |    \r\n" 
+                                            + " | |     __ _| | _____| |__) |   _ ___| |__  \r\n" 
+                                            + " | |    / _` | |/ / _ \\  _  / | | / __| '_ \\ \r\n"
+                                            + " | |___| (_| |   <  __/ | \\ \\ |_| \\__ \\ | | |\r\n"
+                                            + "  \\_____\\__,_|_|\\_\\___|_|  \\_\\__,_|___/_| |_|\r\n" 
+                                            + "                                             \r\n" 
+                                            + "                                             ";
+
+    public static final String SEPARATOR = ".oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo."
+                                + ".oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.";
 }
