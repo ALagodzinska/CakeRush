@@ -15,11 +15,13 @@ public class GameLibrary {
 
     // MODIFIES: this
     // EFFECTS: Creates a new game and adds game to the list of games, inreases the next ID by one.
-    public void createGame() {
+    public GameSession createGame() {
         GameSession game = new GameSession(nextGameID);
         nextGameID++;
 
         playedGames.add(game);
+
+        return game;
     }
 
     public ArrayList<GameSession> getPlayedGames() {

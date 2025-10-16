@@ -20,23 +20,21 @@ public class TestGameLibrary {
 
     @Test
     void testCreateGameOne() {
-        gameLibrary.createGame();
+        GameSession game = gameLibrary.createGame();
         assertEquals(1, gameLibrary.getPlayedGames().size());
-        assertEquals(1, gameLibrary.getPlayedGames().get(0).getGameID());
+        assertEquals(game, gameLibrary.getPlayedGames().get(0));
         assertEquals(2, gameLibrary.getNextID());
     }
 
     @Test
     void testCreateGameMultiple() {
-        int firstID = gameLibrary.getNextID();
-        gameLibrary.createGame();
-        int secondID = gameLibrary.getNextID();
-        gameLibrary.createGame();
+        GameSession game1 = gameLibrary.createGame();
+        GameSession game2 = gameLibrary.createGame();
 
 
         assertEquals(2, gameLibrary.getPlayedGames().size());
-        assertEquals(firstID, gameLibrary.getPlayedGames().get(0).getGameID());
-        assertEquals(secondID, gameLibrary.getPlayedGames().get(1).getGameID());
-        assertEquals(secondID + 1, gameLibrary.getNextID());
+        assertEquals(game1, gameLibrary.getPlayedGames().get(0));
+        assertEquals(game2, gameLibrary.getPlayedGames().get(1));
+        assertEquals(game2.getGameID() + 1, gameLibrary.getNextID());
     }
 }
