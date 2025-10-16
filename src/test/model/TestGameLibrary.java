@@ -2,19 +2,15 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestGameLibrary {
     private GameLibrary gameLibrary;
-    private GameSession game1;
-    private GameSession game2;
 
     @BeforeEach
     void setup() {
         gameLibrary = new GameLibrary();
-        game1 = new GameSession(1);
-        game2 = new GameSession(2);
     }
 
     @Test
@@ -32,11 +28,15 @@ public class TestGameLibrary {
 
     @Test
     void testCreateGameMultiple() {
+        int firstID = gameLibrary.getNextID();
         gameLibrary.createGame();
+        int secondID = gameLibrary.getNextID();
         gameLibrary.createGame();
+
+
         assertEquals(2, gameLibrary.getPlayedGames().size());
-        assertEquals(1, gameLibrary.getPlayedGames().get(0).getGameID());
-        assertEquals(2, gameLibrary.getPlayedGames().get(0).getGameID());
-        assertEquals(3, gameLibrary.getNextID());
+        assertEquals(firstID, gameLibrary.getPlayedGames().get(0).getGameID());
+        assertEquals(secondID, gameLibrary.getPlayedGames().get(1).getGameID());
+        assertEquals(secondID + 1, gameLibrary.getNextID());
     }
 }
