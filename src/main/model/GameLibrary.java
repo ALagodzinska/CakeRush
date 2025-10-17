@@ -24,6 +24,19 @@ public class GameLibrary {
         return game;
     }
 
+    // REQUIRES: valid game id
+    // EFFECTS: Returns a game from the list of all games based on the passed id. 
+    // If the game with such id is not present in the list returns null.
+    public GameSession getGameByID(int id) {
+        for (GameSession game: playedGames) {
+            if (game.getGameID() == id) {
+                return game;
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<GameSession> getPlayedGames() {
         return this.playedGames;
     }

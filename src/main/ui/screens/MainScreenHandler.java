@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import model.GameLibrary;
 import model.GameSession;
 import ui.Constants;
 import ui.InputValidator;
@@ -11,17 +12,16 @@ import ui.MenuOptions.MainMenuOptions;
 
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
-    private static int nextGameID = 1;               // id for the next game
+    private GameLibrary gameLibrary;                 // Library that manages all games
     private Scanner scanner;                         // Scanner for reading user input
     private GameScreenHandler gameSessionHandler;    // handler that manages the game session
-    private ArrayList<GameSession> listOfGames;      // list of all played games
 
     // EFFECTS: Sets up the main screen handler, initializes a new instance of Scanner for user input,  
     // and new instance of GameSessionHandler to manage games. Creates an empty list of all games played.
     public MainScreenHandler() {
         Random random = new Random();
         this.scanner = new Scanner(System.in);
-        listOfGames = new ArrayList<>();
+        this.gameLibrary = new GameLibrary();
         this.gameSessionHandler = new GameScreenHandler(scanner, new RoundScreenHandler(scanner, random));
     }
 
@@ -57,24 +57,23 @@ public class MainScreenHandler {
     // EFFECTS: Creates a new game and adds it to the list of played games and opens a game menu.
     private void startNewGame() {
         System.out.println("Creating a new game...");
-        GameSession newGame = new GameSession(nextGameID);
-        nextGameID++;
-        listOfGames.add(newGame);
+        GameSession newGame = gameLibrary.createGame();
         System.out.println();     
         gameSessionHandler.runGameMenu(newGame);
     }
 
     // EFFECTS: Displays a list of all played games. Allows for user to select one of the played games to play. 
     // If no games were played, shows a message to the user. 
-    private void printPlayedGames() {        
-        if (listOfGames.size() == 0) {
+    private void printPlayedGames() {    
+        ArrayList<GameSession> games = gameLibrary.getPlayedGames();    
+        if (games.isEmpty()) {
             System.out.println("No games played\n");
             return;
         }
 
         System.out.println("List of played games:");
-        for (int i = 0; i < listOfGames.size(); i++) {
-            gameSessionHandler.printGameSummary(listOfGames.get(i));
+        for (int i = 0; i < games.size(); i++) {
+            gameSessionHandler.printGameSummary(games.get(i));
         }
         System.out.println();
         startOldGame();
@@ -83,28 +82,15 @@ public class MainScreenHandler {
     // EFFECTS: Allows to open game menu for the in-progress game, shows a message if the selected game is completed.
     private void startOldGame() {
         int userSelection = InputValidator.getValidUserChoice(scanner, Constants.SELECT_OLD_GAME_PROMPT, 
-                1, listOfGames.size(), true);
+                1, gameLibrary.getPlayedGames().size(), true);
                 
         if (userSelection != -1) {
-            GameSession game = getGameByID(userSelection);
+            GameSession game = gameLibrary.getGameByID(userSelection);
             if (game != null) {
                 gameSessionHandler.runGameMenu(game);
             }            
         } else {
             System.out.println(Constants.MESSAGE_GO_BACK_TO_MAIN_MENU);
         }
-    }
-
-    // REQUIRES: valid game id
-    // EFFECTS: Returns a game from the list of all games based on the passed id. 
-    // If the game with such id is not present in the list returns null.
-    private GameSession getGameByID(int id) {
-        for (GameSession game: listOfGames) {
-            if (game.getGameID() == id) {
-                return game;
-            }
-        }
-
-        return null;
-    }
+    }    
 }
