@@ -1,6 +1,8 @@
 {
+    "nextID": 3,
     "games": [ 
         {
+            "gameID": 1,
             "rounds": [
                 {
                     "targetCake": 
@@ -8,33 +10,37 @@
                             "numberOfTiers": 2,
                             "cakeColor": "BLUE",
                             "topping": "NONE",
-                            "decoration": "NONE"
+                            "decoration": "NONE",
+                            "glaze": "NONE"
                         },
                     "userCake": 
                         {
                             "numberOfTiers": 1,
                             "cakeColor": "BLUE",
                             "topping": "NONE",
-                            "decoration": "NONE"
+                            "decoration": "NONE",
+                            "glaze": "NONE"
                         },
                     "isVictory": false
                 },
                 {
                     "targetCake": 
                         {
-                            "numberOfTiers": 2,
+                            "numberOfTiers": 1,
                             "cakeColor": "BLUE",
                             "topping": "NONE",
-                            "decoration": "NONE"
+                            "decoration": "NONE",
+                            "glaze": "NONE"
                         },
                     "userCake": 
                         {
                             "numberOfTiers": 1,
                             "cakeColor": "BLUE",
                             "topping": "NONE",
-                            "decoration": "NONE"
+                            "decoration": "NONE",
+                            "glaze": "NONE"
                         },
-                    "isVictory": false
+                    "isVictory": true
                 }
             ],
             "isFinished": false,
@@ -42,24 +48,8 @@
             "livesLeft": 1
         },
         {
+            "gameID": 2,
             "rounds": [
-                {
-                    "targetCake": 
-                        {
-                            "numberOfTiers": 2,
-                            "cakeColor": "BLUE",
-                            "topping": "NONE",
-                            "decoration": "NONE"
-                        },
-                    "userCake": 
-                        {
-                            "numberOfTiers": 1,
-                            "cakeColor": "BLUE",
-                            "topping": "NONE",
-                            "decoration": "NONE"
-                        },
-                    "isVictory": false
-                },
                 {
                     "targetCake": 
                         {
