@@ -1,0 +1,86 @@
+{
+    "games": [ 
+        {
+            "rounds": [
+                {
+                    "targetCake": 
+                        {
+                            "numberOfTiers": 2,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "userCake": 
+                        {
+                            "numberOfTiers": 1,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "isVictory": false
+                },
+                {
+                    "targetCake": 
+                        {
+                            "numberOfTiers": 2,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "userCake": 
+                        {
+                            "numberOfTiers": 1,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "isVictory": false
+                }
+            ],
+            "isFinished": false,
+            "totalScore": 0,
+            "livesLeft": 1
+        },
+        {
+            "rounds": [
+                {
+                    "targetCake": 
+                        {
+                            "numberOfTiers": 2,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "userCake": 
+                        {
+                            "numberOfTiers": 1,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "isVictory": false
+                },
+                {
+                    "targetCake": 
+                        {
+                            "numberOfTiers": 2,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "userCake": 
+                        {
+                            "numberOfTiers": 1,
+                            "cakeColor": "BLUE",
+                            "topping": "NONE",
+                            "decoration": "NONE"
+                        },
+                    "isVictory": false
+                }
+            ],
+            "isFinished": false,
+            "totalScore": 0,
+            "livesLeft": 1
+        }
+    ]
+}

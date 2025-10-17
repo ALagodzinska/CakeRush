@@ -1,0 +1,10 @@
+{
+    "games": [ 
+        {
+            "rounds": [],
+            "isFinished": false,
+            "totalScore": 0,
+            "livesLeft": 3
+        }
+    ]
+}
