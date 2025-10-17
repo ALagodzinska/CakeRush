@@ -7,7 +7,7 @@ import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 import ui.MenuOptions.GameMenuOptions;
 
-//
+// Stores all constants for the UI used in interaction with the user.
 public class Constants {
     // String colors 
     public static final String DEFAULT_COLOR = "\u001B[0m";

@@ -21,7 +21,7 @@ public class MenuOptions {
             this.text = text;
         }
 
-        public String getText() {
+        private String getText() {
             return text;
         }
 
@@ -46,12 +46,13 @@ public class MenuOptions {
 
         private String text;        // text representation of the enum member
 
+        // MODIFIES: this
         // EFFECTS: Creates an enum member with specified text.
         MainMenuOptions(String text) {
             this.text = text;
         }
 
-        public String getText() {
+        private String getText() {
             return text;
         }
 

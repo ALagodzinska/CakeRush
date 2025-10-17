@@ -24,6 +24,7 @@ public class GameSession {
     }
 
     // REQUIRES: totalScore >= 0; livesLeft >= && <= MAX_LIVES
+    // MODIFIES: this
     // EFFECTS: Creates a game session with fields defined by parameters passed to the method - 
     // gameID, isFinised state, total score and  
     // lives left. Sets rounds to the empty list of rounds. 
@@ -75,6 +76,7 @@ public class GameSession {
         calculateScore(isVictory);
     }
 
+    // MODIFIES: this
     // EFFECTS: If the round is won adds ROUND_SCORE to the total score, otherwise subtracts ROUND_SCORE
     // from the total score, if the total score is less than ROUND_SCORE sets the total score zero.
     private void calculateScore(boolean isRoundWon) {
