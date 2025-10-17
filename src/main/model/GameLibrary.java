@@ -24,7 +24,12 @@ public class GameLibrary {
         return game;
     }
 
-    // REQUIRES: valid game id
+    // MODIFIES: this
+    // EFFECTS: Creates a game with specified parameters and adds it to the list of games, inreases the next ID by one.
+    public void addExistingGame(GameSession game) {
+        // stub
+    }
+
     // EFFECTS: Returns a game from the list of all games based on the passed id. 
     // If the game with such id is not present in the list returns null.
     public GameSession getGameByID(int id) {

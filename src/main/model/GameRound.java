@@ -20,6 +20,12 @@ public class GameRound {
         this.isVictory = false;
     }
 
+    // REQUIRES: Target cake and user cake not null.
+    // EFFECTS: Creates a game round with defined targetCake, userCake and isVictory state.
+    public GameRound(Cake targetCake, Cake userCake, boolean isVictory) {
+        // stub
+    }
+
     public boolean isVictory() {
         return this.isVictory;
     }    

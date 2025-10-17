@@ -42,6 +42,11 @@ public class Cake {
         this.topping = Topping.values()[random.nextInt(Topping.length())];
         this.decoration = Decoration.values()[random.nextInt(Decoration.length())];
     }
+
+    // EFFECTS: Creates cake specified by passed parameters.
+    public Cake(int numberOfTiers, CakeColor color, Glaze glaze, Topping topping, Decoration decoration) {
+        // stub
+    }
     
     // EFFECTS: Compares every element of the cake. If cake have all elements the same returns true, else returns false.
     public boolean compare(Cake anotherCake) {

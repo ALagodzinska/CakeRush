@@ -23,6 +23,15 @@ public class GameSession {
         this.livesLeft = MAX_LIVES;
     }
 
+    // REQUIRES: totalScore >= 0; livesLeft >= && <= MAX_LIVES
+    // EFFECTS: Creates a game session with fields defined by parameters passed to the method - 
+    // gameID, isFinised state, total score and  
+    // lives left. Sets rounds to the empty list of rounds. 
+    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft) {
+        // stub
+    }
+
+
     // REQUIRES: Game not finished
     // MODIFIES: this
     // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
