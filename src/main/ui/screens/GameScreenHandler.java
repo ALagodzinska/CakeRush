@@ -71,7 +71,9 @@ public class GameScreenHandler {
                     break;
                 }            
             } while (!game.isFinished());
-            System.out.println(Constants.RED_COLOR + "GAME OVER!" + Constants.DEFAULT_COLOR);
+            if (game.getLivesLeft() == 0) {
+                System.out.println(Constants.RED_COLOR + "GAME OVER!" + Constants.DEFAULT_COLOR);
+            }            
         } else {
             System.out.println(Constants.GAME_OVER_MESSAGE);
             System.out.println("Total score: " + game.getTotalScore() + "\n");

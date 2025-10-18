@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 // Contains methods for processing and validating user input.
 public class InputValidator {
+    // REQUIRES: minValue and maxValue > 0
     // EFFECTS: Prompts user with the specified message  for a valid numeric input within the given range
     // [minValue, maxValue]. Continues to prompt the user until the valid input is entered. 
     // Returns the recieved valid input.
@@ -11,6 +12,7 @@ public class InputValidator {
         return getValidUserChoice(scanner, promptMessage, minValue, maxValue, false); 
     }
 
+    // REQUIRES: minValue and maxValue > 0
     // EFFECTS: Prompts user with the specified message for a valid numeric input within the given range
     // [minValue, maxValue] or "exit" String. Continues to prompt the user until the valid input is entered. 
     // Returns the recieved valid input or -1 when canExit is equal to true and the user entered "exit".

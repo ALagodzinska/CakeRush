@@ -21,9 +21,9 @@ public class JsonReader {
     public JsonReader(String source) {
     }
 
-    // EFFECTS: reads list of played games from file and returns it;
+    // EFFECTS: reads game library from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public ArrayList<GameSession> read() throws IOException {
+    public GameLibrary read() throws IOException {
         // stub
         return null;
     }
