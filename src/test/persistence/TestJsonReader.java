@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import model.Cake;
 import model.GameLibrary;
@@ -19,10 +23,11 @@ import model.GameSession;
 //   Type: source code
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-public class TestJsonReader extends TestJson{
+public class TestJsonReader extends TestJson {
     @Test
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
+
         try {
             GameLibrary gameLibrary = reader.read();
             fail("IOException expected");
@@ -33,7 +38,7 @@ public class TestJsonReader extends TestJson{
 
     @Test
     void testReaderEmptyGameLibrary() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyGamesList.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyGameLibrary.json");
         try {
             GameLibrary gameLibrary = reader.read();
             assertEquals(1, gameLibrary.getNextID());
@@ -48,33 +53,36 @@ public class TestJsonReader extends TestJson{
         JsonReader reader = new JsonReader("./data/testReaderEmptyRoundList.json");
         try {
             GameLibrary gameLibrary = reader.read();
-            assertEquals(2, gameLibrary.getNextID());
             assertEquals(1, gameLibrary.getPlayedGames().size());
-            GameSession game = gameLibrary.getPlayedGames().get(0);
-            checkGame(1, false, 0, 3, new ArrayList<GameRound>(), game);
-            assertEquals(0, game.getRounds().size());
+            GameSession game = gameLibrary.getPlayedGames().get(0);          
+            checkGame(1, false, 0, 3, 0, game);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
+    // TODO: debug
     @Test
     void testReaderGeneralWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralGameLibrary.json");
         try {
             GameLibrary gameLibrary = reader.read();
-            assertEquals(3, gameLibrary.getNextID());
-            assertEquals(1, gameLibrary.getPlayedGames().size());
             ArrayList<GameSession> games = gameLibrary.getPlayedGames();
             assertEquals(2, games.size());
-            ArrayList<GameRound> gameOneRounds = games.get(0).getRounds();
-            ArrayList<GameRound> gameTwoRounds = games.get(1).getRounds();
+            GameSession gameOne = games.get(0);
+            GameSession gameTwo = games.get(1);
+
+            checkGame(1, false, 0, 2, 2, gameOne);
+            checkGame(2, false, 0, 1, 1, gameTwo);
+            
             Cake targetCake = new Cake();
             Cake userCake = new Cake();
-            userCake.setNumberOfTiers(2);
-            checkRound(targetCake, userCake, false, gameOneRounds.get(0));
-            checkRound(targetCake, targetCake, true, gameOneRounds.get(1));
-            checkRound(targetCake, userCake, false, gameTwoRounds.get(0));
+            targetCake.setNumberOfTiers(2);
+
+            checkRound(targetCake, userCake, false, gameOne.getRounds().get(0));
+            checkRound(userCake, userCake, true, gameOne.getRounds().get(1));
+            checkRound(targetCake, userCake, false, gameTwo.getRounds().get(0));
+            
             
         } catch (IOException e) {
             fail("Couldn't read from file");

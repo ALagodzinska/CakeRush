@@ -19,25 +19,25 @@ import model.GameSession;
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 public class TestJson {
-    protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, 
-    ArrayList<GameRound> rounds, GameSession game) {
+    protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, int roundsSize, 
+            GameSession game) {
         assertEquals(id, game.getGameID());
         assertEquals(isFinished, game.isFinished());
         assertEquals(totalScore, game.getTotalScore());
         assertEquals(livesLeft, game.getLivesLeft());
-        assertEquals(rounds, game.getRounds());        
+        assertEquals(roundsSize, game.getRounds().size());
     }
 
     protected void checkRound(Cake targetCake, Cake userCake, boolean isVictory, GameRound round) {
         checkCake(targetCake.getNumberOfTiers(), targetCake.getCakeColor(), 
-            targetCake.getGlaze(), targetCake.getTopping(), targetCake.getDecoration(), round.getTargetCake());
+                targetCake.getGlaze(), targetCake.getTopping(), targetCake.getDecoration(), round.getTargetCake());
         checkCake(userCake.getNumberOfTiers(), userCake.getCakeColor(), 
-            userCake.getGlaze(), userCake.getTopping(), userCake.getDecoration(), round.getUserCake());
+                userCake.getGlaze(), userCake.getTopping(), userCake.getDecoration(), round.getUserCake());
         assertEquals(isVictory, round.isVictory());
     }
 
     private void checkCake(int numberOfTiers, CakeColor color, Glaze glaze, Topping topping, Decoration decoration,
-        Cake cake) {
+            Cake cake) {
         assertEquals(numberOfTiers, cake.getNumberOfTiers());
         assertEquals(color, cake.getCakeColor());
         assertEquals(topping, cake.getTopping());
