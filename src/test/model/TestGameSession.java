@@ -48,7 +48,7 @@ public class TestGameSession {
     void testAddRoundOne() {
         assertEquals(0, gameSession.getRounds().size());  
 
-        gameSession.addRound(wonRound);
+        gameSession.addPlayedRound(wonRound);
 
         assertEquals(1, gameSession.getRounds().size());
         assertEquals(wonRound, gameSession.getRounds().get(0));   
@@ -61,8 +61,8 @@ public class TestGameSession {
     void testAddRoundMultipleAfterRoundVictory() {
         assertEquals(0, gameSession.getRounds().size());  
 
-        gameSession.addRound(wonRound);
-        gameSession.addRound(wonRound);
+        gameSession.addPlayedRound(wonRound);
+        gameSession.addPlayedRound(wonRound);
 
         assertEquals(2, gameSession.getRounds().size());
         assertEquals(wonRound, gameSession.getRounds().get(0));  
@@ -76,9 +76,9 @@ public class TestGameSession {
     void testAddRoundMultipleAfterOneRoundLoss() {
         assertEquals(0, gameSession.getRounds().size());  
 
-        gameSession.addRound(wonRound);
-        gameSession.addRound(lostRound);
-        gameSession.addRound(wonRound);
+        gameSession.addPlayedRound(wonRound);
+        gameSession.addPlayedRound(lostRound);
+        gameSession.addPlayedRound(wonRound);
 
         assertEquals(3, gameSession.getRounds().size());
         assertEquals(wonRound, gameSession.getRounds().get(0));  
@@ -93,9 +93,9 @@ public class TestGameSession {
     void testAddRoundMultipleGameOver() {
         assertEquals(0, gameSession.getRounds().size());  
 
-        gameSession.addRound(lostRound);
-        gameSession.addRound(lostRound);
-        gameSession.addRound(lostRound);
+        gameSession.addPlayedRound(lostRound);
+        gameSession.addPlayedRound(lostRound);
+        gameSession.addPlayedRound(lostRound);
 
         assertEquals(3, gameSession.getRounds().size());
 

@@ -62,7 +62,7 @@ public class GameScreenHandler {
             1, 2);
                 if (userSelection == 1) {
                     try {
-                        game.addRound(roundHandler.playRound());  
+                        game.addPlayedRound(roundHandler.playRound());  
                         System.out.println("Number of lives left: " + game.getLivesLeft() + "\n"); 
                     } catch (InterruptedException ex) {
                         System.out.println(Constants.UNEXPECTED_ERROR_MESSAGE);
@@ -77,8 +77,7 @@ public class GameScreenHandler {
         } else {
             System.out.println(Constants.GAME_OVER_MESSAGE);
             System.out.println("Total score: " + game.getTotalScore() + "\n");
-        }
-        
+        }        
         System.out.println(Constants.MESSAGE_GO_BACK_TO_GAME_MENU);
     }
 
