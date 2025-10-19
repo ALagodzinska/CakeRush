@@ -2,8 +2,6 @@ package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-
 import model.Cake;
 import model.CakeElements.CakeColor;
 import model.CakeElements.Decoration;

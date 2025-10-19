@@ -75,8 +75,7 @@ public class GameScreenHandler {
                 System.out.println(Constants.RED_COLOR + "GAME OVER!" + Constants.DEFAULT_COLOR);
             }            
         } else {
-            System.out.println(Constants.GAME_OVER_MESSAGE);
-            System.out.println("Total score: " + game.getTotalScore() + "\n");
+            System.out.println(Constants.GAME_OVER_MESSAGE + "\nTotal score: " + game.getTotalScore() + "\n");
         }        
         System.out.println(Constants.MESSAGE_GO_BACK_TO_GAME_MENU);
     }
