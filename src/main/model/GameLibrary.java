@@ -13,6 +13,12 @@ public class GameLibrary {
         playedGames = new ArrayList<>();
     }
 
+    // EFFECTS: Creates a game library with specified next game id and an empty list of games.
+    public GameLibrary(int nextID) {
+        nextGameID = nextID;
+        playedGames = new ArrayList<>();
+    }
+
     // MODIFIES: this
     // EFFECTS: Creates a new game and adds game to the list of games, inreases the next ID by one.
     public GameSession createGame() {
@@ -27,7 +33,9 @@ public class GameLibrary {
     // MODIFIES: this
     // EFFECTS: Creates a game with specified parameters and adds it to the list of games, inreases the next ID by one.
     public void addExistingGame(GameSession game) {
-        // stub
+        nextGameID++;
+
+        playedGames.add(game);
     }
 
     // EFFECTS: Returns a game from the list of all games based on the passed id. 

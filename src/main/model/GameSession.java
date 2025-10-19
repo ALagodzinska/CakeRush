@@ -16,7 +16,6 @@ public class GameSession {
     // assigns total score to zero and livesLeft to MAX_LIVES. 
     public GameSession(int gameID) {
         this.gameID = gameID;
-
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
         this.totalScore = 0;
@@ -29,17 +28,25 @@ public class GameSession {
     // gameID, isFinised state, total score and  
     // lives left. Sets rounds to the empty list of rounds. 
     public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft) {
-        // stub
+        this.gameID = gameID;
+        this.isFinished = isFinished;
+        this.totalScore = totalScore;
+        this.livesLeft = livesLeft;
+        this.rounds = new ArrayList<GameRound>();
     }
 
 
     // REQUIRES: Game not finished
     // MODIFIES: this
     // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
-    public void addRound(GameRound round) {
+    public void addPlayedRound(GameRound round) {
         rounds.add(round);
         updateAfterRound(round);
-    }   
+    }
+
+    public void addSavedRound(GameRound round) {
+        rounds.add(round);
+    }
     
     public int getGameID() {
         return this.gameID;
