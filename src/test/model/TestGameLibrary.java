@@ -20,6 +20,13 @@ public class TestGameLibrary {
     }
 
     @Test
+    void testCounstructorWithParams() {
+        GameLibrary newGameLibrary = new GameLibrary(2);
+        assertEquals(2, newGameLibrary.getNextID());
+        assertEquals(0, newGameLibrary.getPlayedGames().size());
+    }
+
+    @Test
     void testCreateGameOne() {
         GameSession game = gameLibrary.createGame();
         assertEquals(1, gameLibrary.getPlayedGames().size());
