@@ -38,7 +38,7 @@ public class TestJsonReader extends TestJson {
         try {
             GameLibrary gameLibrary = reader.read();
             assertEquals(1, gameLibrary.getNextID());
-            assertEquals(0, gameLibrary.getPlayedGames().size());
+            assertEquals(0, gameLibrary.getGames().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -49,8 +49,8 @@ public class TestJsonReader extends TestJson {
         JsonReader reader = new JsonReader("./data/testReaderEmptyRoundList.json");
         try {
             GameLibrary gameLibrary = reader.read();
-            assertEquals(1, gameLibrary.getPlayedGames().size());
-            GameSession game = gameLibrary.getPlayedGames().get(0);          
+            assertEquals(1, gameLibrary.getGames().size());
+            GameSession game = gameLibrary.getGames().get(0);          
             checkGame(1, false, 0, 3, 0, game);
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -62,7 +62,7 @@ public class TestJsonReader extends TestJson {
         JsonReader reader = new JsonReader("./data/testReaderGeneralGameLibrary.json");
         try {
             GameLibrary gameLibrary = reader.read();
-            ArrayList<GameSession> games = gameLibrary.getPlayedGames();
+            ArrayList<GameSession> games = gameLibrary.getGames();
             assertEquals(2, games.size());
             GameSession gameOne = games.get(0);
             GameSession gameTwo = games.get(1);

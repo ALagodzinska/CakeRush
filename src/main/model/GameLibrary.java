@@ -5,18 +5,18 @@ import java.util.ArrayList;
 // Represents a library of all played games. Contains a list of played games.
 public class GameLibrary {    
     private static int nextGameID = 1;          // id for the next game
-    private ArrayList<GameSession> playedGames; // list of all played games
+    private ArrayList<GameSession> games; // list of all played games
 
 
     // EFFECTS: Creates a game library with empty list of games.
     public GameLibrary() {
-        playedGames = new ArrayList<>();
+        games = new ArrayList<>();
     }
 
     // EFFECTS: Creates a game library with specified next game id and an empty list of games.
     public GameLibrary(int nextID) {
         nextGameID = nextID;
-        playedGames = new ArrayList<>();
+        games = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -25,7 +25,7 @@ public class GameLibrary {
         GameSession game = new GameSession(nextGameID);
         nextGameID++;
 
-        playedGames.add(game);
+        games.add(game);
 
         return game;
     }
@@ -35,13 +35,13 @@ public class GameLibrary {
     public void addExistingGame(GameSession game) {
         nextGameID++;
 
-        playedGames.add(game);
+        games.add(game);
     }
 
     // EFFECTS: Returns a game from the list of all games based on the passed id. 
     // If the game with such id is not present in the list returns null.
     public GameSession getGameByID(int id) {
-        for (GameSession game: playedGames) {
+        for (GameSession game: games) {
             if (game.getGameID() == id) {
                 return game;
             }
@@ -50,8 +50,8 @@ public class GameLibrary {
         return null;
     }
 
-    public ArrayList<GameSession> getPlayedGames() {
-        return this.playedGames;
+    public ArrayList<GameSession> getGames() {
+        return this.games;
     }
 
     public int getNextID() {

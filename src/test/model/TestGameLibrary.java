@@ -16,21 +16,21 @@ public class TestGameLibrary {
 
     @Test
     void testConstructor() {
-        assertEquals(0, gameLibrary.getPlayedGames().size());
+        assertEquals(0, gameLibrary.getGames().size());
     }
 
     @Test
     void testCounstructorWithParams() {
         GameLibrary newGameLibrary = new GameLibrary(2);
         assertEquals(2, newGameLibrary.getNextID());
-        assertEquals(0, newGameLibrary.getPlayedGames().size());
+        assertEquals(0, newGameLibrary.getGames().size());
     }
 
     @Test
     void testCreateGameOne() {
         GameSession game = gameLibrary.createGame();
-        assertEquals(1, gameLibrary.getPlayedGames().size());
-        assertEquals(game, gameLibrary.getPlayedGames().get(0));
+        assertEquals(1, gameLibrary.getGames().size());
+        assertEquals(game, gameLibrary.getGames().get(0));
         assertEquals(2, gameLibrary.getNextID());
     }
 
@@ -40,9 +40,9 @@ public class TestGameLibrary {
         GameSession game2 = gameLibrary.createGame();
 
 
-        assertEquals(2, gameLibrary.getPlayedGames().size());
-        assertEquals(game1, gameLibrary.getPlayedGames().get(0));
-        assertEquals(game2, gameLibrary.getPlayedGames().get(1));
+        assertEquals(2, gameLibrary.getGames().size());
+        assertEquals(game1, gameLibrary.getGames().get(0));
+        assertEquals(game2, gameLibrary.getGames().get(1));
         assertEquals(game2.getGameID() + 1, gameLibrary.getNextID());
     }
 
@@ -55,7 +55,7 @@ public class TestGameLibrary {
     @Test
     void testGetGameBy() {
         gameLibrary.createGame();
-        int id = gameLibrary.getPlayedGames().get(0).getGameID();
-        assertEquals(gameLibrary.getPlayedGames().get(0), gameLibrary.getGameByID(id));
+        int id = gameLibrary.getGames().get(0).getGameID();
+        assertEquals(gameLibrary.getGames().get(0), gameLibrary.getGameByID(id));
     }
 }

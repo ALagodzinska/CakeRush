@@ -65,7 +65,7 @@ public class MainScreenHandler {
     // EFFECTS: Displays a list of all played games. Allows for user to select one of the played games to play. 
     // If no games were played, shows a message to the user. 
     private void printPlayedGames() {    
-        ArrayList<GameSession> games = gameLibrary.getPlayedGames();    
+        ArrayList<GameSession> games = gameLibrary.getGames();    
         if (games.isEmpty()) {
             System.out.println("No games played\n");
             return;
@@ -82,7 +82,7 @@ public class MainScreenHandler {
     // EFFECTS: Allows to open game menu for the in-progress game, shows a message if the selected game is completed.
     private void startOldGame() {
         int userSelection = InputValidator.getValidUserChoice(scanner, Constants.SELECT_OLD_GAME_PROMPT, 
-                1, gameLibrary.getPlayedGames().size(), true);
+                1, gameLibrary.getGames().size(), true);
                 
         if (userSelection != -1) {
             GameSession game = gameLibrary.getGameByID(userSelection);
