@@ -95,5 +95,16 @@ public class MainScreenHandler {
         } else {
             System.out.println(Constants.MESSAGE_GO_BACK_TO_MAIN_MENU);
         }
-    }    
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Loads existing game library from the file into the current game library.
+    private void loadGameLibrary() {
+        // stub
+    }
+
+    // EFFECTS: Saves game library to JSON file.
+    private void saveGameLibrary() {
+        // stub
+    }
 }
