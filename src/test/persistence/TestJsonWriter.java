@@ -12,7 +12,7 @@ import model.GameLibrary;
 import model.GameRound;
 import model.GameSession;
 
-public class TestJsonWriter extends TestJson {
+public class TestJsonWriter extends JsonTestBase {
     @Test
     public void testWriterInvalidFile() {
         try {

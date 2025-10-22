@@ -19,7 +19,7 @@ import model.GameSession;
 //   Type: source code
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-public class TestJsonReader extends TestJson {
+public class TestJsonReader extends JsonTestBase {
     @Test
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");

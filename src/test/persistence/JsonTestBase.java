@@ -16,7 +16,7 @@ import model.GameSession;
 //   Type: source code
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-public class TestJson {
+public class JsonTestBase {
     protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, int roundsSize, 
             GameSession game) {
         assertEquals(id, game.getGameID());
