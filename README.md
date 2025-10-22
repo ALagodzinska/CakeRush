@@ -13,5 +13,5 @@ This game is great for people who enjoy challenges that **train memory and focus
 - As a user, I want to be able to preview the cake before the round starts so I would be able to recreate it.
 - As a user, I want to be able to select different cake elements to recreate a cake.
 - As a user, I want to be able to see the total score at the end of the game. 
-- As a user, I want to be able to save played games to file (if I so choose)
-- As a user, I want to be able to be able to load played games from file (if I so choose)
+- As a user, when I select the quit option from the menu on the main screecn, I want to be able to save all played games to file (if I so choose)
+- As a user, when I start the application, I want to be able to load all played games from file (if I so choose)
