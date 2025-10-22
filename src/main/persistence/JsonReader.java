@@ -55,7 +55,6 @@ public class JsonReader {
     // EFFECTS: parses list of games from JSON object and returns it
     private GameLibrary parseGameLibrary(JSONObject jsonObject) {
         int nextGameID = jsonObject.getInt("nextID");
-        System.out.println(nextGameID);
         GameLibrary gameLibrary = new GameLibrary(nextGameID);
         addGames(gameLibrary, jsonObject);
         return gameLibrary;

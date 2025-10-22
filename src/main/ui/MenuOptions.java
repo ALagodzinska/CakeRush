@@ -10,6 +10,7 @@ public class MenuOptions {
     private MenuOptions() {
     }
 
+    @ExcludeFromJacocoGeneratedReport
     // Represents menu options for the game menu.
     public enum GameMenuOptions {
         PLAY("Play the game"),
@@ -41,6 +42,7 @@ public class MenuOptions {
         }
     }
 
+    @ExcludeFromJacocoGeneratedReport
     // Represents menu options for the main menu.
     public enum MainMenuOptions {
         NEW_GAME("Create a new game"),
