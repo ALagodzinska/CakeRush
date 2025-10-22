@@ -5,13 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONObject;
+
 import model.CakeElements.CakeColor;
 import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
+import persistence.Writable;
 
 // Represents a cake that consists of different elements: number of tiers, cake color, glaze, topping and decoration.
-public class Cake {
+public class Cake implements Writable {
     public static final int MIN_NUM_OF_TIERS = 1; 
     public static final int MAX_NUM_OF_TIERS = 3;   
 
@@ -127,5 +130,16 @@ public class Cake {
         }
         
         return result;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("numberOfTiers", numberOfTiers);
+        json.put("cakeColor", cakeColor);
+        json.put("topping", topping);
+        json.put("decoration", decoration);
+        json.put("glaze", glaze);
+        return json;
     }
 }

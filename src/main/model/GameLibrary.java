@@ -2,9 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a library of all played games. Contains a list of played games.
-public class GameLibrary {    
-    private static int nextGameID = 1;          // id for the next game
+public class GameLibrary implements Writable {    
+    private int nextGameID = 1;          // id for the next game
     private ArrayList<GameSession> games; // list of all played games
 
 
@@ -33,7 +38,7 @@ public class GameLibrary {
     // MODIFIES: this
     // EFFECTS: Creates a game with specified parameters and adds it to the list of games, inreases the next ID by one.
     public void addExistingGame(GameSession game) {
-        nextGameID++;
+        nextGameID = game.getGameID() + 1;
 
         games.add(game);
     }
@@ -55,6 +60,24 @@ public class GameLibrary {
     }
 
     public int getNextID() {
-        return nextGameID;
+        return this.nextGameID;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("nextID", nextGameID);
+        json.put("games", gamesToJson());
+        return json;
+    }
+
+    private JSONArray gamesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (GameSession game : games) {
+            jsonArray.put(game.toJson());
+        }
+
+        return jsonArray;
     }
 }

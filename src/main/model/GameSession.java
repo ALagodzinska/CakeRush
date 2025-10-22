@@ -2,8 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a single game session. Contains a list of completed rounds and ends the game session when a round is lost.
-public class GameSession {
+public class GameSession implements Writable {
     public static final int MAX_LIVES = 3;
 
     private int gameID;                     // unique identifier for the game
@@ -94,5 +99,27 @@ public class GameSession {
         } else {
             this.totalScore -= GameRound.ROUND_SCORE;
         }
+    }
+
+    // EFFECTS: 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gameID", gameID);
+        json.put("rounds", roundsToJson());
+        json.put("isFinished", isFinished);
+        json.put("totalScore", totalScore);
+        json.put("livesLeft", livesLeft);
+        return json;
+    }
+
+    private JSONArray roundsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (GameRound round : rounds) {
+            jsonArray.put(round.toJson());
+        }
+
+        return jsonArray;
     }
 }
