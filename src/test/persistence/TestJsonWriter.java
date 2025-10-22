@@ -1,11 +1,11 @@
 package persistence;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.IOException;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.io.*;
+import org.junit.jupiter.api.Test;
 
 import model.Cake;
 import model.GameLibrary;
@@ -16,7 +16,7 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 @ExcludeFromJacocoGeneratedReport
 public class TestJsonWriter extends JsonTestBase {
     @Test
-    public void testWriterInvalidFile() {
+    void testWriterInvalidFile() {
         try {
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
@@ -27,7 +27,7 @@ public class TestJsonWriter extends JsonTestBase {
     }
 
     @Test
-    public void testWriterEmptyGameLibrary() {
+    void testWriterEmptyGameLibrary() {
         try {
             GameLibrary gameLibrary = new GameLibrary();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyGameLibrary.json");
@@ -45,7 +45,7 @@ public class TestJsonWriter extends JsonTestBase {
     }
 
     @Test
-    public void testWriterEmptyRoundList() {
+    void testWriterEmptyRoundList() {
         try {
             GameLibrary gameLibrary = new GameLibrary();
             gameLibrary.addExistingGame(new GameSession(1));
@@ -65,7 +65,7 @@ public class TestJsonWriter extends JsonTestBase {
     }
 
     @Test
-    public void testWriterGeneralGameLibrary() {
+    void testWriterGeneralGameLibrary() {
         try {
             GameLibrary gameLibrary = setupGeneralGameLibrary();
             Cake targetCake = new Cake();
