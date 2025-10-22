@@ -80,7 +80,7 @@ public class TestJsonWriter extends TestJson {
             GameSession gameOne = gameLibrary.getGames().get(0);
             GameSession gameTwo = gameLibrary.getGames().get(1);
             checkGame(1, false, 0, 2, 2, gameOne);
-            checkGame(2, false, 0, 1, 1, gameTwo);
+            checkGame(2, false, 0, 2, 1, gameTwo);
             checkRound(targetCake, userCake, false, gameOne.getRounds().get(0));
             checkRound(userCake, userCake, true, gameOne.getRounds().get(1));
             checkRound(targetCake, userCake, false, gameTwo.getRounds().get(0));
@@ -92,13 +92,13 @@ public class TestJsonWriter extends TestJson {
     private GameLibrary setupGeneralGameLibrary() {
         GameLibrary gameLibrary = new GameLibrary();
         GameSession gameOne = new GameSession(1, false, 0, 2);
-        GameSession gameTwo = new GameSession(2, false, 0, 1);
+        GameSession gameTwo = new GameSession(2, false, 0, 2);
         Cake targetCake = new Cake();
         Cake userCake = new Cake();
         targetCake.setNumberOfTiers(2);
-        gameOne.addPlayedRound(new GameRound(targetCake, userCake, false));
-        gameOne.addPlayedRound(new GameRound(userCake, userCake, true));
-        gameTwo.addPlayedRound(new GameRound(targetCake, userCake, false));
+        gameOne.addSavedRound(new GameRound(targetCake, userCake, false));
+        gameOne.addSavedRound(new GameRound(userCake, userCake, true));
+        gameTwo.addSavedRound(new GameRound(targetCake, userCake, false));
         gameLibrary.addExistingGame(gameOne);
         gameLibrary.addExistingGame(gameTwo);
 

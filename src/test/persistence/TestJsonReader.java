@@ -68,7 +68,7 @@ public class TestJsonReader extends TestJson {
             GameSession gameTwo = games.get(1);
 
             checkGame(1, false, 0, 2, 2, gameOne);
-            checkGame(2, false, 0, 1, 1, gameTwo);
+            checkGame(2, false, 0, 2, 1, gameTwo);
             
             Cake targetCake = new Cake();
             Cake userCake = new Cake();
