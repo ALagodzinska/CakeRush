@@ -2,8 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a single game session. Contains a list of completed rounds and ends the game session when a round is lost.
-public class GameSession {
+public class GameSession implements Writable {
     public static final int MAX_LIVES = 3;
 
     private int gameID;                     // unique identifier for the game
@@ -16,20 +21,37 @@ public class GameSession {
     // assigns total score to zero and livesLeft to MAX_LIVES. 
     public GameSession(int gameID) {
         this.gameID = gameID;
-
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
         this.totalScore = 0;
         this.livesLeft = MAX_LIVES;
     }
 
+    // REQUIRES: totalScore >= 0; livesLeft >= && <= MAX_LIVES
+    // MODIFIES: this
+    // EFFECTS: Creates a game session with fields defined by parameters passed to the method - 
+    // gameID, isFinised state, total score and  
+    // lives left. Sets rounds to the empty list of rounds. 
+    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft) {
+        this.gameID = gameID;
+        this.isFinished = isFinished;
+        this.totalScore = totalScore;
+        this.livesLeft = livesLeft;
+        this.rounds = new ArrayList<GameRound>();
+    }
+
+
     // REQUIRES: Game not finished
     // MODIFIES: this
     // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
-    public void addRound(GameRound round) {
+    public void addPlayedRound(GameRound round) {
         rounds.add(round);
         updateAfterRound(round);
-    }   
+    }
+
+    public void addSavedRound(GameRound round) {
+        rounds.add(round);
+    }
     
     public int getGameID() {
         return this.gameID;
@@ -66,6 +88,7 @@ public class GameSession {
         calculateScore(isVictory);
     }
 
+    // MODIFIES: this
     // EFFECTS: If the round is won adds ROUND_SCORE to the total score, otherwise subtracts ROUND_SCORE
     // from the total score, if the total score is less than ROUND_SCORE sets the total score zero.
     private void calculateScore(boolean isRoundWon) {
@@ -76,5 +99,27 @@ public class GameSession {
         } else {
             this.totalScore -= GameRound.ROUND_SCORE;
         }
+    }
+
+    // EFFECTS: 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gameID", gameID);
+        json.put("rounds", roundsToJson());
+        json.put("isFinished", isFinished);
+        json.put("totalScore", totalScore);
+        json.put("livesLeft", livesLeft);
+        return json;
+    }
+
+    private JSONArray roundsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (GameRound round : rounds) {
+            jsonArray.put(round.toJson());
+        }
+
+        return jsonArray;
     }
 }

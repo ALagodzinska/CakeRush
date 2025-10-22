@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,9 @@ import model.CakeElements.CakeColor;
 import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
+@ExcludeFromJacocoGeneratedReport
 public class TestGameRound {
     private GameRound gameRound;
     private Random random = new Random();
@@ -67,5 +70,26 @@ public class TestGameRound {
         gameRound.finishRound();
 
         assertFalse(gameRound.isVictory());
+    }
+
+    @Test
+    void testGameRoundParmeterConstructor() {
+        Cake targetCake = new Cake(random);
+        Cake userCake = new Cake();
+
+        GameRound newRound = new GameRound(targetCake, userCake, false);
+        
+        assertEquals(targetCake, newRound.getTargetCake());
+        assertEquals(userCake, newRound.getUserCake());
+        assertEquals(false, newRound.isVictory());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject json = gameRound.toJson();
+
+        assertEquals(false, json.getBoolean("isVictory"));
+        assertNotNull(json.getJSONObject("userCake"));
+        assertNotNull(json.getJSONObject("targetCake"));
     }
 }

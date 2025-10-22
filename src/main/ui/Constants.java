@@ -7,7 +7,10 @@ import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 import ui.MenuOptions.GameMenuOptions;
 
-//
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
+// Stores all constants for the UI used in interaction with the user.
 public class Constants {
     // String colors 
     public static final String DEFAULT_COLOR = "\u001B[0m";
@@ -49,7 +52,8 @@ public class Constants {
     // Main screen constants
     public static final String SELECT_OLD_GAME_PROMPT = "Select the number of the game you want to continue playing\n"
             + "or type 'exit' to go back to the main menu";
-
+    public static final String LOAD_GAMES_PROMPT = "Do you want to load saved games?\n1.YES 2.NO\n";
+    public static final String SAVE_GAMES_PROMPT = "Do you want to save played games?\n1.YES 2.NO\n";
     // Visual noise 
     public static final String VISUAL_NOISE = "                       )\\\r\n" 
                 + "                      (__)\r\n" 

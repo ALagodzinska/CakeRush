@@ -9,6 +9,9 @@ import ui.Constants;
 import ui.InputValidator;
 import ui.MenuOptions.GameMenuOptions;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Handler that manages one Game Session.
 public class GameScreenHandler { 
     private Scanner scanner;                    // Scanner for reading user input
@@ -62,7 +65,7 @@ public class GameScreenHandler {
             1, 2);
                 if (userSelection == 1) {
                     try {
-                        game.addRound(roundHandler.playRound());  
+                        game.addPlayedRound(roundHandler.playRound());  
                         System.out.println("Number of lives left: " + game.getLivesLeft() + "\n"); 
                     } catch (InterruptedException ex) {
                         System.out.println(Constants.UNEXPECTED_ERROR_MESSAGE);
@@ -71,12 +74,12 @@ public class GameScreenHandler {
                     break;
                 }            
             } while (!game.isFinished());
-            System.out.println(Constants.RED_COLOR + "GAME OVER!" + Constants.DEFAULT_COLOR);
+            if (game.getLivesLeft() == 0) {
+                System.out.println(Constants.RED_COLOR + "GAME OVER!" + Constants.DEFAULT_COLOR);
+            }            
         } else {
-            System.out.println(Constants.GAME_OVER_MESSAGE);
-            System.out.println("Total score: " + game.getTotalScore() + "\n");
-        }
-        
+            System.out.println(Constants.GAME_OVER_MESSAGE + "\nTotal score: " + game.getTotalScore() + "\n");
+        }        
         System.out.println(Constants.MESSAGE_GO_BACK_TO_GAME_MENU);
     }
 

@@ -1,5 +1,8 @@
 package ui;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents ptions for various menus. Contains enums for game and main menu options.
 public class MenuOptions {
 
@@ -7,6 +10,7 @@ public class MenuOptions {
     private MenuOptions() {
     }
 
+    @ExcludeFromJacocoGeneratedReport
     // Represents menu options for the game menu.
     public enum GameMenuOptions {
         PLAY("Play the game"),
@@ -21,7 +25,7 @@ public class MenuOptions {
             this.text = text;
         }
 
-        public String getText() {
+        private String getText() {
             return text;
         }
 
@@ -38,6 +42,7 @@ public class MenuOptions {
         }
     }
 
+    @ExcludeFromJacocoGeneratedReport
     // Represents menu options for the main menu.
     public enum MainMenuOptions {
         NEW_GAME("Create a new game"),
@@ -46,12 +51,13 @@ public class MenuOptions {
 
         private String text;        // text representation of the enum member
 
+        // MODIFIES: this
         // EFFECTS: Creates an enum member with specified text.
         MainMenuOptions(String text) {
             this.text = text;
         }
 
-        public String getText() {
+        private String getText() {
             return text;
         }
 

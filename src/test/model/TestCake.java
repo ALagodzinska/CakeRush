@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,9 @@ import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 public class TestCake {
     private static final int SEED = 12;
     private static final int NUM_OF_ELEMENTS = 5;
@@ -143,6 +147,16 @@ public class TestCake {
         assertTrue(reorderedSummary.contains("DECORATION: NONE"));
     }
 
+    @Test
+    void testToJson() {
+        JSONObject json = defaultCake.toJson();
+        assertEquals(1, json.getInt("numberOfTiers"));
+        assertEquals("WHITE", json.get("cakeColor").toString());
+        assertEquals("NONE", json.get("topping").toString());
+        assertEquals("NONE", json.get("decoration").toString());
+        assertEquals("NONE", json.get("glaze").toString());
+    }
+
     // EFFECTS: Returns an array of five values generated using a fixed seed, based on the size of each 
     // cake element's options.
     private int[] randomFixedValues() {
@@ -168,5 +182,5 @@ public class TestCake {
         numbersOfOptionsForAllElements[4] = Decoration.values().length;
 
         return numbersOfOptionsForAllElements;
-    }
+    }    
 }

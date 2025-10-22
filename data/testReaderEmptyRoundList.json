@@ -1,0 +1,12 @@
+{
+    "nextID": 2,
+    "games": [ 
+        {
+            "gameID": 1,
+            "rounds": [],
+            "isFinished": false,
+            "totalScore": 0,
+            "livesLeft": 3
+        }
+    ]
+}

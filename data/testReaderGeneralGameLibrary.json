@@ -1,0 +1,79 @@
+{
+    "nextID": 3,
+    "games": 
+            [ 
+                {
+                    "gameID": 1,
+                    "rounds": [
+                        {
+                            "targetCake": 
+                                {
+                                    "numberOfTiers": 2,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "userCake": 
+                                {
+                                    "numberOfTiers": 1,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "isVictory": false
+                        },
+                        {
+                            "targetCake": 
+                                {
+                                    "numberOfTiers": 1,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "userCake": 
+                                {
+                                    "numberOfTiers": 1,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "isVictory": true
+                        }
+                    ],
+                    "isFinished": false,
+                    "totalScore": 0,
+                    "livesLeft": 2
+                },
+                {
+                    "gameID": 2,
+                    "rounds": [
+                        {
+                            "targetCake": 
+                                {
+                                    "numberOfTiers": 2,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "userCake": 
+                                {
+                                    "numberOfTiers": 1,
+                                    "cakeColor": "WHITE",
+                                    "topping": "NONE",
+                                    "decoration": "NONE",
+                                    "glaze": "NONE"
+                                },
+                            "isVictory": false
+                        }
+                    ],
+                    "isFinished": false,
+                    "totalScore": 0,
+                    "livesLeft": 2
+                }
+            ]
+}

@@ -1,10 +1,13 @@
 package model;
 
 import java.util.Random;
+import org.json.JSONObject;
+
+import persistence.Writable;
 
 // Represents a single round of the game. A round stores the target cake, tracks the user's attempt to recreate a cake
 // and the round outcome.
-public class GameRound {
+public class GameRound implements Writable {
     public static final int ROUND_SCORE = 10;
 
     private Cake targetCake;        // the cake that user has to replicate
@@ -18,6 +21,14 @@ public class GameRound {
         this.targetCake = new Cake(random);
         this.userCake = new Cake();
         this.isVictory = false;
+    }
+
+    // REQUIRES: Target cake and user cake not null.
+    // EFFECTS: Creates a game round with defined targetCake, userCake and isVictory state.
+    public GameRound(Cake targetCake, Cake userCake, boolean isVictory) {
+        this.targetCake = targetCake;
+        this.userCake = userCake;
+        this.isVictory = isVictory;
     }
 
     public boolean isVictory() {
@@ -36,5 +47,14 @@ public class GameRound {
     // EFFECTS: Sets round victory state to true if the target cake and user cake are same otherwise sets to false.
     public void finishRound() {
         this.isVictory = targetCake.compare(userCake);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("targetCake", targetCake.toJson());
+        json.put("userCake", userCake.toJson());
+        json.put("isVictory", isVictory);
+        return json;
     }
 }
