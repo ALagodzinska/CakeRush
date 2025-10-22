@@ -1,0 +1,70 @@
+{
+    "nextID": 3,
+    "games": [
+        {
+            "gameID": 1,
+            "livesLeft": 1,
+            "isFinished": false,
+            "totalScore": 0,
+            "rounds": [
+                {
+                    "targetCake": {
+                        "glaze": "STRAWBERRY",
+                        "cakeColor": "WHITE",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 3,
+                        "decoration": "CANDLE"
+                    },
+                    "userCake": {
+                        "glaze": "NONE",
+                        "cakeColor": "PINK",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 1,
+                        "decoration": "NONE"
+                    },
+                    "isVictory": false
+                },
+                {
+                    "targetCake": {
+                        "glaze": "NONE",
+                        "cakeColor": "WHITE",
+                        "topping": "CREAM",
+                        "numberOfTiers": 2,
+                        "decoration": "FLOWER"
+                    },
+                    "userCake": {
+                        "glaze": "CHOCOLATE",
+                        "cakeColor": "PINK",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 1,
+                        "decoration": "NONE"
+                    },
+                    "isVictory": false
+                }
+            ]
+        },
+        {
+            "gameID": 2,
+            "livesLeft": 2,
+            "isFinished": false,
+            "totalScore": 0,
+            "rounds": [{
+                "targetCake": {
+                    "glaze": "CARAMEL",
+                    "cakeColor": "WHITE",
+                    "topping": "CREAM",
+                    "numberOfTiers": 3,
+                    "decoration": "CARD"
+                },
+                "userCake": {
+                    "glaze": "STRAWBERRY",
+                    "cakeColor": "BLUE",
+                    "topping": "SPRINKLES",
+                    "numberOfTiers": 2,
+                    "decoration": "NONE"
+                },
+                "isVictory": false
+            }]
+        }
+    ]
+}

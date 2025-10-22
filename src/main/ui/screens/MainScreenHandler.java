@@ -1,11 +1,15 @@
 package ui.screens;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 import model.GameLibrary;
 import model.GameSession;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import ui.Constants;
 import ui.InputValidator;
 import ui.MenuOptions.MainMenuOptions;
@@ -15,9 +19,13 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 @ExcludeFromJacocoGeneratedReport
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
+    private static final String GAME_STORAGE = "./data/gameLibrary.json";
+
     private GameLibrary gameLibrary;                 // Library that manages all games
     private Scanner scanner;                         // Scanner for reading user input
-    private GameScreenHandler gameSessionHandler;    // handler that manages the game session
+    private GameScreenHandler gameSessionHandler;    // handler that manages the game session    
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: Sets up the main screen handler, initializes a new instance of Scanner for user input,  
     // and new instance of GameSessionHandler to manage games. Creates an empty list of all games played.
@@ -26,11 +34,14 @@ public class MainScreenHandler {
         this.scanner = new Scanner(System.in);
         this.gameLibrary = new GameLibrary();
         this.gameSessionHandler = new GameScreenHandler(scanner, new RoundScreenHandler(scanner, random));
+        jsonWriter = new JsonWriter(GAME_STORAGE);
+        jsonReader = new JsonReader(GAME_STORAGE);
     }
 
     // EFFECTS: Displays the main menu and based on user input, either creates the new game or shows 
     // the list of all games. Exits main menu when the user chooses to exit.
     public void runMainMenu() {
+        loadGameLibrary();
         String menuPrompt = Constants.INSTRUCTIONS_FOR_INPUT + "\n" +  MainMenuOptions.listAllOptions();
         MainMenuOptions selectedOption;
         int selectedIndex;
@@ -50,10 +61,10 @@ public class MainScreenHandler {
                     printPlayedGames();
                     break;
                 case EXIT:
-                    System.out.println("Thank you for playing! See you next time!");
+                    saveGameLibrary();                    
                     break;
             }
-        } while (selectedOption != MainMenuOptions.EXIT); 
+        } while (selectedOption != MainMenuOptions.EXIT);
     }
 
     // MODIFIES: this
@@ -97,14 +108,51 @@ public class MainScreenHandler {
         }
     }
 
+    // Adapted from: 
+    //   Project Title: JsonSerializationDemo
+    //   Author: CPSC210
+    //   Type: source code
+    //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
     // MODIFIES: this
     // EFFECTS: Loads existing game library from the file into the current game library.
     private void loadGameLibrary() {
-        // stub
+        int userSelection = InputValidator.getValidUserChoice(scanner, Constants.LOAD_GAMES_PROMPT, 
+                1, 2);
+        if (userSelection == 1) {
+            try {
+                gameLibrary = jsonReader.read();
+                System.out.println("Loaded game library with " + gameLibrary.getGames().size() 
+                        + " games from " + GAME_STORAGE);
+            } catch (IOException e) {
+                System.out.println("Unable to read from file: " + GAME_STORAGE);
+            }                  
+        }        
     }
+
+    // Adapted from: 
+    //   Project Title: JsonSerializationDemo
+    //   Author: CPSC210
+    //   Type: source code
+    //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
     // EFFECTS: Saves game library to JSON file.
     private void saveGameLibrary() {
-        // stub
+        int userSelection = InputValidator.getValidUserChoice(scanner, Constants.LOAD_GAMES_PROMPT, 
+                1, 2);
+        if (userSelection == 1) {
+            try {
+                jsonWriter.open();
+                jsonWriter.write(gameLibrary);
+                jsonWriter.close();
+                String getPlural = gameLibrary.getGames().size() == 1 ? "" : "s";
+                System.out.println("Saved current game library with " + gameLibrary.getGames().size()
+                         + " game" + getPlural + " to " + GAME_STORAGE);
+            } catch (FileNotFoundException e) {
+                System.out.println("Unable to write to file: " + GAME_STORAGE);
+            }
+        }        
+
+        System.out.println("Thank you for playing! See you next time!");
     }
 }
