@@ -12,6 +12,9 @@ import model.CakeElements.Topping;
 import ui.Constants;
 import ui.InputValidator;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Handler that manages one round.
 public class RoundScreenHandler {
 

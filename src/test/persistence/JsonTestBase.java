@@ -9,6 +9,7 @@ import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 import model.GameRound;
 import model.GameSession;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Adapted from: 
 //   Project Title: JsonSerializationDemo
@@ -16,6 +17,7 @@ import model.GameSession;
 //   Type: source code
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
+@ExcludeFromJacocoGeneratedReport
 public class JsonTestBase {
     protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, int roundsSize, 
             GameSession game) {

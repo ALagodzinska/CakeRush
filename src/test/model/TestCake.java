@@ -15,6 +15,9 @@ import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 public class TestCake {
     private static final int SEED = 12;
     private static final int NUM_OF_ELEMENTS = 5;

@@ -2,6 +2,9 @@ package ui;
 
 import java.util.Scanner;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Contains methods for processing and validating user input.
 public class InputValidator {
     // REQUIRES: minValue and maxValue > 0

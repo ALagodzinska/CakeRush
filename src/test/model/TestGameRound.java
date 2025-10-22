@@ -15,7 +15,9 @@ import model.CakeElements.CakeColor;
 import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
+@ExcludeFromJacocoGeneratedReport
 public class TestGameRound {
     private GameRound gameRound;
     private Random random = new Random();

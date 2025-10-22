@@ -10,6 +10,9 @@ import ui.Constants;
 import ui.InputValidator;
 import ui.MenuOptions.MainMenuOptions;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Manages the main screen and all existing games, allows to create a new game instance.
 public class MainScreenHandler {
     private GameLibrary gameLibrary;                 // Library that manages all games

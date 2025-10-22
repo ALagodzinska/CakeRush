@@ -11,7 +11,9 @@ import model.Cake;
 import model.GameLibrary;
 import model.GameRound;
 import model.GameSession;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
+@ExcludeFromJacocoGeneratedReport
 public class TestJsonWriter extends JsonTestBase {
     @Test
     public void testWriterInvalidFile() {

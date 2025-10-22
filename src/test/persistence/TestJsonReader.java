@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import model.Cake;
 import model.GameLibrary;
 import model.GameSession;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Adapted from: 
 //   Project Title: JsonSerializationDemo
@@ -19,6 +20,7 @@ import model.GameSession;
 //   Type: source code
 //   URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
+@ExcludeFromJacocoGeneratedReport
 public class TestJsonReader extends JsonTestBase {
     @Test
     void testReaderNonExistentFile() {

@@ -1,5 +1,8 @@
 package ui;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents ptions for various menus. Contains enums for game and main menu options.
 public class MenuOptions {
 

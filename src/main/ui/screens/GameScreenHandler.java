@@ -9,6 +9,9 @@ import ui.Constants;
 import ui.InputValidator;
 import ui.MenuOptions.GameMenuOptions;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Handler that manages one Game Session.
 public class GameScreenHandler { 
     private Scanner scanner;                    // Scanner for reading user input
