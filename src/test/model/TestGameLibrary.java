@@ -3,6 +3,7 @@ package model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,5 +58,32 @@ public class TestGameLibrary {
         gameLibrary.createGame();
         int id = gameLibrary.getGames().get(0).getGameID();
         assertEquals(gameLibrary.getGames().get(0), gameLibrary.getGameByID(id));
+    }
+
+    @Test
+    void testAddExistingGame() {
+        GameSession newGame = new GameSession(2);
+        gameLibrary.addExistingGame(newGame);
+        assertEquals(3, gameLibrary.getNextID());
+        assertEquals(1, gameLibrary.getGames().size());
+        assertEquals(newGame, gameLibrary.getGames().get(0));
+    }
+
+    @Test
+    void testToJsonEmptyLibrary() {
+        JSONObject json = gameLibrary.toJson();
+
+        assertEquals(1, json.getInt("nextID"));
+        assertEquals(0, json.getJSONArray("games").length());
+    }
+
+    @Test
+    void testToJson() {
+        GameSession newGame = new GameSession(2);
+        gameLibrary.addExistingGame(newGame);
+        JSONObject json = gameLibrary.toJson();
+
+        assertEquals(3, json.getInt("nextID"));
+        assertEquals(1, json.getJSONArray("games").length());
     }
 }

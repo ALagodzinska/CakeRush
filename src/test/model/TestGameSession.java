@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -106,5 +107,37 @@ public class TestGameSession {
         assertEquals(0, gameSession.getTotalScore());
         assertEquals(0, gameSession.getLivesLeft());
         assertTrue(gameSession.isFinished());
+    }
+
+    @Test
+    void testToJson() {
+        gameSession.addPlayedRound(lostRound);
+        gameSession.addPlayedRound(lostRound);       
+
+        JSONObject json = gameSession.toJson();
+
+        assertEquals(1, json.getInt("gameID"));
+        assertEquals(false, json.getBoolean("isFinished"));
+        assertEquals(0, json.getInt("totalScore"));
+        assertEquals(1, json.getInt("livesLeft"));
+        assertEquals(2, json.getJSONArray("rounds").length());
+    }
+
+    @Test
+    void testAddSavedRound() {
+        gameSession.addSavedRound(lostRound);
+        assertEquals(1, gameSession.getRounds().size());
+        assertEquals(lostRound, gameSession.getRounds().get(0));
+    }
+
+    @Test
+    void testConstructorWithParameters() {
+        GameSession game = new GameSession(1, false, 100, 2);
+
+        assertEquals(1, game.getGameID());
+        assertEquals(false, game.isFinished());
+        assertEquals(100, game.getTotalScore());
+        assertEquals(2, game.getLivesLeft());
+        assertEquals(0, game.getRounds().size());
     }
 }
