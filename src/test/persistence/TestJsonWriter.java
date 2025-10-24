@@ -71,11 +71,11 @@ public class TestJsonWriter extends JsonTestBase {
             Cake targetCake = new Cake();
             Cake userCake = new Cake();
             targetCake.setNumberOfTiers(2);
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralGameLibrary.json");
             writer.open();
             writer.write(gameLibrary);
             writer.close();
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralGameLibrary.json");
             gameLibrary = reader.read();
             assertEquals(3, gameLibrary.getNextID());
             assertEquals(2, gameLibrary.getGames().size());
