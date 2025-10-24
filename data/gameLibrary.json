@@ -47,24 +47,60 @@
             "gameID": 2,
             "livesLeft": 2,
             "isFinished": false,
-            "totalScore": 0,
-            "rounds": [{
-                "targetCake": {
-                    "glaze": "CARAMEL",
-                    "cakeColor": "WHITE",
-                    "topping": "CREAM",
-                    "numberOfTiers": 3,
-                    "decoration": "CARD"
+            "totalScore": 20,
+            "rounds": [
+                {
+                    "targetCake": {
+                        "glaze": "CARAMEL",
+                        "cakeColor": "WHITE",
+                        "topping": "CREAM",
+                        "numberOfTiers": 3,
+                        "decoration": "CARD"
+                    },
+                    "userCake": {
+                        "glaze": "STRAWBERRY",
+                        "cakeColor": "BLUE",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 2,
+                        "decoration": "NONE"
+                    },
+                    "isVictory": false
                 },
-                "userCake": {
-                    "glaze": "STRAWBERRY",
-                    "cakeColor": "BLUE",
-                    "topping": "SPRINKLES",
-                    "numberOfTiers": 2,
-                    "decoration": "NONE"
+                {
+                    "targetCake": {
+                        "glaze": "VANILLA",
+                        "cakeColor": "BLUE",
+                        "topping": "NONE",
+                        "numberOfTiers": 3,
+                        "decoration": "FLOWER"
+                    },
+                    "userCake": {
+                        "glaze": "VANILLA",
+                        "cakeColor": "BLUE",
+                        "topping": "NONE",
+                        "numberOfTiers": 3,
+                        "decoration": "FLOWER"
+                    },
+                    "isVictory": true
                 },
-                "isVictory": false
-            }]
+                {
+                    "targetCake": {
+                        "glaze": "CHOCOLATE",
+                        "cakeColor": "PINK",
+                        "topping": "FRUIT",
+                        "numberOfTiers": 3,
+                        "decoration": "BALLOON"
+                    },
+                    "userCake": {
+                        "glaze": "CHOCOLATE",
+                        "cakeColor": "PINK",
+                        "topping": "FRUIT",
+                        "numberOfTiers": 3,
+                        "decoration": "BALLOON"
+                    },
+                    "isVictory": true
+                }
+            ]
         }
     ]
 }

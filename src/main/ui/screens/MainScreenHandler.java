@@ -138,7 +138,7 @@ public class MainScreenHandler {
 
     // EFFECTS: Saves game library to JSON file.
     private void saveGameLibrary() {
-        int userSelection = InputValidator.getValidUserChoice(scanner, Constants.LOAD_GAMES_PROMPT, 
+        int userSelection = InputValidator.getValidUserChoice(scanner, Constants.SAVE_GAMES_PROMPT, 
                 1, 2);
         if (userSelection == 1) {
             try {
