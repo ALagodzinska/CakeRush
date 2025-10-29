@@ -1,18 +1,21 @@
 package ui;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+import model.GameSession;
+import ui.screens.GameMenu;
 
 @ExcludeFromJacocoGeneratedReport
 // Starts the game.
 public class Main {
     public static void main(String[] args) {
-        // Creating instance of JFrame
-        JFrame frame = new JFrame();
-        frame.setSize(1000, 800);
-        frame.setLocationRelativeTo(null);
-
+        // Creating main frame.
+        MainPanel frame = new MainPanel();
+        
+        JPanel panel = new GameMenu(new GameSession(2), frame);
+        frame.add(panel);
+         
         // making the frame visible
         frame.setVisible(true);
     }
