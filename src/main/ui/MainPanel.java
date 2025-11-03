@@ -8,7 +8,7 @@ public class MainPanel extends JFrame {
     // EFFECTS: Constructs the main panel with the specified size and centers it on the screen.
     public MainPanel() {
         super();
-        this.setSize(1000, 800);
+        this.setSize(1000, 850);
         this.setLocationRelativeTo(null);
     }
 

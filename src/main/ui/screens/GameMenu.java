@@ -49,7 +49,7 @@ public class GameMenu extends JPanel {
     private void addPlayGameBtn() {
         String text = this.game.getRounds().size() == 0 ? "START" : "CONTINUE";
         JButton playGame = new MenuButton(text);
-        playGame.addActionListener(e -> mainPanel.displayScreen(new RoundScreen(game)));
+        playGame.addActionListener(e -> mainPanel.displayScreen(new RoundScreen(game, mainPanel)));
 
         if (game.isFinished()) {
             playGame.setEnabled(false);
