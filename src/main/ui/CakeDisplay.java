@@ -26,14 +26,12 @@ public class CakeDisplay extends JPanel {
     public CakeDisplay(Cake cake) {
         super();
         this.cake = cake;
-        // this.cake.setNumberOfTiers(3); //TODO:remove; used for size debugging
-        // this.cake.setDecoration(Decoration.CANDLE);
-        this.setPreferredSize(new Dimension(500, 1000));
-        loadImages();
+        this.setPreferredSize(new Dimension(500, 900));        
     }
 
     // EFFECTS: Loads images for all cake elements.
-    private void loadImages() {        
+    private void loadImages() {    
+        clearImageValues();    
         try {
             cakeBaseImage = ImageIO.read(new File("./images/cakeColor/" 
                 + cake.getCakeColor().toString().toLowerCase() + ".PNG"));
@@ -55,10 +53,19 @@ public class CakeDisplay extends JPanel {
         }
     }
 
+    private void clearImageValues() { 
+        cakeBaseImage = null;
+        glazeImage = null;
+        toppingImage = null;
+        decorationImage = null;
+    }
+
     // EFFECTS: Draws each cake tier sequentially, adding decorations only to top tier.
     @Override
     protected void paintComponent(Graphics g) {
+        loadImages();
         super.paintComponent(g);
+        System.out.println("HERE");
         drawFirstTier(g);
 
         int numOfTiers = this.cake.getNumberOfTiers();
@@ -134,5 +141,9 @@ public class CakeDisplay extends JPanel {
                 break;
             
         }
+    }
+
+    public Cake getDisplayedCake() {
+        return this.cake;
     }
 }
