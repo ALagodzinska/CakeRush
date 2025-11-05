@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 // Represents displed timer on th screen.
-public class TimerDisplay extends JPanel{
+public class TimerDisplay extends JPanel {
     private JLabel timeDisplay;
 
     // EFFECTS: Constructs timer panel adds text label to it and applies styling.
