@@ -22,7 +22,9 @@
                                     "decoration": "NONE",
                                     "glaze": "NONE"
                                 },
-                            "isVictory": false
+                            "isVictory": false,
+                            "roundTime": 10,
+                            "score": 0
                         },
                         {
                             "targetCake": 
@@ -41,12 +43,15 @@
                                     "decoration": "NONE",
                                     "glaze": "NONE"
                                 },
-                            "isVictory": true
+                            "isVictory": true,
+                            "roundTime": 10,
+                            "score": 30
                         }
                     ],
                     "isFinished": false,
-                    "totalScore": 0,
-                    "livesLeft": 2
+                    "totalScore": 30,
+                    "livesLeft": 2,
+                    "totalTimePlayed": 20
                 },
                 {
                     "gameID": 2,
@@ -68,12 +73,15 @@
                                     "decoration": "NONE",
                                     "glaze": "NONE"
                                 },
-                            "isVictory": false
+                            "isVictory": false,
+                            "roundTime": 20,
+                            "score": 0
                         }
                     ],
                     "isFinished": false,
                     "totalScore": 0,
-                    "livesLeft": 2
+                    "livesLeft": 2,
+                    "totalTimePlayed": 20
                 }
             ]
 }

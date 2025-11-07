@@ -6,7 +6,8 @@
             "rounds": [],
             "isFinished": false,
             "totalScore": 0,
-            "livesLeft": 3
+            "livesLeft": 3,
+            "totalTimePlayed": 0
         }
     ]
 }
