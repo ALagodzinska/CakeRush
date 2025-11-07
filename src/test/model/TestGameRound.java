@@ -37,6 +37,8 @@ public class TestGameRound {
         assertEquals(Topping.NONE, gameRound.getUserCake().getTopping());
         assertEquals(Decoration.NONE, gameRound.getUserCake().getDecoration());
         assertFalse(gameRound.isVictory());
+        assertEquals(0, gameRound.getRoundTime());
+        assertEquals(0, gameRound.getScore());
     }
 
     @Test
@@ -52,9 +54,11 @@ public class TestGameRound {
 
         assertFalse(gameRound.isVictory());
 
-        gameRound.finishRound();
+        gameRound.finishRound(30);
 
         assertTrue(gameRound.isVictory());
+        assertEquals(30, gameRound.getRoundTime());
+        assertEquals(10, gameRound.getScore());
     }
 
     @Test
@@ -67,9 +71,31 @@ public class TestGameRound {
 
         assertFalse(gameRound.isVictory());
 
-        gameRound.finishRound();
+        gameRound.finishRound(10);
 
         assertFalse(gameRound.isVictory());
+        assertEquals(10, gameRound.getRoundTime());
+        assertEquals(0, gameRound.getScore());
+    }
+
+    @Test
+    void testFinishRoundSuccesfulFast() {
+        Cake targetCake = gameRound.getTargetCake();
+        Cake userCake = gameRound.getUserCake();
+        // Match cake
+        userCake.setNumberOfTiers(targetCake.getNumberOfTiers());
+        userCake.setCakeColor(targetCake.getCakeColor());
+        userCake.setGlaze(targetCake.getGlaze());
+        userCake.setTopping(targetCake.getTopping());
+        userCake.setDecoration(targetCake.getDecoration());
+
+        assertFalse(gameRound.isVictory());
+
+        gameRound.finishRound(10);
+
+        assertEquals(10, gameRound.getRoundTime());
+        assertTrue(gameRound.isVictory());        
+        assertEquals(30, gameRound.getScore());
     }
 
     @Test
@@ -77,11 +103,13 @@ public class TestGameRound {
         Cake targetCake = new Cake(random);
         Cake userCake = new Cake();
 
-        GameRound newRound = new GameRound(targetCake, userCake, false);
+        GameRound newRound = new GameRound(targetCake, userCake, false, 20, 10);
         
         assertEquals(targetCake, newRound.getTargetCake());
         assertEquals(userCake, newRound.getUserCake());
         assertEquals(false, newRound.isVictory());
+        assertEquals(20, newRound.getRoundTime());
+        assertEquals(10, newRound.getScore());
     }
 
     @Test
@@ -91,5 +119,7 @@ public class TestGameRound {
         assertEquals(false, json.getBoolean("isVictory"));
         assertNotNull(json.getJSONObject("userCake"));
         assertNotNull(json.getJSONObject("targetCake"));
+        assertEquals(0, json.getInt("roundTime"));
+        assertEquals(0, json.getInt("score"));
     }
 }

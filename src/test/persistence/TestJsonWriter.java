@@ -58,7 +58,7 @@ public class TestJsonWriter extends JsonTestBase {
             gameLibrary = reader.read();
             assertEquals(2, gameLibrary.getNextID());
             assertEquals(1, gameLibrary.getGames().size());
-            checkGame(1, false, 0, 3, 0, gameLibrary.getGames().get(0));
+            checkGame(1, false, 0, 3, 0, 0, gameLibrary.getGames().get(0));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -81,11 +81,11 @@ public class TestJsonWriter extends JsonTestBase {
             assertEquals(2, gameLibrary.getGames().size());
             GameSession gameOne = gameLibrary.getGames().get(0);
             GameSession gameTwo = gameLibrary.getGames().get(1);
-            checkGame(1, false, 0, 2, 2, gameOne);
-            checkGame(2, false, 0, 2, 1, gameTwo);
-            checkRound(targetCake, userCake, false, gameOne.getRounds().get(0));
-            checkRound(userCake, userCake, true, gameOne.getRounds().get(1));
-            checkRound(targetCake, userCake, false, gameTwo.getRounds().get(0));
+            checkGame(1, false, 0, 2, 2, 30, gameOne);
+            checkGame(2, false, 0, 2, 1, 30, gameTwo);
+            checkRound(targetCake, userCake, false, 15, 0, gameOne.getRounds().get(0));
+            checkRound(userCake, userCake, true, 15, 10, gameOne.getRounds().get(1));
+            checkRound(targetCake, userCake, false, 30, 0, gameTwo.getRounds().get(0));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -93,14 +93,14 @@ public class TestJsonWriter extends JsonTestBase {
 
     private GameLibrary setupGeneralGameLibrary() {
         GameLibrary gameLibrary = new GameLibrary();
-        GameSession gameOne = new GameSession(1, false, 0, 2);
-        GameSession gameTwo = new GameSession(2, false, 0, 2);
+        GameSession gameOne = new GameSession(1, false, 0, 2, 30);
+        GameSession gameTwo = new GameSession(2, false, 0, 2, 30);
         Cake targetCake = new Cake();
         Cake userCake = new Cake();
         targetCake.setNumberOfTiers(2);
-        gameOne.addSavedRound(new GameRound(targetCake, userCake, false));
-        gameOne.addSavedRound(new GameRound(userCake, userCake, true));
-        gameTwo.addSavedRound(new GameRound(targetCake, userCake, false));
+        gameOne.addSavedRound(new GameRound(targetCake, userCake, false, 15, 0));
+        gameOne.addSavedRound(new GameRound(userCake, userCake, true, 15, 10));
+        gameTwo.addSavedRound(new GameRound(targetCake, userCake, false, 30, 0));
         gameLibrary.addExistingGame(gameOne);
         gameLibrary.addExistingGame(gameTwo);
 

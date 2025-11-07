@@ -19,21 +19,25 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
 public class JsonTestBase {
-    protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, int roundsSize, 
-            GameSession game) {
+    protected void checkGame(int id, boolean isFinished, int totalScore, int livesLeft, 
+            int roundsSize, int totalTimePlayed, GameSession game) {
         assertEquals(id, game.getGameID());
         assertEquals(isFinished, game.isFinished());
         assertEquals(totalScore, game.getTotalScore());
         assertEquals(livesLeft, game.getLivesLeft());
+        assertEquals(totalTimePlayed, game.getTotalTimePLayed());
         assertEquals(roundsSize, game.getRounds().size());
     }
 
-    protected void checkRound(Cake targetCake, Cake userCake, boolean isVictory, GameRound round) {
+    protected void checkRound(Cake targetCake, Cake userCake, boolean isVictory, int roundTime, 
+            int score, GameRound round) {
         checkCake(targetCake.getNumberOfTiers(), targetCake.getCakeColor(), 
                 targetCake.getGlaze(), targetCake.getTopping(), targetCake.getDecoration(), round.getTargetCake());
         checkCake(userCake.getNumberOfTiers(), userCake.getCakeColor(), 
                 userCake.getGlaze(), userCake.getTopping(), userCake.getDecoration(), round.getUserCake());
         assertEquals(isVictory, round.isVictory());
+        assertEquals(roundTime, round.getRoundTime());
+        assertEquals(score, round.getScore());
     }
 
     private void checkCake(int numberOfTiers, CakeColor color, Glaze glaze, Topping topping, Decoration decoration,
