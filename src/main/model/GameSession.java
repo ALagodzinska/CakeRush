@@ -16,6 +16,7 @@ public class GameSession implements Writable {
     private boolean isFinished;             // true if the game was lost
     private int totalScore;                 // combined score from all played rounds
     private int livesLeft;                  // the number of lives remaining, when 0 game ends
+    private int totalTimePlayed;
 
     // EFFECTS: Creates a game session with an empty list of rounds, sets the game finished state to false, 
     // assigns total score to zero and livesLeft to MAX_LIVES. 
@@ -85,20 +86,13 @@ public class GameSession implements Writable {
             }
         }
 
-        calculateScore(isVictory);
+        calculateStatistics();
     }
 
     // MODIFIES: this
-    // EFFECTS: If the round is won adds ROUND_SCORE to the total score, otherwise subtracts ROUND_SCORE
-    // from the total score, if the total score is less than ROUND_SCORE sets the total score zero.
-    private void calculateScore(boolean isRoundWon) {
-        if (isRoundWon) {
-            this.totalScore += GameRound.ROUND_SCORE;
-        } else if (this.totalScore < GameRound.ROUND_SCORE) {
-            this.totalScore = 0;
-        } else {
-            this.totalScore -= GameRound.ROUND_SCORE;
-        }
+    // EFFECTS: Update statistics of the total score and total time played.
+    private void calculateStatistics() {
+        // stub
     }
 
     // EFFECTS: 

@@ -8,12 +8,17 @@ import persistence.Writable;
 // Represents a single round of the game. A round stores the target cake, tracks the user's attempt to recreate a cake
 // and the round outcome.
 public class GameRound implements Writable {
+    public static final int MAX_TIME_POINTS = 30;
     public static final int ROUND_SCORE = 10;
+    public static final int MAX_TIME = 30;
+    public static final int PREVIEW_TIME = 7;
 
     private Cake targetCake;        // the cake that user has to replicate
     private Cake userCake;          // the cake user modifies to match target cake
     private boolean isVictory;      // tracks whether the round is succesfully completed (user cake matches the 
                                     // target cake at the end of the round)
+    private int roundTime;
+    private int score;
 
     // EFFECTS: Creates a game round with random target cake, default user cake, 
     // and victory status set to false.
@@ -43,10 +48,30 @@ public class GameRound implements Writable {
         return this.targetCake;
     }
 
+    public int getTimePlayed() {
+        // stub
+        return 0;
+    }
+
+    public int getScore() {
+        // stub
+        return 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: If the victory state for the round is true adds the difference between MAX_TIME_POINTS 
+    // and round time to the ROUND_SCORE and saves value to score. Otherwise sets the score value to zero.
+    private void calculateScore() {
+
+    }
+
+    // REQUIRES: roundTime >= 0
     // MODIFIES: this
     // EFFECTS: Sets round victory state to true if the target cake and user cake are same otherwise sets to false.
-    public void finishRound() {
+    // Calculates score for the round
+    public void finishRound(int roundTime) {
         this.isVictory = targetCake.compare(userCake);
+        // stub
     }
 
     @Override
