@@ -19,25 +19,27 @@ public class GameSession implements Writable {
     private int totalTimePlayed;
 
     // EFFECTS: Creates a game session with an empty list of rounds, sets the game finished state to false, 
-    // assigns total score to zero and livesLeft to MAX_LIVES. 
+    // assigns total score to zero, livesLeft to MAX_LIVES and totalTimePlayed to zero. 
     public GameSession(int gameID) {
         this.gameID = gameID;
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
         this.totalScore = 0;
         this.livesLeft = MAX_LIVES;
+        this.totalTimePlayed = 0;
     }
 
     // REQUIRES: totalScore >= 0; livesLeft >= && <= MAX_LIVES
     // MODIFIES: this
     // EFFECTS: Creates a game session with fields defined by parameters passed to the method - 
-    // gameID, isFinised state, total score and  
+    // gameID, isFinised state, total score, totalTimePlayed, and 
     // lives left. Sets rounds to the empty list of rounds. 
-    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft) {
+    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft, int totalTimePlayed) {
         this.gameID = gameID;
         this.isFinished = isFinished;
         this.totalScore = totalScore;
         this.livesLeft = livesLeft;
+        this.totalTimePlayed = totalTimePlayed;
         this.rounds = new ArrayList<GameRound>();
     }
 
@@ -74,6 +76,10 @@ public class GameSession implements Writable {
         return this.livesLeft;
     }
 
+    public int getTotalTimePLayed() {
+        return this.totalTimePlayed;
+    }
+
     // MODIFIES: this
     // EFFECTS: Updates the total score. If round was lost, deducts one live, if the live number is zero
     // the game state is changed to finished.
@@ -86,13 +92,14 @@ public class GameSession implements Writable {
             }
         }
 
-        calculateStatistics();
+        calculateStatistics(round);
     }
 
     // MODIFIES: this
     // EFFECTS: Update statistics of the total score and total time played.
-    private void calculateStatistics() {
-        // stub
+    private void calculateStatistics(GameRound round) {
+        this.totalScore += round.getScore();
+        this.totalTimePlayed += round.getRoundTime();
     }
 
     // EFFECTS: 
@@ -104,6 +111,7 @@ public class GameSession implements Writable {
         json.put("isFinished", isFinished);
         json.put("totalScore", totalScore);
         json.put("livesLeft", livesLeft);
+        json.put("totalTimePlayed", totalTimePlayed);
         return json;
     }
 

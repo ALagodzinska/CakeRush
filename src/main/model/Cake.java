@@ -58,8 +58,24 @@ public class Cake implements Writable {
 
     // EFFECTS: returns a String that is a fraction of matching elements out of all elements.
     public String getComparisonAccuracy(Cake anotherCake) {
-        // stub
-        return null;
+        int correctCount = 0;        
+        if (this.numberOfTiers == anotherCake.numberOfTiers) {
+            correctCount++;
+        }
+        if (this.cakeColor.equals(anotherCake.cakeColor)) {
+            correctCount++;
+        }
+        if (this.glaze.equals(anotherCake.glaze)) {
+            correctCount++;
+        }
+        if (this.topping.equals(anotherCake.topping)) {
+            correctCount++;
+        }
+        if (this.decoration.equals(anotherCake.decoration)) {
+            correctCount++;
+        }
+
+        return correctCount + "/" + NUM_ELEMENTS;
     }
 
     public int getNumberOfTiers() {

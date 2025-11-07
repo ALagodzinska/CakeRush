@@ -76,8 +76,9 @@ public class JsonReader {
         int gameID = jsonObject.getInt("gameID");
         boolean isFinished = jsonObject.getBoolean("isFinished");
         int totalScore = jsonObject.getInt("totalScore");
-        int livesLeft = jsonObject.getInt("livesLeft");        
-        GameSession game = new GameSession(gameID, isFinished, totalScore, livesLeft);        
+        int livesLeft = jsonObject.getInt("livesLeft");   
+        int totalTimePlayed = jsonObject.getInt("totalTimePlayed");      
+        GameSession game = new GameSession(gameID, isFinished, totalScore, livesLeft, totalTimePlayed);        
 
         addRounds(game, jsonObject);
         
@@ -98,11 +99,13 @@ public class JsonReader {
     // EFFECTS: parses round from JSON object and adds it to game session list of rounds
     private void addRound(GameSession game, JSONObject jsonObject) {        
         boolean isVictory = jsonObject.getBoolean("isVictory"); 
+        int roundTime = jsonObject.getInt("roundTime");
+        int score = jsonObject.getInt("score");
         
         Cake userCake = getUserCake(jsonObject);
         Cake targetCake = getTargetCake(jsonObject);
         
-        GameRound round = new GameRound(targetCake, userCake, isVictory);
+        GameRound round = new GameRound(targetCake, userCake, isVictory, roundTime, score);
         
         game.addSavedRound(round);
     }
