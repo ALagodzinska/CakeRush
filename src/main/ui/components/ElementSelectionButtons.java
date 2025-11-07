@@ -17,7 +17,8 @@ public class ElementSelectionButtons extends JPanel {
     private ButtonGroup btnGroup;
     private ActionListener action;
 
-    // EFFECTS: Creates a set of radio buttons for the specified list of options, with a defined title and button action.
+    // EFFECTS: Creates a set of radio buttons for the specified list of options,
+    // with a defined title and button action.
     public ElementSelectionButtons(Object[] options, String title, ActionListener action) {
         super();
         this.title = title;
@@ -43,7 +44,7 @@ public class ElementSelectionButtons extends JPanel {
                 btn.setSelected(true);
             }
         }
-    }   
+    }
 
     // Adapted from: 
     //   StackOverflow Question Title: Disable group of radio buttons

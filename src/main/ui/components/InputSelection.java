@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -23,6 +24,7 @@ public class InputSelection extends JPanel {
     private ElementSelectionButtons glaze;
     private ElementSelectionButtons toppings;
     private ElementSelectionButtons decorations;
+    private JButton submitButton;
 
     private Cake cake;
     private CakeDisplay display;
@@ -39,6 +41,7 @@ public class InputSelection extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         addButtonsToPanel();
+        addSubmitButton();
         
         this.display = display;
         this.cake = display.getDisplayedCake();
@@ -47,7 +50,8 @@ public class InputSelection extends JPanel {
     // TODO: remove duplication; move out cake + cake display
 
     // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake tiers to the value selected by button. Repaints the cake display component.
+    // EFFECTS: Changes the value of the cake tiers to the value selected by button.
+    // Repaints the cake display component.
     private ActionListener changeNumberOfTiers() {
         ActionListener action = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {                
@@ -61,7 +65,8 @@ public class InputSelection extends JPanel {
     }
 
     // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake color to the value selected by button. Repaints the cake display component.
+    // EFFECTS: Changes the value of the cake color to the value selected by button.
+    // Repaints the cake display component.
     private ActionListener changeColor() {
         ActionListener action = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {                
@@ -75,7 +80,8 @@ public class InputSelection extends JPanel {
     }
 
     // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake glaze to the value selected by button. Repaints the cake display component.
+    // EFFECTS: Changes the value of the cake glaze to the value selected by button.
+    // Repaints the cake display component.
     private ActionListener changeGlaze() {
         ActionListener action = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {                
@@ -103,7 +109,8 @@ public class InputSelection extends JPanel {
     }
 
     // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the decoration to the value selected by button. Repaints the cake display component.
+    // EFFECTS: Changes the value of the decoration to the value selected by button.
+    // Repaints the cake display component.
     private ActionListener changeDecoration() {
         ActionListener action = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {                
@@ -128,11 +135,22 @@ public class InputSelection extends JPanel {
         this.add(toppings);
         this.add(Box.createRigidArea(new Dimension(50, 0)));
         this.add(decorations);
+        this.add(Box.createRigidArea(new Dimension(50, 0)));
     }
 
-    // EFFECTS: Disables all buttons and submits the result.
-    public void submit() {
-        // stub
+    // MODIFIES: this
+    // EFFECTS: initializes and adds submit button to this panel.
+    private void addSubmitButton() {
+        submitButton = new JButton("SUBMIT");
+        
+        submitButton.setPreferredSize(new Dimension(80, 80));
+
+        this.add(submitButton);
+    }       
+
+    // EFFECTS: assigns specified action to the submit button on this panel.
+    public void setActionOnSumbit(ActionListener action) {
+        submitButton.addActionListener(action);
     }
 
     // EFFECTS: Enables or disables all the buttons on this panel based on the given boolean value.
@@ -143,5 +161,6 @@ public class InputSelection extends JPanel {
         glaze.setEnableAll(enable);
         toppings.setEnableAll(enable);
         decorations.setEnableAll(enable);
+        submitButton.setEnabled(enable);
     }
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 import model.GameRound;
 import model.GameSession;
 import ui.CakeDisplay;
@@ -60,8 +61,7 @@ public class RoundScreen extends JPanel {
         userCakeDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         inputSelection = new InputSelection(userCakeDisplay);
-
-        
+        inputSelection.setActionOnSumbit(submitAction());        
 
         remainingTime = 35;
         int delay = 1000;
@@ -78,21 +78,9 @@ public class RoundScreen extends JPanel {
         ActionListener action = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {                
                 if (remainingTime <= 0) {
-                    timer.stop(); 
-                    // RoundScreen.this.remove(userCakeDisplay);  
-                    RoundScreen.this.title.setText("RESULTS");
-                    System.out.println(RoundScreen.this.currentRound.getUserCake().getReorderedSummary());
-                    inputSelection.setEnabled(false);
-                    // showComparisonPanel();   // TODO: figure out how to show two at the same time
-                    // RoundScreen.this.revalidate(); 
-                    // RoundScreen.this.repaint();
+                    endRound();
                 } else if (remainingTime == 30) {                    
-                    RoundScreen.this.remove(targetCakeDisplay);   
-                    RoundScreen.this.add(userCakeDisplay);    
-                    RoundScreen.this.add(inputSelection, Component.BOTTOM_ALIGNMENT);
-                    RoundScreen.this.title.setText("RECREATE THE CAKE");
-                    RoundScreen.this.revalidate(); 
-                    RoundScreen.this.repaint();                
+                    changeFromPreviewToGame();         
                 }
                 timerDisplay.setTime(remainingTime);
                 remainingTime--;             
@@ -100,6 +88,34 @@ public class RoundScreen extends JPanel {
         };
 
         return action;
+    }
+
+    // EFFECTS: initializes new action listener that will get triggered by pressing button.
+    private ActionListener submitAction() {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {                
+                endRound();
+            }
+        };
+    }
+
+    // MODIFIES: this
+    // EFFECTS: when the round ends stop the active timer, disable all input buttons and change screen title.
+    private void endRound() {
+        this.timer.stop();
+        this.inputSelection.setEnabled(false);
+        RoundScreen.this.title.setText("RESULTS");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Changes screen fro preview to the game screen with user inputs.
+    private void changeFromPreviewToGame() {
+        this.remove(targetCakeDisplay);   
+        this.add(userCakeDisplay);    
+        this.add(inputSelection, Component.BOTTOM_ALIGNMENT);
+        this.title.setText("RECREATE THE CAKE");
+        this.revalidate(); 
+        this.repaint();   
     }
     
     // TODO: figure out how to show two at the same time
