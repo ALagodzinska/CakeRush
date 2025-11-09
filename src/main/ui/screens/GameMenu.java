@@ -63,7 +63,8 @@ public class GameMenu extends JPanel {
     // EFFECTS: Creates the play round history button, assigns the action event to it and adds it to this panel.
     private void addRoundHistoryBtn() {
         JButton roundHistory = new MenuButton("VIEW ROUNDS");
-        roundHistory.addActionListener(e -> System.out.println("LIST OF ROUNDS")); // TODO: add action on click
+        roundHistory.addActionListener(e -> 
+                mainPanel.displayScreen(new RoundList(game, mainPanel))); // TODO: add action on click
 
         if (game.getRounds().size() == 0) {
             roundHistory.setEnabled(false);
@@ -77,7 +78,8 @@ public class GameMenu extends JPanel {
     // EFFECTS: Creates the exit button, assigns the action event to it and adds it to this panel.
     private void addExitBtn() {
         JButton exit = new MenuButton("EXIT");
-        exit.addActionListener(e -> System.out.println("EXIT")); // TODO: add action on click
+        exit.addActionListener(e -> 
+                mainPanel.displayScreen(new MainMenu(mainPanel))); // TODO: add action on click
         this.add(exit); 
     }
 }
