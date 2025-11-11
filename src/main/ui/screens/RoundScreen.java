@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.BoxLayout;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -16,14 +15,14 @@ import model.GameSession;
 import ui.CakeDisplay;
 import ui.MainPanel;
 import ui.components.InputSelection;
-import ui.components.RoundPopup;
 import ui.components.TimerDisplay;
 import ui.components.Title;
+import ui.components.popups.PopupBase;
+import ui.components.popups.RoundPopup;
 
 // Represents a round screen.
 public class RoundScreen extends JPanel {
     private GameSession game;
-    private MainPanel mainPanel;
 
     // Visual elements
     private CakeDisplay targetCakeDisplay;
@@ -32,7 +31,7 @@ public class RoundScreen extends JPanel {
     private Title title;    
     private Timer timer;
     private InputSelection inputSelection;
-    private JDialog dialog;
+    private PopupBase popup;
 
     private int remainingTime;
     private GameRound currentRound;
@@ -41,10 +40,10 @@ public class RoundScreen extends JPanel {
     public RoundScreen(GameSession game, MainPanel mainPanel) {        
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.game = game;
-        this.mainPanel = mainPanel;      
+        this.game = game;     
         this.title = new Title("MEMORIZE THE CAKE");
         this.timerDisplay = new TimerDisplay();
+        this.popup = new RoundPopup(game, mainPanel, this);
         this.add(title);
         this.add(timerDisplay);
 
@@ -53,7 +52,7 @@ public class RoundScreen extends JPanel {
 
     // MODIFIES: this
     // EFFECTS: starts new round of the game, initializes all cake components on the screen and activates the game.
-    private void startRound() {
+    public void startRound() {
         this.currentRound = new GameRound(new Random());        
 
         targetCakeDisplay = new CakeDisplay(currentRound.getTargetCake());
@@ -112,7 +111,7 @@ public class RoundScreen extends JPanel {
         this.game.addPlayedRound(currentRound);
         this.inputSelection.setEnabled(false);
         this.title.setText(getRoundResultsMessage());
-        showPopup();
+        this.popup.open();
     }
 
     // MODIFIES: this
@@ -126,25 +125,6 @@ public class RoundScreen extends JPanel {
         this.repaint();   
     }
 
-    // EFFECTS: Display popup window that displays game statistics and provides a choice to user to 
-    // play next round or exit to the game menu.
-    private void showPopup() {      
-        String stats = "Total score: " + this.game.getTotalScore() + "            Lives left: " 
-                + this.game.getLivesLeft();
-
-        boolean isPlayable = this.game.getLivesLeft() > 0;
-
-        RoundPopup popup = new RoundPopup("PLAY ROUND?", stats, exitAction(), continueAction(), isPlayable);
-        this.dialog = new JDialog(this.mainPanel, "Popup", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setUndecorated(true);
-        dialog.setAlwaysOnTop(true); 
-        dialog.setContentPane(popup);
-
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-        dialog.setVisible(true);
-    }
-
     // EFFECTS: Returns a result message based on whether round is won or lost.
     private String getRoundResultsMessage() {
         if (this.currentRound.isVictory()) {
@@ -154,30 +134,11 @@ public class RoundScreen extends JPanel {
         }
     }
 
-    // EFFECTS: initializes new action listener that will get triggered by pressing exit button on popup.
-    private ActionListener exitAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {     
-                RoundScreen.this.dialog.setVisible(false);           
-                RoundScreen.this.mainPanel.displayScreen(new GameMenu(game, mainPanel));
-            }
-        };
-    }
-
-    // EFFECTS: initializes new action listener that will get triggered by pressing exit button on popup.
-    private ActionListener continueAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent evt) { 
-                RoundScreen.this.dialog.setVisible(false);
-                clearScreen();
-                RoundScreen.this.startRound();
-            }
-        };
-    }
-
-    private void clearScreen() {
+    // MODIFIES: this
+    // EFFECTS: Creates default round screen. Removes cake display and input buttons.
+    public void clearScreen() {
         this.title.setText("MEMORIZE THE CAKE");
-        timerDisplay.setTime(remainingTime);
+        this.timerDisplay.setTime(0);
         this.remove(userCakeDisplay); 
         this.remove(inputSelection); 
         this.revalidate();
