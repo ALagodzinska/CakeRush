@@ -12,6 +12,7 @@ import model.GameSession;
 import ui.MainPanel;
 import ui.components.MenuButton;
 import ui.components.Title;
+import ui.components.popups.SaveGamesPopup;
 
 // Represents a game menu screen.
 public class MainMenu extends JPanel {
@@ -21,6 +22,7 @@ public class MainMenu extends JPanel {
     // EFFECTS: Constructs and displays game menu for the given game on the given panel.
     public MainMenu(MainPanel mainPanel) {
         super();
+        System.out.println("HERE IS LIBRARY");
         this.gameLibrary = mainPanel.getGameLibrary();
         this.mainPanel = mainPanel;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // arranges in a column
@@ -75,7 +77,11 @@ public class MainMenu extends JPanel {
     // EFFECTS: Creates the exit button, assigns the action event to it and adds it to this panel.
     private void addExitBtn() {
         JButton exit = new MenuButton("EXIT");
-        exit.addActionListener(e -> System.exit(0));
+        exit.addActionListener(e -> {
+            SaveGamesPopup popup = new SaveGamesPopup(mainPanel, gameLibrary);
+            popup.open();
+            System.exit(0);
+        });
         this.add(exit); 
     }
 }
