@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Styled button used in the menus.
 public class MenuButton extends JButton {
     private static final Dimension btnDimension = new Dimension(300, 40);

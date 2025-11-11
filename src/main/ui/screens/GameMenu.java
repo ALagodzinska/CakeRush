@@ -12,6 +12,9 @@ import ui.MainPanel;
 import ui.components.MenuButton;
 import ui.components.Title;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a game menu screen.
 public class GameMenu extends JPanel {
     private GameSession game;

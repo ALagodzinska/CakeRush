@@ -17,6 +17,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a popup that has a title, description and two action buttons.
 public abstract class PopupBase extends JDialog {
     private String title;

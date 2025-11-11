@@ -14,6 +14,9 @@ import ui.components.MenuButton;
 import ui.components.Title;
 import ui.components.popups.SaveGamesPopup;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a game menu screen.
 public class MainMenu extends JPanel {
     private MainPanel mainPanel;

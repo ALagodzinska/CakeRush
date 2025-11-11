@@ -5,6 +5,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents displed timer on th screen.
 public class TimerDisplay extends JPanel {
     private JLabel timeDisplay;

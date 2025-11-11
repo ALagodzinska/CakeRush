@@ -1,11 +1,6 @@
 package ui;
 
-import javax.swing.JPanel;
-
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
-import ui.components.popups.LoadGamesPopup;
-import ui.components.popups.PopupBase;
-import ui.screens.MainMenu;
 
 @ExcludeFromJacocoGeneratedReport
 // Starts the game.

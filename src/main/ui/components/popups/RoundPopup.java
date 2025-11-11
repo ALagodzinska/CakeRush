@@ -8,6 +8,9 @@ import ui.MainPanel;
 import ui.screens.GameMenu;
 import ui.screens.RoundScreen;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a popup displayed to user in between rounds.
 public class RoundPopup extends PopupBase {
     private GameSession gameSession;

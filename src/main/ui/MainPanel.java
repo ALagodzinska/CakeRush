@@ -7,6 +7,9 @@ import model.GameLibrary;
 import ui.components.popups.LoadGamesPopup;
 import ui.components.popups.PopupBase;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // The main GUI container for the application. Serves as a parent for all screens.
 public class MainPanel extends JFrame {
     public static final String GAME_STORAGE = "./data/gameLibrary.json";

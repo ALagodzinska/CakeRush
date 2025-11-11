@@ -14,6 +14,9 @@ import model.CakeElements.Decoration;
 import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a panel where the cake is depicted to user.
 public class CakeDisplay extends JPanel {
     Cake cake;

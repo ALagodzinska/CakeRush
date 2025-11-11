@@ -18,6 +18,9 @@ import ui.MainPanel;
 import ui.components.ReturnButton;
 import ui.components.Title;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 public class RoundList extends JPanel {
     private String[] columnNames = {"ROUND NUMBER", "ROUND TIME", "ROUND SCORE", "CORRCTLY GUESSED"};
     private Object[][] roundsData;

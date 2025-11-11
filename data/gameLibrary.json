@@ -1,106 +1,69 @@
 {
-    "nextID": 3,
-    "games": [
-        {
-            "gameID": 1,
-            "livesLeft": 1,
-            "isFinished": false,
-            "totalScore": 0,
-            "rounds": [
-                {
-                    "targetCake": {
-                        "glaze": "STRAWBERRY",
-                        "cakeColor": "WHITE",
-                        "topping": "SPRINKLES",
-                        "numberOfTiers": 3,
-                        "decoration": "CANDLE"
-                    },
-                    "userCake": {
-                        "glaze": "NONE",
-                        "cakeColor": "PINK",
-                        "topping": "SPRINKLES",
-                        "numberOfTiers": 1,
-                        "decoration": "NONE"
-                    },
-                    "isVictory": false
+    "nextID": 2,
+    "games": [{
+        "gameID": 1,
+        "totalTimePlayed": 25,
+        "livesLeft": 2,
+        "isFinished": false,
+        "totalScore": 65,
+        "rounds": [
+            {
+                "targetCake": {
+                    "glaze": "CARAMEL",
+                    "cakeColor": "WHITE",
+                    "topping": "FRUIT",
+                    "numberOfTiers": 1,
+                    "decoration": "CARD"
                 },
-                {
-                    "targetCake": {
-                        "glaze": "NONE",
-                        "cakeColor": "WHITE",
-                        "topping": "CREAM",
-                        "numberOfTiers": 2,
-                        "decoration": "FLOWER"
-                    },
-                    "userCake": {
-                        "glaze": "CHOCOLATE",
-                        "cakeColor": "PINK",
-                        "topping": "SPRINKLES",
-                        "numberOfTiers": 1,
-                        "decoration": "NONE"
-                    },
-                    "isVictory": false
-                }
-            ]
-        },
-        {
-            "gameID": 2,
-            "livesLeft": 2,
-            "isFinished": false,
-            "totalScore": 20,
-            "rounds": [
-                {
-                    "targetCake": {
-                        "glaze": "CARAMEL",
-                        "cakeColor": "WHITE",
-                        "topping": "CREAM",
-                        "numberOfTiers": 3,
-                        "decoration": "CARD"
-                    },
-                    "userCake": {
-                        "glaze": "STRAWBERRY",
-                        "cakeColor": "BLUE",
-                        "topping": "SPRINKLES",
-                        "numberOfTiers": 2,
-                        "decoration": "NONE"
-                    },
-                    "isVictory": false
+                "score": 0,
+                "userCake": {
+                    "glaze": "VANILLA",
+                    "cakeColor": "WHITE",
+                    "topping": "FRUIT",
+                    "numberOfTiers": 1,
+                    "decoration": "CARD"
                 },
-                {
-                    "targetCake": {
-                        "glaze": "VANILLA",
-                        "cakeColor": "BLUE",
-                        "topping": "NONE",
-                        "numberOfTiers": 3,
-                        "decoration": "FLOWER"
-                    },
-                    "userCake": {
-                        "glaze": "VANILLA",
-                        "cakeColor": "BLUE",
-                        "topping": "NONE",
-                        "numberOfTiers": 3,
-                        "decoration": "FLOWER"
-                    },
-                    "isVictory": true
+                "roundTime": 10,
+                "isVictory": false
+            },
+            {
+                "targetCake": {
+                    "glaze": "STRAWBERRY",
+                    "cakeColor": "BLUE",
+                    "topping": "SPRINKLES",
+                    "numberOfTiers": 2,
+                    "decoration": "NONE"
                 },
-                {
-                    "targetCake": {
-                        "glaze": "CHOCOLATE",
-                        "cakeColor": "PINK",
-                        "topping": "FRUIT",
-                        "numberOfTiers": 3,
-                        "decoration": "BALLOON"
-                    },
-                    "userCake": {
-                        "glaze": "CHOCOLATE",
-                        "cakeColor": "PINK",
-                        "topping": "FRUIT",
-                        "numberOfTiers": 3,
-                        "decoration": "BALLOON"
-                    },
-                    "isVictory": true
-                }
-            ]
-        }
-    ]
+                "score": 33,
+                "userCake": {
+                    "glaze": "STRAWBERRY",
+                    "cakeColor": "BLUE",
+                    "topping": "SPRINKLES",
+                    "numberOfTiers": 2,
+                    "decoration": "NONE"
+                },
+                "roundTime": 7,
+                "isVictory": true
+            },
+            {
+                "targetCake": {
+                    "glaze": "NONE",
+                    "cakeColor": "YELLOW",
+                    "topping": "CREAM",
+                    "numberOfTiers": 3,
+                    "decoration": "NONE"
+                },
+                "score": 32,
+                "userCake": {
+                    "glaze": "NONE",
+                    "cakeColor": "YELLOW",
+                    "topping": "CREAM",
+                    "numberOfTiers": 3,
+                    "decoration": "NONE"
+                },
+                "roundTime": 8,
+                "isVictory": true
+            }
+        ]
+    }]
 }

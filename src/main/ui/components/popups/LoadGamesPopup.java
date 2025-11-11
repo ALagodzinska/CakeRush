@@ -9,6 +9,9 @@ import persistence.JsonReader;
 import ui.MainPanel;
 import ui.screens.MainMenu;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a popup that prompts user to load previously played games into game library.
 public class LoadGamesPopup extends PopupBase {
     private JsonReader jsonReader;

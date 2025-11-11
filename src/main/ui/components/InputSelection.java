@@ -17,6 +17,9 @@ import model.CakeElements.Glaze;
 import model.CakeElements.Topping;
 import ui.CakeDisplay;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents the panel that displays all buttons used for customizing and controlling cake display.
 public class InputSelection extends JPanel {
     private ElementSelectionButtons numOfTiers;

@@ -15,6 +15,9 @@ import ui.MainPanel;
 import ui.components.ReturnButton;
 import ui.components.Title;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 public class GameList extends JPanel {
     private String[] columnNames = {"GAME ID", "TIME PLAYED", "TOTAL SCORE", "LIVES LEFT", "CONTINUE"};
     MainPanel mainPanel;

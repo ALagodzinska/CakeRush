@@ -20,6 +20,9 @@ import ui.components.Title;
 import ui.components.popups.PopupBase;
 import ui.components.popups.RoundPopup;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a round screen.
 public class RoundScreen extends JPanel {
     private GameSession game;

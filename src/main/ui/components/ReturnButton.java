@@ -7,6 +7,9 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 public class ReturnButton extends JButton {
     private static final Dimension btnDimension = new Dimension(150, 60);
 

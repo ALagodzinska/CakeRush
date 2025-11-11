@@ -8,6 +8,9 @@ import model.GameLibrary;
 import persistence.JsonWriter;
 import ui.MainPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a popup that prompts user to save previously played games into game a file.
 public class SaveGamesPopup extends PopupBase {
     private JsonWriter jsonWriter; 
