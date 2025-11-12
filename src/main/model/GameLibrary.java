@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,10 +65,17 @@ public class GameLibrary implements Writable {
         return this.nextGameID;
     }
 
+    // Adapted from: 
+    //   Java Code Geeks: Filter a List by Any Matching Field
+    //   Author: Yatin Batra
+    //   URL: https://www.javacodegeeks.com/filter-a-list-by-any-matching-field.html#google_vignette
+    
     // EFFECTS: Returns the list of games that are not finished.
     public List<GameSession> getPlayableGames() {
         // stub
-        return null;
+        return this.games.stream()
+                    .filter(game -> game.isFinished() == false)
+                    .collect(Collectors.toList());
     }
 
     // EFFECTS: Returns game library as a json object.
