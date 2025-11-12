@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,6 +64,13 @@ public class GameLibrary implements Writable {
         return this.nextGameID;
     }
 
+    // EFFECTS: Returns the list of games that are not finished.
+    public List<GameSession> getPlayableGames() {
+        // stub
+        return null;
+    }
+
+    // EFFECTS: Returns game library as a json object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -71,6 +79,7 @@ public class GameLibrary implements Writable {
         return json;
     }
 
+    // EFFECTS: Converts and returns a list of games as a json array.
     private JSONArray gamesToJson() {
         JSONArray jsonArray = new JSONArray();
 
