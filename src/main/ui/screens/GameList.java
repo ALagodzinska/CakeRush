@@ -2,50 +2,153 @@ package ui.screens;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
+
+import model.GameLibrary;
+import model.GameScoreComparator;
 import model.GameSession;
 import ui.MainPanel;
-import ui.components.ReturnButton;
 import ui.components.Title;
-
+import ui.components.buttons.ReturnButton;
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
 public class GameList extends JPanel {
     private String[] columnNames = {"GAME ID", "TIME PLAYED", "TOTAL SCORE", "LIVES LEFT", "CONTINUE"};
-    MainPanel mainPanel;
-    private ArrayList<GameSession> games;
+    MainPanel mainPanel;    
     private JPanel listDisplay;
+    private JScrollPane scrollList;
 
-    public GameList(ArrayList<GameSession> games, MainPanel mainPanel) {
+    private GameLibrary gameLibrary;
+    private List<GameSession> filteredListOfGames;
+    private boolean isFiltered;
+
+    public GameList(MainPanel mainPanel) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         Title title = new Title("PLAYED GAMES");
         this.add(title);
 
-        this.games = games;
+        this.gameLibrary = mainPanel.getGameLibrary();
+        // this.originalListOfGames = mainPanel.getGameLibrary().getGames();
+        this.filteredListOfGames = this.gameLibrary.getGames();
         this.mainPanel = mainPanel;
 
         listDisplay = new JPanel();
         listDisplay.setLayout(new BoxLayout(listDisplay, BoxLayout.Y_AXIS));
 
-        addColumnNames();
-        addGames();
+        this.isFiltered = false;
 
-        JScrollPane scroll = new JScrollPane(listDisplay);
-        add(scroll);
+        // TESTING
+        addSortButtons();
+
+        addColumnNames();
+        // addGames();
+
+        scrollList = new JScrollPane(createTableData());
+        listDisplay.add(scrollList);
+
+        this.add(listDisplay);
 
         JButton goBack = new ReturnButton("GO BACK");
         goBack.addActionListener(e -> mainPanel.displayScreen(new MainMenu(mainPanel)));
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(goBack);
+    }
+
+    
+
+    private void addSortButtons() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+
+        JToggleButton togglePlayableSortBtn = createPlayableFilterBtn();
+
+        JPanel sortByScoreBtns = createScoreSortBtn();
+        
+        buttonPanel.add(togglePlayableSortBtn);
+        buttonPanel.add(Box.createHorizontalStrut(400));
+        buttonPanel.add(sortByScoreBtns);
+
+        this.add(buttonPanel);
+    }
+
+    private JPanel createScoreSortBtn() {
+        JPanel sortPanel = new JPanel();
+        sortPanel.setLayout(new BoxLayout(sortPanel, BoxLayout.X_AXIS));
+
+        ButtonGroup sortButtons = new ButtonGroup();
+        JRadioButton defaultBtn = new JRadioButton("NONE");
+        JRadioButton ascBtn = new JRadioButton("↑");
+        JRadioButton descBtn = new JRadioButton("↓");
+
+        defaultBtn.addActionListener(e -> {          
+            List<GameSession> gamesToSort = isFiltered ? this.filteredListOfGames : this.gameLibrary.getGames();   
+            this.filteredListOfGames = gamesToSort;
+            redrawTable();            
+        });
+
+        ascBtn.addActionListener(e -> {             
+            this.filteredListOfGames.sort(new GameScoreComparator().reversed()); 
+            redrawTable();    
+        });
+
+        descBtn.addActionListener(e -> {             
+            this.filteredListOfGames.sort(new GameScoreComparator()); 
+            redrawTable();    
+        });
+
+        sortButtons.add(defaultBtn);
+        defaultBtn.setSelected(true);
+        sortPanel.add(defaultBtn);
+        sortButtons.add(ascBtn);
+        sortPanel.add(ascBtn);
+        sortButtons.add(descBtn);
+        sortPanel.add(descBtn);
+
+        return sortPanel;
+    }
+
+    private JToggleButton createPlayableFilterBtn() {
+        JToggleButton filterPlayableBtn = new JToggleButton("Show active games");
+
+        filterPlayableBtn.addActionListener(e -> {
+            if (filterPlayableBtn.isSelected()) {
+                filterPlayableBtn.setText("Show all games");                
+                this.filteredListOfGames = this.mainPanel.getGameLibrary().getPlayableGames();
+                this.isFiltered = true;
+
+                redrawTable();
+            } else {
+                filterPlayableBtn.setText("Show active games");
+                this.filteredListOfGames = this.gameLibrary.getGames();
+                this.isFiltered = false;
+
+                redrawTable();
+            }
+        });
+
+        return filterPlayableBtn;
+    }
+
+
+    private void redrawTable() {
+        this.listDisplay.remove(scrollList);
+        scrollList = new JScrollPane(createTableData());
+        this.listDisplay.add(scrollList);
+        
+        this.revalidate();
+        this.repaint(); 
     }
 
     public void addColumnNames() {
@@ -73,7 +176,11 @@ public class GameList extends JPanel {
         return element;
     }
 
-    public void addGames() {
+    public JPanel createTableData() {
+        JPanel dataRows = new JPanel();
+        dataRows.setLayout(new BoxLayout(dataRows, BoxLayout.Y_AXIS));
+        List<GameSession> games = this.filteredListOfGames;
+
         for (GameSession game: games) {
             JPanel row = new JPanel();
             row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
@@ -104,8 +211,10 @@ public class GameList extends JPanel {
             btnElement.add(continueBtn);
             row.add(btnElement);
 
-            listDisplay.add(row);
-        }        
+            dataRows.add(row);
+        }      
+        
+        return dataRows;
     }
 
     private String formatTime(int timeInSeconds) {
