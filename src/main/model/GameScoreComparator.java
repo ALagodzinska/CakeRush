@@ -14,8 +14,13 @@ public class GameScoreComparator implements Comparator<GameSession> {
     // returns one, else if firstGame score equals to secondGame score returns zero, otherwise returns -1.
     @Override
     public int compare(GameSession firstGame, GameSession secondGame) {
-        // stub
-        return 0;
+        if (firstGame.getTotalScore() == secondGame.getTotalScore()) {
+            return 0;
+        } else if (firstGame.getTotalScore() > secondGame.getTotalScore()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
     
 }
