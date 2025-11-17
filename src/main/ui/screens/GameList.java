@@ -1,7 +1,10 @@
 package ui.screens;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -11,63 +14,70 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
 import model.GameLibrary;
 import model.GameScoreComparator;
 import model.GameSession;
 import ui.MainPanel;
+import ui.components.ListBase;
 import ui.components.Title;
 import ui.components.buttons.ReturnButton;
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
+// Represents a screen where are displayed all played games in a list format .
 public class GameList extends JPanel {
     private String[] columnNames = {"GAME ID", "TIME PLAYED", "TOTAL SCORE", "LIVES LEFT", "CONTINUE"};
-    MainPanel mainPanel;    
-    private JPanel listDisplay;
-    private JScrollPane scrollList;
+    private MainPanel mainPanel;    
+    private ListBase listDisplay;
 
     private GameLibrary gameLibrary;
     private List<GameSession> filteredListOfGames;
     private boolean isFiltered;
 
+    // EFFECTS: Constructs a game list screen.
     public GameList(MainPanel mainPanel) {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        Title title = new Title("PLAYED GAMES");
-        this.add(title);
-
         this.gameLibrary = mainPanel.getGameLibrary();
-        // this.originalListOfGames = mainPanel.getGameLibrary().getGames();
         this.filteredListOfGames = this.gameLibrary.getGames();
         this.mainPanel = mainPanel;
-
-        listDisplay = new JPanel();
-        listDisplay.setLayout(new BoxLayout(listDisplay, BoxLayout.Y_AXIS));
-
         this.isFiltered = false;
+        
+        setup();
+    }
 
-        // TESTING
+    // MODIFIES: this
+    // EFFECTS: Sets up a layout for the game screen and adds all components - title, list and return button.
+    private void setup() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        Title title = new Title("PLAYED GAMES");
+        this.add(title);  
+
         addSortButtons();
 
-        addColumnNames();
-        // addGames();
-
-        scrollList = new JScrollPane(createTableData());
-        listDisplay.add(scrollList);
-
+        this.listDisplay = new ListBase(columnNames, createDataRows());   
         this.add(listDisplay);
+        
+        addReturnBtn();
+    }
+    
+    // MODIFIES: this
+    // RETURNS: Adds return button to this screen.
+    private void addReturnBtn() {
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
 
         JButton goBack = new ReturnButton("GO BACK");
         goBack.addActionListener(e -> mainPanel.displayScreen(new MainMenu(mainPanel)));
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(goBack);
+
+        JPanel bottomCorner = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomCorner.add(goBack);
+        
+        this.add(bottomCorner, BorderLayout.SOUTH);
     }
 
-    
-
+    // MODIFIES: this
+    // EFFECTS: Adds the buttons used for sorting and filtering data to this screen.
     private void addSortButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -83,42 +93,69 @@ public class GameList extends JPanel {
         this.add(buttonPanel);
     }
 
+    // EFFECTS: Creates and returns a JPanel that contains buttons used for filtering games by their total score.
     private JPanel createScoreSortBtn() {
         JPanel sortPanel = new JPanel();
         sortPanel.setLayout(new BoxLayout(sortPanel, BoxLayout.X_AXIS));
 
         ButtonGroup sortButtons = new ButtonGroup();
-        JRadioButton defaultBtn = new JRadioButton("NONE");
-        JRadioButton ascBtn = new JRadioButton("↑");
-        JRadioButton descBtn = new JRadioButton("↓");
 
-        defaultBtn.addActionListener(e -> {          
-            List<GameSession> gamesToSort = isFiltered ? this.filteredListOfGames : this.gameLibrary.getGames();   
-            this.filteredListOfGames = gamesToSort;
-            redrawTable();            
-        });
-
-        ascBtn.addActionListener(e -> {             
-            this.filteredListOfGames.sort(new GameScoreComparator().reversed()); 
-            redrawTable();    
-        });
-
-        descBtn.addActionListener(e -> {             
-            this.filteredListOfGames.sort(new GameScoreComparator()); 
-            redrawTable();    
-        });
-
-        sortButtons.add(defaultBtn);
-        defaultBtn.setSelected(true);
-        sortPanel.add(defaultBtn);
-        sortButtons.add(ascBtn);
-        sortPanel.add(ascBtn);
-        sortButtons.add(descBtn);
-        sortPanel.add(descBtn);
+        addClearSortButton(sortPanel, sortButtons);
+        addSortAscendingBtn(sortPanel, sortButtons);
+        addSortDescendingBtn(sortPanel, sortButtons);        
 
         return sortPanel;
     }
 
+    // EFFECTS: Adds radio button to the specified panel and button group. 
+    // The button clears any applied sorting from the data.
+    private void addClearSortButton(JPanel btnPanel, ButtonGroup sortButtons) {
+        JRadioButton defaultBtn = new JRadioButton("NONE");
+
+        defaultBtn.addActionListener(e -> {          
+            List<GameSession> gamesToSort = isFiltered ? this.filteredListOfGames : this.gameLibrary.getGames();   
+            this.filteredListOfGames = new ArrayList<GameSession>(gamesToSort);
+            this.listDisplay.updateDataRows(createDataRows());
+        });
+
+        sortButtons.add(defaultBtn);
+        defaultBtn.setSelected(true);
+
+        btnPanel.add(defaultBtn); 
+    }
+
+    // EFFECTS: Adds radio button to the specified panel and button group. 
+    // The button sorts data in ascending order based on game score.
+    private void addSortAscendingBtn(JPanel btnPanel, ButtonGroup sortButtons) {
+        JRadioButton ascBtn = new JRadioButton("↑");
+
+        ascBtn.addActionListener(e -> {             
+            this.filteredListOfGames = new ArrayList<GameSession>(this.filteredListOfGames);
+            this.filteredListOfGames.sort(new GameScoreComparator().reversed()); 
+            this.listDisplay.updateDataRows(createDataRows());  
+        });
+
+        sortButtons.add(ascBtn);
+        btnPanel.add(ascBtn);
+    }
+
+    // EFFECTS: Adds radio button to the specified panel and button group. 
+    // The button sorts data in descending order based on game score.
+    private void addSortDescendingBtn(JPanel btnPanel, ButtonGroup sortButtons) {
+        JRadioButton descBtn = new JRadioButton("↓");
+
+        descBtn.addActionListener(e -> {             
+            this.filteredListOfGames = new ArrayList<GameSession>(this.filteredListOfGames);
+            this.filteredListOfGames.sort(new GameScoreComparator()); 
+            this.listDisplay.updateDataRows(createDataRows());    
+        });        
+        
+        sortButtons.add(descBtn);
+        btnPanel.add(descBtn);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates and returns a toggle button used to filter data by game status: active(playable) or finished.
     private JToggleButton createPlayableFilterBtn() {
         JToggleButton filterPlayableBtn = new JToggleButton("Show active games");
 
@@ -127,96 +164,72 @@ public class GameList extends JPanel {
                 filterPlayableBtn.setText("Show all games");                
                 this.filteredListOfGames = this.mainPanel.getGameLibrary().getPlayableGames();
                 this.isFiltered = true;
-
-                redrawTable();
+                this.listDisplay.updateDataRows(createDataRows());    
             } else {
                 filterPlayableBtn.setText("Show active games");
                 this.filteredListOfGames = this.gameLibrary.getGames();
                 this.isFiltered = false;
 
-                redrawTable();
+                this.listDisplay.updateDataRows(createDataRows());    
             }
         });
 
         return filterPlayableBtn;
     }
 
-
-    private void redrawTable() {
-        this.listDisplay.remove(scrollList);
-        scrollList = new JScrollPane(createTableData());
-        this.listDisplay.add(scrollList);
-        
-        this.revalidate();
-        this.repaint(); 
-    }
-
-    public void addColumnNames() {
-        JPanel row = new JPanel();
-        row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
-
-        for (String name: columnNames) {
-            JPanel element = fixedSizeElement();
-            JLabel label = new JLabel(name);
-            label.setFont(new Font("Arial", Font.BOLD, 14));
-            element.add(label);
-            row.add(element);
-        }
-
-        row.setMaximumSize(new Dimension(row.getPreferredSize().width, 40));
-        listDisplay.add(row);
-    }
-
-    private JPanel fixedSizeElement() {
-        JPanel element = new JPanel();
-        element.setPreferredSize(new Dimension(150, 30));
-        element.setMinimumSize(new Dimension(150, 30));
-        element.setMaximumSize(new Dimension(150, 30));
-
-        return element;
-    }
-
-    public JPanel createTableData() {
-        JPanel dataRows = new JPanel();
-        dataRows.setLayout(new BoxLayout(dataRows, BoxLayout.Y_AXIS));
+    // EFFECTS: Returns a list of panels, each containg data about one game.
+    public List<JPanel> createDataRows() {
+        List<JPanel> dataRows = new ArrayList<JPanel>();
         List<GameSession> games = this.filteredListOfGames;
 
+        System.out.println(games.get(0).getTotalScore());
+
         for (GameSession game: games) {
-            JPanel row = new JPanel();
-            row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
-
-            JPanel gameIDElement = fixedSizeElement();
-            gameIDElement.add(new JLabel(Integer.toString(game.getGameID())));
-            row.add(gameIDElement);
-
-            JPanel timeElement = fixedSizeElement();
-            timeElement.add(new JLabel(formatTime(game.getTotalTimePLayed())));
-            row.add(timeElement);
-
-            JPanel scoreElement = fixedSizeElement();
-            scoreElement.add(new JLabel(Integer.toString(game.getTotalScore())));
-            row.add(scoreElement);
-
-            JPanel livesElement = fixedSizeElement();
-            livesElement.add(new JLabel(Integer.toString(game.getLivesLeft())));
-            row.add(livesElement);
-
-            JButton continueBtn = new JButton("PLAY");
-            continueBtn.setFont(new Font("Arial", Font.CENTER_BASELINE, 7));
-            continueBtn.setMaximumSize(new Dimension(70, 20));
-            continueBtn.addActionListener(e -> mainPanel.displayScreen(new GameMenu(game, mainPanel)));
-            continueBtn.setEnabled(!game.isFinished());
-
-            JPanel btnElement = fixedSizeElement();
-            btnElement.add(continueBtn);
-            row.add(btnElement);
-
+            JPanel row = createRowPanel(game);
             dataRows.add(row);
         }      
         
         return dataRows;
     }
 
+    // EFFECTS: Creates and returns a panel that represents a row that stores game data - id, time, score, lives and
+    // button to continue playing.
+    private JPanel createRowPanel(GameSession game) {
+        JPanel row = new JPanel();
+        row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
+
+        JPanel gameIDElement = ListBase.createfixedSizeElement(new JLabel(Integer.toString(game.getGameID())));
+        row.add(gameIDElement);
+
+        JPanel timeElement = ListBase.createfixedSizeElement(new JLabel(formatTime(game.getTotalTimePLayed())));
+        row.add(timeElement);
+
+        JPanel scoreElement = ListBase.createfixedSizeElement(new JLabel(Integer.toString(game.getTotalScore())));
+        row.add(scoreElement);
+
+        JPanel livesElement = ListBase.createfixedSizeElement(new JLabel(Integer.toString(game.getLivesLeft())));
+        row.add(livesElement);
+
+        JPanel btnElement = ListBase.createfixedSizeElement(createContinueGameBtn(game));
+        row.add(btnElement);
+
+        return row;
+    }
+
+    // EFFECTS: Creates and returns a button that is allows to continue to play the specified game.
+    // If the game is finished the button is disabled.
+    private JButton createContinueGameBtn(GameSession game) {
+        JButton continueBtn = new JButton("PLAY");
+        continueBtn.setFont(new Font("Arial", Font.CENTER_BASELINE, 7));
+        continueBtn.setMaximumSize(new Dimension(70, 20));
+        continueBtn.addActionListener(e -> mainPanel.displayScreen(new GameMenu(game, mainPanel)));
+        continueBtn.setEnabled(!game.isFinished());
+
+        return continueBtn;
+    }
+
+    // REQUIRES: timeInSeconds >= 0
+    // EFFECTS: Return time as a formatted string that contains hours, minutes and seconds.
     private String formatTime(int timeInSeconds) {
         int hours = timeInSeconds / 3600;
         int min = (timeInSeconds % 3600) / 60;
