@@ -32,8 +32,8 @@ public abstract class PopupBase extends JDialog {
     private JLabel descriptionLabel;
 
     // EFFECTS: Initializes a popup with specified title, description and two buttons.
-    public PopupBase(MainPanel mainPanel, String title, String description, String cancelButtonLabel,
-            String continueButtonLabel) {
+    public PopupBase(MainPanel mainPanel, String title, String description,
+            String cancelButtonLabel, String continueButtonLabel) {
         super(mainPanel, "Popup", Dialog.ModalityType.APPLICATION_MODAL);
         this.title = title;
         this.description = description;
@@ -43,13 +43,55 @@ public abstract class PopupBase extends JDialog {
         setup();
     }
 
+    // EFFECTS: Adds the given panel to the top of the popup window, then clears and updates the popup’s content.
+    public void addResultsPanel(JPanel resultsPanel) {
+        JPanel newContent = new JPanel();
+        newContent.setLayout(new BoxLayout(newContent, BoxLayout.Y_AXIS));
+        newContent.setPreferredSize(new Dimension(500, 300));
+        newContent.add(resultsPanel);
+
+        JPanel popupPanel = createPopupPanel();
+        popupPanel.setMaximumSize(new Dimension(400, 150));
+        popupPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        resultsPanel.setMaximumSize(new Dimension(400,70));
+        resultsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        newContent.add(popupPanel);
+        
+        updatePopupContent(newContent);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Clears and updates popup content with a new panel.
+    private void updatePopupContent(JPanel newContent) {
+        clearPopupContent();
+        this.setContentPane(newContent);
+
+        this.pack();
+        this.revalidate();
+        this.repaint();
+        this.setLocationRelativeTo(this);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Clears popup content.
+    private void clearPopupContent() {
+        this.getContentPane().removeAll();        
+    }
+
     // MODIFIES: this
     // EFFECTS: Styles the JDialog and adds popup content to it.
     private void setup() {
         this.setUndecorated(true);
         this.setAlwaysOnTop(true);
 
-        this.setContentPane(createPopupPanel());
+        JPanel panel = createPopupPanel();
+        panel.setSize(500, 200);
+        panel.setPreferredSize(new Dimension(500,150));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        this.setContentPane(panel);
 
         this.pack();
         this.setLocationRelativeTo(this);        
@@ -75,9 +117,12 @@ public abstract class PopupBase extends JDialog {
         JPanel popupPanel = new JPanel();
 
         popupPanel.setLayout(new BoxLayout(popupPanel, BoxLayout.Y_AXIS));
-        popupPanel.setSize(500, 200);
-        popupPanel.setPreferredSize(new Dimension(500,150));
-        popupPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // popupPanel.setSize(500, 200);
+        // popupPanel.setPreferredSize(new Dimension(500,150));
+        // popupPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // TEST
+        
 
         addPanelComponents(popupPanel);
 
@@ -96,7 +141,7 @@ public abstract class PopupBase extends JDialog {
         this.descriptionLabel = popupDescription;
 
         JPanel buttonPanel = createButtonPanel();
-
+        
         popupPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         popupPanel.add(popupTitle);
         popupPanel.add(Box.createRigidArea(new Dimension(0, 20)));
