@@ -1,14 +1,15 @@
 package ui.components;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
+import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
+import model.GameRound;
+
 @ExcludeFromJacocoGeneratedReport
-// Represents displed timer on th screen.
+// Represents a panel that displays the amount of time remaining on the timer.
 public class TimerDisplay extends JPanel {
     private JLabel timeDisplay;
 
@@ -16,23 +17,27 @@ public class TimerDisplay extends JPanel {
     public TimerDisplay() {
         super();  
         this.timeDisplay = new JLabel(" ");
+        this.timeDisplay.setFont(new Font("Arial", Font.BOLD, 40));
+        JLabel label = new JLabel("TIME: ");
+        label.setFont(new Font("Arial", Font.PLAIN, 30));
+
+        this.add(label);
         this.add(timeDisplay);
+
         this.setBounds(200,200, 50,50);
-        this.setBorder(BorderFactory.createLineBorder(Color.RED));
+        this.setPreferredSize(new Dimension(50, 50));
+        this.setMinimumSize(new Dimension(50, 50));
     }
 
     // REQUIRES: time >= 0
     // MODIFIES: this
-    // EFFECTS: Updates the time on the timer if the time is larger than round time, 
-    // sets to the label the modulus of time.
+    // EFFECTS: Updates the time on the timer; if the time is larger than round time, 
+    // sets to the label the modulus of time. Updates and repaints this panel.
     public void setTime(int time) {
         if (time == 0) {
             this.timeDisplay.setText("");
-            return;
-        }
-
-        // TODO: add constants
-        if (time >= 30) {
+            
+        } else if (time > GameRound.MAX_TIME) {
             time %= 10;
         }
 
