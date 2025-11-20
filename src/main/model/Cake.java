@@ -153,6 +153,7 @@ public class Cake implements Writable {
         return result;
     }
 
+    // EFFECTS: Returns cake as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

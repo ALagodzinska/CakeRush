@@ -56,10 +56,10 @@ public class RoundPopup extends PopupBase {
         resultsTitle.setFont(new Font("Arial", Font.BOLD, 20));
         resultsTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel score = new JLabel("+" + completedRound.getScore());
+        JLabel score = new JLabel("SCORE: +" + completedRound.getScore());
         score.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel time = new JLabel(RoundList.formatTime(completedRound.getRoundTime()));
+        JLabel time = new JLabel("TIME: " + RoundList.formatTime(completedRound.getRoundTime()));
         time.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         resultsPanel.add(resultsTitle);

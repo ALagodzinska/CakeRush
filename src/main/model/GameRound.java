@@ -81,6 +81,7 @@ public class GameRound implements Writable {
         calculateScore();
     }
 
+    // EFFECTS: Converts and returns round as a JSONobject.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

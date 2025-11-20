@@ -117,13 +117,6 @@ public abstract class PopupBase extends JDialog {
         JPanel popupPanel = new JPanel();
 
         popupPanel.setLayout(new BoxLayout(popupPanel, BoxLayout.Y_AXIS));
-        // popupPanel.setSize(500, 200);
-        // popupPanel.setPreferredSize(new Dimension(500,150));
-        // popupPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        // TEST
-        
-
         addPanelComponents(popupPanel);
 
         return popupPanel;

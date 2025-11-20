@@ -1,5 +1,5 @@
 {
-    "nextID": 3,
+    "nextID": 4,
     "games": [
         {
             "gameID": 1,
@@ -129,6 +129,110 @@
                         "decoration": "NONE"
                     },
                     "roundTime": 1,
+                    "isVictory": false
+                }
+            ]
+        },
+        {
+            "gameID": 3,
+            "totalTimePlayed": 39,
+            "livesLeft": 1,
+            "isFinished": false,
+            "totalScore": 95,
+            "rounds": [
+                {
+                    "targetCake": {
+                        "glaze": "VANILLA",
+                        "cakeColor": "WHITE",
+                        "topping": "CREAM",
+                        "numberOfTiers": 2,
+                        "decoration": "BALLOON"
+                    },
+                    "score": 0,
+                    "userCake": {
+                        "glaze": "CHOCOLATE",
+                        "cakeColor": "BLUE",
+                        "topping": "CANDIES",
+                        "numberOfTiers": 2,
+                        "decoration": "NONE"
+                    },
+                    "roundTime": 10,
+                    "isVictory": false
+                },
+                {
+                    "targetCake": {
+                        "glaze": "NONE",
+                        "cakeColor": "WHITE",
+                        "topping": "FRUIT",
+                        "numberOfTiers": 2,
+                        "decoration": "CANDLE"
+                    },
+                    "score": 33,
+                    "userCake": {
+                        "glaze": "NONE",
+                        "cakeColor": "WHITE",
+                        "topping": "FRUIT",
+                        "numberOfTiers": 2,
+                        "decoration": "CANDLE"
+                    },
+                    "roundTime": 7,
+                    "isVictory": true
+                },
+                {
+                    "targetCake": {
+                        "glaze": "CARAMEL",
+                        "cakeColor": "PINK",
+                        "topping": "NONE",
+                        "numberOfTiers": 1,
+                        "decoration": "FLOWER"
+                    },
+                    "score": 32,
+                    "userCake": {
+                        "glaze": "CARAMEL",
+                        "cakeColor": "PINK",
+                        "topping": "NONE",
+                        "numberOfTiers": 1,
+                        "decoration": "FLOWER"
+                    },
+                    "roundTime": 8,
+                    "isVictory": true
+                },
+                {
+                    "targetCake": {
+                        "glaze": "STRAWBERRY",
+                        "cakeColor": "BLUE",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 1,
+                        "decoration": "FLOWER"
+                    },
+                    "score": 30,
+                    "userCake": {
+                        "glaze": "STRAWBERRY",
+                        "cakeColor": "BLUE",
+                        "topping": "SPRINKLES",
+                        "numberOfTiers": 1,
+                        "decoration": "FLOWER"
+                    },
+                    "roundTime": 10,
+                    "isVictory": true
+                },
+                {
+                    "targetCake": {
+                        "glaze": "CHOCOLATE",
+                        "cakeColor": "GREEN",
+                        "topping": "NONE",
+                        "numberOfTiers": 1,
+                        "decoration": "BALLOON"
+                    },
+                    "score": 0,
+                    "userCake": {
+                        "glaze": "NONE",
+                        "cakeColor": "WHITE",
+                        "topping": "FRUIT",
+                        "numberOfTiers": 1,
+                        "decoration": "NONE"
+                    },
+                    "roundTime": 4,
                     "isVictory": false
                 }
             ]

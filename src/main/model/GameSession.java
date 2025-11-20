@@ -102,7 +102,7 @@ public class GameSession implements Writable {
         this.totalTimePlayed += round.getRoundTime();
     }
 
-    // EFFECTS: 
+    // EFFECTS: Converts and returns game as a JSONObject.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -115,6 +115,7 @@ public class GameSession implements Writable {
         return json;
     }
 
+    // EFFECTS: Converts all played rounds in this game into a JSONArray and returns it.
     private JSONArray roundsToJson() {
         JSONArray jsonArray = new JSONArray();
 
