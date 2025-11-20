@@ -1,20 +1,20 @@
 package ui.screens;
 
 import java.awt.Component;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+import ui.MainPanel;
+import ui.components.GameLogo;
+import ui.components.buttons.MenuButton;
+import ui.components.popups.SaveGamesPopup;
 
 import model.GameLibrary;
 import model.GameSession;
-import ui.MainPanel;
-import ui.components.MenuButton;
-import ui.components.Title;
-import ui.components.popups.SaveGamesPopup;
-
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
 // Represents a game menu screen.
@@ -25,7 +25,6 @@ public class MainMenu extends JPanel {
     // EFFECTS: Constructs and displays game menu for the given game on the given panel.
     public MainMenu(MainPanel mainPanel) {
         super();
-        System.out.println("HERE IS LIBRARY");
         this.gameLibrary = mainPanel.getGameLibrary();
         this.mainPanel = mainPanel;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // arranges in a column
@@ -35,13 +34,21 @@ public class MainMenu extends JPanel {
     // MODIFIES: this
     // EFFECTS: Initializes and adds GUI components to this panel.
     private void init() {
-        JLabel title = new Title("CAKE RUSH");        
-        this.add(title);
-        this.add(Box.createVerticalStrut(40));
+        addLogo();
         
         addStartNewGameBtn();
         addGameHistoryBtn();
         addExitBtn();
+    }
+
+    private void addLogo() {
+        JPanel logo = new GameLogo();   
+        logo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logo.setAlignmentY(Component.CENTER_ALIGNMENT);  
+
+        this.add(Box.createVerticalStrut(30));
+        this.add(logo);
+        this.add(Box.createVerticalStrut(20));
     }
 
     // MODIFIES: this
@@ -63,12 +70,10 @@ public class MainMenu extends JPanel {
     private void addGameHistoryBtn() {        
         JButton gameHistory = new MenuButton("VIEW GAMES");
         gameHistory.addActionListener(e -> 
-                mainPanel.displayScreen(new GameList(gameLibrary.getGames(), mainPanel)));
+                mainPanel.displayScreen(new GameList(mainPanel)));
 
         System.out.println(gameLibrary.getGames().size());
-        if (gameLibrary.getGames().size() == 0) {
-            
-            System.out.println("EMPTY");
+        if (gameLibrary.getGames().size() == 0) {            
             gameHistory.setEnabled(false);
         }
 
