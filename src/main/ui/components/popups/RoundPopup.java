@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import model.GameRound;
 import model.GameSession;
 import ui.MainPanel;
@@ -34,8 +33,8 @@ public class RoundPopup extends PopupBase {
         this.mainPanel = mainPanel;
         this.roundScreen = roundScreen;      
         
-        this.addActionToCancelButton(exitAction());
-        this.addActionToContinueButton(continueAction());        
+        this.addActionToCancelButton(new ExitActionListener());
+        this.addActionToContinueButton(new ContinueActionListener());        
     }
 
     // EFFECTS: creates a round results panel that contains a message and
@@ -68,46 +67,21 @@ public class RoundPopup extends PopupBase {
         resultsPanel.add(time);
 
         return resultsPanel;
-    }
-
-    // EFFECTS: Initializes new action listener that will send user back to the game menu and that is
-    // triggered by pressing exit button on popup.
-    private ActionListener exitAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {     
-                close();
-            }
-        };
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Initializes new action listener that will get triggered by pressing exit button on popup.
-    private ActionListener continueAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent evt) { 
-                RoundPopup.this.setVisible(false);
-                RoundPopup.this.roundScreen.clearScreen();
-                RoundPopup.this.roundScreen.startRound();
-            }
-        };
-    }
+    }    
 
     private void updatePopup() {
         this.addResultsPanel(createResultsPanel());
 
-        this.addActionToCancelButton(exitAction());
-        this.addActionToContinueButton(continueAction()); 
+        this.addActionToCancelButton(new ExitActionListener());
+        this.addActionToContinueButton(new ContinueActionListener()); 
     }
 
     // MODIFIES: this
     // EFFECTS: Checks whether the continue button should be active, updates description label and displays popup.
     @Override
     public void open() {
-        this.setEnabledContinueBtn(!this.gameSession.isFinished());
-        // String stats = "Total score: " + this.gameSession.getTotalScore() + "            Lives left: " 
-        //         + this.gameSession.getLivesLeft();
-        // this.setDescription(stats);
         updatePopup();
+        this.setEnabledContinueBtn(!this.gameSession.isFinished());
         this.setVisible(true);           
         
     }
@@ -119,5 +93,28 @@ public class RoundPopup extends PopupBase {
         this.setVisible(false);           
         this.mainPanel.displayScreen(new GameMenu(this.gameSession, mainPanel));
     }
-    
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles exit button click.
+    private class ExitActionListener implements ActionListener {
+        // EFFECTS: Initializes new action listener that will send user back to the game menu and that is
+        // triggered by pressing exit button on popup.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            close();
+        }
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles continue button click.
+    private class ContinueActionListener implements ActionListener {
+        // MODIFIES: this
+        // EFFECTS: Initializes new action listener that will get triggered by pressing exit button on popup.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RoundPopup.this.setVisible(false);
+            RoundPopup.this.roundScreen.clearScreen();
+            RoundPopup.this.roundScreen.startRound();
+        }
+    }
 }

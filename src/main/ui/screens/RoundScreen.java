@@ -44,14 +44,15 @@ public class RoundScreen extends JPanel {
     // EFFECTS: Constructs a round session screen for specified game and starts a game round.
     public RoundScreen(GameSession game, MainPanel mainPanel) {        
         super();
+        this.game = game;
+        
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));            
         this.title = new Title("MEMORIZE THE CAKE");        
         this.add(title);
         statsPanel = createStatisticsPanel();
         this.add(statsPanel);
-        this.popup = new RoundPopup(game, mainPanel, this);
-
-        this.game = game; 
+        updateStatisticsPanel();
+        this.popup = new RoundPopup(game, mainPanel, this);         
 
         startRound();
     }
@@ -59,9 +60,7 @@ public class RoundScreen extends JPanel {
     // EFFECTS: Creates and returns a panel that stores game lives and round timer.
     public JPanel createStatisticsPanel() {
         JPanel statsPanel = new JPanel();
-        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.X_AXIS));
-
-        updateStatisticsPanel();
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.X_AXIS));        
 
         return statsPanel;
     }
@@ -94,43 +93,14 @@ public class RoundScreen extends JPanel {
         userCakeDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         inputSelection = new InputSelection(userCakeDisplay);
-        inputSelection.setActionOnSumbit(submitAction());        
+        inputSelection.setActionOnSumbit(new SubmitActionListener());        
 
         remainingTime = GameRound.MAX_TIME + GameRound.PREVIEW_TIME;
-        timer = new javax.swing.Timer(TIMER_DELAY, roundAction());
+        timer = new javax.swing.Timer(TIMER_DELAY, new RoundActionListener());
 
         targetCakeDisplay.setVisible(true);
         timer.start();        
-    }
-
-    // MODIFIES: this
-    // EFFECTS: shows user the target cake and allows user within round time 
-    // to customize user's cake to match target cake.
-    private ActionListener roundAction() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                                             
-                if (remainingTime <= 0) {                    
-                    endRound();                    
-                } else if (remainingTime == GameRound.MAX_TIME) {               
-                    changeFromPreviewToGame();         
-                } 
-                timerDisplay.setTime(remainingTime);   
-                              
-                remainingTime--;                          
-            }
-        };
-
-        return action;
-    }
-
-    // EFFECTS: initializes new action listener that will get triggered by pressing button.
-    private ActionListener submitAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {               
-                endRound();
-            }
-        };
-    }
+    }    
 
     // MODIFIES: this
     // EFFECTS: when the round ends stop the active timer, disable all input buttons and change screen title.
@@ -164,8 +134,37 @@ public class RoundScreen extends JPanel {
         this.repaint(); 
     }
 
-    // EFFECTS: Returns the current round data.
+    // EFFECTS: Returns the current round.
     public GameRound getCurrentRound() {
         return this.currentRound;
-    }    
+    }   
+    
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that updates round state each second.
+    private class RoundActionListener implements ActionListener {
+        // MODIFIES: this
+        // EFFECTS: shows user the target cake and allows user within round time 
+        // to customize user's cake to match target cake.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (remainingTime <= 0) {                    
+                endRound();                    
+            } else if (remainingTime == GameRound.MAX_TIME) {               
+                changeFromPreviewToGame();         
+            } 
+            timerDisplay.setTime(remainingTime);   
+                            
+            remainingTime--;
+        }
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that updates round state each second.
+    private class SubmitActionListener implements ActionListener {
+        // EFFECTS: ends current round.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            endRound();
+        }
+    }
 }

@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents a panel that displays the image indicating the number of lives remaining.
 public class LivesDisplay extends JPanel {
     private int lives;
@@ -30,7 +33,7 @@ public class LivesDisplay extends JPanel {
         try {
             livesImage = ImageIO.read(new File("./images/lives/" + lives + ".PNG"));
         } catch (IOException e) {
-            // Create empty imahge if load fails.
+            // Create empty image if load fails.
             livesImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
             System.out.println("Lives image loading error: " + e);
         }

@@ -36,11 +36,13 @@ public class InputSelection extends JPanel {
     // assigns the specified actions for the defined cake display.
     public InputSelection(CakeDisplay display) {
         super();
-        this.numOfTiers = new ElementSelectionButtons(new Integer[]{1,2,3},"Number of tiers", changeNumberOfTiers());
-        this.cakeColors = new ElementSelectionButtons(CakeColor.values(),"Color", changeColor());
-        this.glaze = new ElementSelectionButtons(Glaze.values(),"Glaze", changeGlaze());
-        this.toppings = new ElementSelectionButtons(Topping.values(),"Toppings", changeTopping());
-        this.decorations = new ElementSelectionButtons(Decoration.values(),"Decorations", changeDecoration());
+        this.numOfTiers = new ElementSelectionButtons(new Integer[]{1,2,3},"Number of tiers", 
+                new ChangeNumberOfTiersListener());
+        this.cakeColors = new ElementSelectionButtons(CakeColor.values(),"Color", new ChangeColorListener());
+        this.glaze = new ElementSelectionButtons(Glaze.values(),"Glaze", new ChangeGlazeListener());
+        this.toppings = new ElementSelectionButtons(Topping.values(),"Toppings", new ChangeToppingListener());
+        this.decorations = new ElementSelectionButtons(Decoration.values(),"Decorations", 
+                new ChangeDecorationListener());
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         addButtonsToPanel();
@@ -48,83 +50,7 @@ public class InputSelection extends JPanel {
         
         this.display = display;
         this.cake = display.getDisplayedCake();
-    }
-
-    // TODO: remove duplication; move out cake + cake display
-
-    // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake tiers to the value selected by button.
-    // Repaints the cake display component.
-    private ActionListener changeNumberOfTiers() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                
-                JRadioButton selectedButton = (JRadioButton) evt.getSource();
-                InputSelection.this.cake.setNumberOfTiers(Integer.parseInt(selectedButton.getText()));
-                InputSelection.this.display.repaint();            
-            }
-        };
-
-        return action;
-    }
-
-    // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake color to the value selected by button.
-    // Repaints the cake display component.
-    private ActionListener changeColor() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                
-                JRadioButton selectedButton = (JRadioButton) evt.getSource();
-                InputSelection.this.cake.setCakeColor(CakeColor.valueOf(selectedButton.getText()));
-                InputSelection.this.display.repaint();          
-            }
-        };
-
-        return action;
-    }
-
-    // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the cake glaze to the value selected by button.
-    // Repaints the cake display component.
-    private ActionListener changeGlaze() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                
-                JRadioButton selectedButton = (JRadioButton) evt.getSource();
-                InputSelection.this.cake.setGlaze(Glaze.valueOf(selectedButton.getText()));
-                InputSelection.this.display.repaint();          
-            }
-        };
-
-        return action;
-    }
-
-    // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the topping to the value selected by button. Repaints the cake display component.
-    private ActionListener changeTopping() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                
-                JRadioButton selectedButton = (JRadioButton) evt.getSource();
-                InputSelection.this.cake.setTopping(Topping.valueOf(selectedButton.getText()));
-                InputSelection.this.display.repaint();          
-            }
-        };
-
-        return action;
-    }
-
-    // MODIFIES: this, Cake, CakeDisplay
-    // EFFECTS: Changes the value of the decoration to the value selected by button.
-    // Repaints the cake display component.
-    private ActionListener changeDecoration() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {                
-                JRadioButton selectedButton = (JRadioButton) evt.getSource();
-                InputSelection.this.cake.setDecoration(Decoration.valueOf(selectedButton.getText()));
-                InputSelection.this.display.repaint();          
-            }
-        };
-
-        return action;
-    }
+    }    
 
     // MODIFIES: this
     // EFFECTS: adds all element selection buttons to this panel.
@@ -165,5 +91,78 @@ public class InputSelection extends JPanel {
         toppings.setEnableAll(enable);
         decorations.setEnableAll(enable);
         submitButton.setEnabled(enable);
+    }
+
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles number of tiers button group clicks.
+    private class ChangeNumberOfTiersListener implements ActionListener {
+        // MODIFIES: this, Cake, CakeDisplay
+        // EFFECTS: Changes the value of the cake tiers to the value selected by button.
+        // Repaints the cake display component.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            InputSelection.this.cake.setNumberOfTiers(Integer.parseInt(selectedButton.getText()));
+            InputSelection.this.display.repaint();  
+        }
+
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles color button group clicks.
+    private class ChangeColorListener implements ActionListener {
+        // MODIFIES: this, Cake, CakeDisplay
+        // EFFECTS: Changes the value of the cake color to the value selected by button.
+        // Repaints the cake display component.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            InputSelection.this.cake.setCakeColor(CakeColor.valueOf(selectedButton.getText()));
+            InputSelection.this.display.repaint();  
+        }
+
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles glaze button group clicks.
+    private class ChangeGlazeListener implements ActionListener {
+        // MODIFIES: this, Cake, CakeDisplay
+        // EFFECTS: Changes the value of the cake glaze to the value selected by button.
+        // Repaints the cake display component.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            InputSelection.this.cake.setGlaze(Glaze.valueOf(selectedButton.getText()));
+            InputSelection.this.display.repaint();  
+        }
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles glaze button group clicks.
+    private class ChangeToppingListener implements ActionListener {
+        // MODIFIES: this, Cake, CakeDisplay
+        // EFFECTS: Changes the value of the topping to the value selected by button. 
+        // Repaints the cake display component.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            InputSelection.this.cake.setTopping(Topping.valueOf(selectedButton.getText()));
+            InputSelection.this.display.repaint();  
+        }
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // Action listener that handles glaze button group clicks.
+    private class ChangeDecorationListener implements ActionListener {
+        // MODIFIES: this, Cake, CakeDisplay
+        // EFFECTS: Changes the value of the decoration to the value selected by button.
+        // Repaints the cake display component.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton selectedButton = (JRadioButton) e.getSource();
+            InputSelection.this.cake.setDecoration(Decoration.valueOf(selectedButton.getText()));
+            InputSelection.this.display.repaint();  
+        }
     }
 }

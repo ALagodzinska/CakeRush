@@ -51,7 +51,6 @@ public class CakeDisplay extends JPanel {
                 + cake.getDecoration().toString().toLowerCase() + ".PNG"));
             }
         } catch (IOException e) {
-            // TODO: Handle image loading error
             System.out.println("ERROR" + e);
         }
     }

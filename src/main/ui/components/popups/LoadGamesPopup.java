@@ -21,39 +21,11 @@ public class LoadGamesPopup extends PopupBase {
     // Initiazlizes a JsonReader instance.
     public LoadGamesPopup(MainPanel mainPanel, GameLibrary library) {
         super(mainPanel, "LOAD PLAYED GAMES?", "", "NO", "YES");
-        this.addActionToCancelButton(exitAction());
-        this.addActionToContinueButton(loadAction());
+        this.addActionToCancelButton(new ExitActionListener());
+        this.addActionToContinueButton(new LoadActionListener());
         this.jsonReader = new JsonReader(MainPanel.GAME_STORAGE);        
         this.mainPanel = mainPanel;
-    }
-
-    // EFFECTS: Initializes and returns an action listener that tries to read from file and assign game library from to a 
-    // current game library in the main panel. After action is done closes the popup.
-    private ActionListener loadAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("CLICK");
-                try {
-                    GameLibrary library = jsonReader.read();
-                    LoadGamesPopup.this.mainPanel.setGameLibrary(library);
-
-                } catch (IOException ex) {
-                    System.out.println("Couldn't read from the file");
-                }
-
-                close();
-            }
-        };
-    }
-
-    // EFFECTS: Initializes and returns an action listener that closes popup.
-    private ActionListener exitAction() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {     
-                close();
-            }
-        };
-    }
+    }    
 
     // MODIFIES: this
     // EFFECTS: Closes popup window and displays to user main menu.
@@ -63,5 +35,34 @@ public class LoadGamesPopup extends PopupBase {
         MainMenu mainMenu = new MainMenu(mainPanel);    
         this.mainPanel.add(mainMenu);
         this.mainPanel.displayScreen(mainMenu);
+    }
+
+    // Action listener that handles load button clicks.
+    @ExcludeFromJacocoGeneratedReport
+    private class LoadActionListener implements ActionListener {
+        //EFFECTS: Reads from file and assigns game library from a file to a 
+        // current game library in the main panel. After action is done closes the popup.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameLibrary library = jsonReader.read();
+                LoadGamesPopup.this.mainPanel.setGameLibrary(library);
+
+            } catch (IOException ex) {
+                System.out.println("Couldn't read from the file");
+            }
+
+            close();
+        }
+    }
+
+    // Action listener that handles exit button clicks.
+    @ExcludeFromJacocoGeneratedReport
+    private class ExitActionListener implements ActionListener {
+        // EFFECTS: Closes popup.
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            close();
+        }
     }
 }

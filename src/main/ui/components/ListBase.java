@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Represents the list used to display a table that contains column names and JPanels as rows.
 public class ListBase extends JPanel {
     List<JPanel> rows;
@@ -26,6 +29,8 @@ public class ListBase extends JPanel {
         scrollList = new JScrollPane(createTableData());
         this.add(createHeaders(columnNames));
         this.add(scrollList);
+        this.setPreferredSize(new Dimension(800, 600));
+        this.setMinimumSize(new Dimension(800, 600));
     }    
 
     // EFFECTS: Creates and returns a JPanel that stores column names in a single styled row.
@@ -47,9 +52,9 @@ public class ListBase extends JPanel {
     // EFFECTS: Creates and returns a Jpanel element that wraps the given component inside a fixed panel container.
     public static JPanel createfixedSizeElement(Component component) {
         JPanel element = new JPanel();
-        element.setPreferredSize(new Dimension(150, 30));
-        element.setMinimumSize(new Dimension(150, 30));
-        element.setMaximumSize(new Dimension(150, 30));
+        element.setPreferredSize(new Dimension(180, 30));
+        element.setMinimumSize(new Dimension(180, 30));
+        element.setMaximumSize(new Dimension(180, 30));
         element.add(component);
 
         return element;
