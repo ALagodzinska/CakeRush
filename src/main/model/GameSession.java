@@ -16,27 +16,30 @@ public class GameSession implements Writable {
     private boolean isFinished;             // true if the game was lost
     private int totalScore;                 // combined score from all played rounds
     private int livesLeft;                  // the number of lives remaining, when 0 game ends
+    private int totalTimePlayed;
 
     // EFFECTS: Creates a game session with an empty list of rounds, sets the game finished state to false, 
-    // assigns total score to zero and livesLeft to MAX_LIVES. 
+    // assigns total score to zero, livesLeft to MAX_LIVES and totalTimePlayed to zero. 
     public GameSession(int gameID) {
         this.gameID = gameID;
         this.rounds = new ArrayList<GameRound>();
         this.isFinished = false;
         this.totalScore = 0;
         this.livesLeft = MAX_LIVES;
+        this.totalTimePlayed = 0;
     }
 
     // REQUIRES: totalScore >= 0; livesLeft >= && <= MAX_LIVES
     // MODIFIES: this
     // EFFECTS: Creates a game session with fields defined by parameters passed to the method - 
-    // gameID, isFinised state, total score and  
+    // gameID, isFinised state, total score, totalTimePlayed, and 
     // lives left. Sets rounds to the empty list of rounds. 
-    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft) {
+    public GameSession(int gameID, boolean isFinished, int totalScore, int livesLeft, int totalTimePlayed) {
         this.gameID = gameID;
         this.isFinished = isFinished;
         this.totalScore = totalScore;
         this.livesLeft = livesLeft;
+        this.totalTimePlayed = totalTimePlayed;
         this.rounds = new ArrayList<GameRound>();
     }
 
@@ -73,6 +76,10 @@ public class GameSession implements Writable {
         return this.livesLeft;
     }
 
+    public int getTotalTimePLayed() {
+        return this.totalTimePlayed;
+    }
+
     // MODIFIES: this
     // EFFECTS: Updates the total score. If round was lost, deducts one live, if the live number is zero
     // the game state is changed to finished.
@@ -85,23 +92,17 @@ public class GameSession implements Writable {
             }
         }
 
-        calculateScore(isVictory);
+        calculateStatistics(round);
     }
 
     // MODIFIES: this
-    // EFFECTS: If the round is won adds ROUND_SCORE to the total score, otherwise subtracts ROUND_SCORE
-    // from the total score, if the total score is less than ROUND_SCORE sets the total score zero.
-    private void calculateScore(boolean isRoundWon) {
-        if (isRoundWon) {
-            this.totalScore += GameRound.ROUND_SCORE;
-        } else if (this.totalScore < GameRound.ROUND_SCORE) {
-            this.totalScore = 0;
-        } else {
-            this.totalScore -= GameRound.ROUND_SCORE;
-        }
+    // EFFECTS: Update statistics of the total score and total time played.
+    private void calculateStatistics(GameRound round) {
+        this.totalScore += round.getScore();
+        this.totalTimePlayed += round.getRoundTime();
     }
 
-    // EFFECTS: 
+    // EFFECTS: Converts and returns game as a JSONObject.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -110,9 +111,11 @@ public class GameSession implements Writable {
         json.put("isFinished", isFinished);
         json.put("totalScore", totalScore);
         json.put("livesLeft", livesLeft);
+        json.put("totalTimePlayed", totalTimePlayed);
         return json;
     }
 
+    // EFFECTS: Converts all played rounds in this game into a JSONArray and returns it.
     private JSONArray roundsToJson() {
         JSONArray jsonArray = new JSONArray();
 

@@ -2,6 +2,7 @@
     "nextID": 2,
     "games": [{
         "gameID": 1,
+        "totalTimePlayed": 0,
         "livesLeft": 3,
         "isFinished": false,
         "totalScore": 0,

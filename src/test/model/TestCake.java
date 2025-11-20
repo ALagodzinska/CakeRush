@@ -157,6 +157,23 @@ public class TestCake {
         assertEquals("NONE", json.get("glaze").toString());
     }
 
+    @Test
+    void testGetComparisonAccuracyDifferentCakes() {
+        Cake secondCake = new Cake();
+        secondCake.setDecoration(Decoration.CARD);
+        secondCake.setNumberOfTiers(3);
+        secondCake.setCakeColor(CakeColor.BLUE);
+        secondCake.setGlaze(Glaze.STRAWBERRY);
+        secondCake.setTopping(Topping.FRUIT);
+
+        assertEquals("0/5", defaultCake.getComparisonAccuracy(secondCake));
+    }
+
+    @Test
+    void testGetComparisonAccuracySameCakes() {
+        assertEquals("5/5", defaultCake.getComparisonAccuracy(defaultCake));
+    }
+
     // EFFECTS: Returns an array of five values generated using a fixed seed, based on the size of each 
     // cake element's options.
     private int[] randomFixedValues() {

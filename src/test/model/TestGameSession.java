@@ -30,12 +30,12 @@ public class TestGameSession {
         userCake.setGlaze(targetCake.getGlaze());
         userCake.setTopping(targetCake.getTopping());
         userCake.setDecoration(targetCake.getDecoration());
-        wonRound.finishRound();
+        wonRound.finishRound(30);
 
         lostRound = new GameRound(random);
         lostRound.getTargetCake().setNumberOfTiers(1);
         lostRound.getUserCake().setNumberOfTiers(3);
-        lostRound.finishRound();
+        lostRound.finishRound(30);
     }
 
     @Test
@@ -45,6 +45,7 @@ public class TestGameSession {
         assertFalse(gameSession.isFinished());
         assertEquals(0, gameSession.getTotalScore());
         assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
+        assertEquals(0, gameSession.getTotalTimePLayed());
     }
 
     @Test
@@ -58,6 +59,7 @@ public class TestGameSession {
         assertEquals(10, gameSession.getTotalScore());
         assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
         assertFalse(gameSession.isFinished());
+        assertEquals(30, gameSession.getTotalTimePLayed());
     }
 
     @Test
@@ -73,6 +75,7 @@ public class TestGameSession {
         assertEquals(20, gameSession.getTotalScore());
         assertEquals(GameSession.MAX_LIVES, gameSession.getLivesLeft());
         assertFalse(gameSession.isFinished());
+        assertEquals(60, gameSession.getTotalTimePLayed());
     }
 
     @Test
@@ -87,9 +90,10 @@ public class TestGameSession {
         assertEquals(wonRound, gameSession.getRounds().get(0));  
         assertEquals(lostRound, gameSession.getRounds().get(1)); 
         assertEquals(wonRound, gameSession.getRounds().get(2)); 
-        assertEquals(10, gameSession.getTotalScore());
+        assertEquals(20, gameSession.getTotalScore());
         assertEquals(2, gameSession.getLivesLeft());
         assertFalse(gameSession.isFinished());
+        assertEquals(90, gameSession.getTotalTimePLayed());
     }
 
     @Test
@@ -123,6 +127,7 @@ public class TestGameSession {
         assertEquals(0, json.getInt("totalScore"));
         assertEquals(1, json.getInt("livesLeft"));
         assertEquals(2, json.getJSONArray("rounds").length());
+        assertEquals(60, json.getInt("totalTimePlayed"));
     }
 
     @Test
@@ -134,12 +139,13 @@ public class TestGameSession {
 
     @Test
     void testConstructorWithParameters() {
-        GameSession game = new GameSession(1, false, 100, 2);
+        GameSession game = new GameSession(1, false, 100, 2, 30);
 
         assertEquals(1, game.getGameID());
         assertEquals(false, game.isFinished());
         assertEquals(100, game.getTotalScore());
         assertEquals(2, game.getLivesLeft());
         assertEquals(0, game.getRounds().size());
+        assertEquals(30, game.getTotalTimePLayed());
     }
 }

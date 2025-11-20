@@ -16,9 +16,8 @@ import persistence.Writable;
 // Represents a cake that consists of different elements: number of tiers, cake color, glaze, topping and decoration.
 public class Cake implements Writable {
     public static final int MIN_NUM_OF_TIERS = 1; 
-    public static final int MAX_NUM_OF_TIERS = 3;   
-
-    
+    public static final int MAX_NUM_OF_TIERS = 3;
+    public static final int NUM_ELEMENTS = 5;
 
     private int numberOfTiers;         // number of cake tiers (min: 1, max: maxNumberOfTiers)
     private CakeColor cakeColor;       // cake color (must be from the list of CAKE_COLORS)
@@ -55,6 +54,28 @@ public class Cake implements Writable {
                 && this.decoration.equals(anotherCake.decoration);
 
         return isSame;
+    }
+
+    // EFFECTS: returns a String that is a fraction of matching elements out of all elements.
+    public String getComparisonAccuracy(Cake anotherCake) {
+        int correctCount = 0;        
+        if (this.numberOfTiers == anotherCake.numberOfTiers) {
+            correctCount++;
+        }
+        if (this.cakeColor.equals(anotherCake.cakeColor)) {
+            correctCount++;
+        }
+        if (this.glaze.equals(anotherCake.glaze)) {
+            correctCount++;
+        }
+        if (this.topping.equals(anotherCake.topping)) {
+            correctCount++;
+        }
+        if (this.decoration.equals(anotherCake.decoration)) {
+            correctCount++;
+        }
+
+        return correctCount + "/" + NUM_ELEMENTS;
     }
 
     public int getNumberOfTiers() {
@@ -132,6 +153,7 @@ public class Cake implements Writable {
         return result;
     }
 
+    // EFFECTS: Returns cake as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

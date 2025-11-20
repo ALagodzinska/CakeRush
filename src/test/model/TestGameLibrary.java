@@ -3,6 +3,9 @@ package model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+import java.util.Random;
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -88,5 +91,18 @@ public class TestGameLibrary {
 
         assertEquals(3, json.getInt("nextID"));
         assertEquals(1, json.getJSONArray("games").length());
+    }
+
+    @Test
+    void testGetPlayableGames() {
+        GameSession game1 = gameLibrary.createGame();
+        GameSession game2 = gameLibrary.createGame();
+        game2.addPlayedRound(new GameRound(new Random()));
+        game2.addPlayedRound(new GameRound(new Random()));
+        game2.addPlayedRound(new GameRound(new Random()));
+
+        List<GameSession> playableGames = gameLibrary.getPlayableGames();
+        assertEquals(1, playableGames.size());
+        assertEquals(game1, playableGames.get(0));
     }
 }

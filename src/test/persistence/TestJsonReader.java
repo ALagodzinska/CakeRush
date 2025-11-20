@@ -53,14 +53,14 @@ public class TestJsonReader extends JsonTestBase {
             GameLibrary gameLibrary = reader.read();
             assertEquals(1, gameLibrary.getGames().size());
             GameSession game = gameLibrary.getGames().get(0);          
-            checkGame(1, false, 0, 3, 0, game);
+            checkGame(1, false, 0, 3, 0, 0,game);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralGameLibrary() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralGameLibrary.json");
         try {
             GameLibrary gameLibrary = reader.read();
@@ -69,16 +69,16 @@ public class TestJsonReader extends JsonTestBase {
             GameSession gameOne = games.get(0);
             GameSession gameTwo = games.get(1);
 
-            checkGame(1, false, 0, 2, 2, gameOne);
-            checkGame(2, false, 0, 2, 1, gameTwo);
+            checkGame(1, false, 30, 2, 2, 20, gameOne);
+            checkGame(2, false, 0, 2, 1, 20, gameTwo);
             
             Cake targetCake = new Cake();
             Cake userCake = new Cake();
             targetCake.setNumberOfTiers(2);
 
-            checkRound(targetCake, userCake, false, gameOne.getRounds().get(0));
-            checkRound(userCake, userCake, true, gameOne.getRounds().get(1));
-            checkRound(targetCake, userCake, false, gameTwo.getRounds().get(0));
+            checkRound(targetCake, userCake, false, 10, 0, gameOne.getRounds().get(0));
+            checkRound(userCake, userCake, true, 10, 30, gameOne.getRounds().get(1));
+            checkRound(targetCake, userCake, false, 20, 0, gameTwo.getRounds().get(0));
             
             
         } catch (IOException e) {
