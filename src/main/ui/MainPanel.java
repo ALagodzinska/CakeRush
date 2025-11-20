@@ -19,7 +19,8 @@ public class MainPanel extends JFrame {
     // Creates new GameLibrary instance.
     public MainPanel() {
         super();
-        library = new GameLibrary();        
+        library = new GameLibrary();
+        
         this.setSize(1000, 875);
         this.setLocationRelativeTo(null);
     }

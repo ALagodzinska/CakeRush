@@ -14,10 +14,10 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 public class Title extends JLabel {
     // Creates a styled text label with specified text.
     public Title(String text) {
-        super(text);
+        super(text.toUpperCase());
         this.setFont(new Font("Arial", Font.BOLD, 50));
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
     }
 }

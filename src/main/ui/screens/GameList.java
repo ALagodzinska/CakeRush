@@ -67,7 +67,7 @@ public class GameList extends JPanel {
     private void addReturnBtn() {
         this.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        JButton goBack = new ReturnButton("GO BACK");
+        JButton goBack = new ReturnButton();
         goBack.addActionListener(e -> mainPanel.displayScreen(new MainMenu(mainPanel)));
 
         JPanel bottomCorner = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -87,7 +87,7 @@ public class GameList extends JPanel {
         JPanel sortByScoreBtns = createScoreSortBtn();
         
         buttonPanel.add(togglePlayableSortBtn);
-        buttonPanel.add(Box.createHorizontalStrut(400));
+        buttonPanel.add(Box.createHorizontalStrut(500));
         buttonPanel.add(sortByScoreBtns);
 
         this.add(buttonPanel);

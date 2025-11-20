@@ -9,9 +9,8 @@ import javax.swing.JPanel;
 
 import model.GameSession;
 import ui.MainPanel;
-import ui.components.MenuButton;
 import ui.components.Title;
-
+import ui.components.buttons.MenuButton;
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
@@ -67,7 +66,7 @@ public class GameMenu extends JPanel {
     private void addRoundHistoryBtn() {
         JButton roundHistory = new MenuButton("VIEW ROUNDS");
         roundHistory.addActionListener(e -> 
-                mainPanel.displayScreen(new RoundList(game, mainPanel))); // TODO: add action on click
+                mainPanel.displayScreen(new RoundList(game, mainPanel)));
 
         if (game.getRounds().size() == 0) {
             roundHistory.setEnabled(false);
@@ -82,7 +81,7 @@ public class GameMenu extends JPanel {
     private void addExitBtn() {
         JButton exit = new MenuButton("EXIT");
         exit.addActionListener(e -> 
-                mainPanel.displayScreen(new MainMenu(mainPanel))); // TODO: add action on click
+                mainPanel.displayScreen(new MainMenu(mainPanel)));
         this.add(exit); 
     }
 }

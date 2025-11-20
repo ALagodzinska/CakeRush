@@ -55,7 +55,7 @@ public class RoundList extends JPanel {
     private void addReturnBtn() {
         this.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        JButton goBack = new ReturnButton("GO BACK");
+        JButton goBack = new ReturnButton();
         goBack.addActionListener(e -> mainPanel.displayScreen(new MainMenu(mainPanel)));
         
         JPanel bottomCorner = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -77,8 +77,8 @@ public class RoundList extends JPanel {
         return rows;
     }
 
-    // EFFECTS: Creates and returns a panel that represents a row that stores round data - round number, time, score, lives and
-    // game statistics.
+    // EFFECTS: Creates and returns a panel that represents a row that stores round data
+    // - round number, time, score, lives and game statistics.
     private JPanel createRowPanel(GameRound round, int index) {
         JPanel row = new JPanel();
         row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));

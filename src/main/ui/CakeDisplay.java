@@ -55,6 +55,8 @@ public class CakeDisplay extends JPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Clears all image values.
     private void clearImageValues() { 
         cakeBaseImage = null;
         glazeImage = null;
