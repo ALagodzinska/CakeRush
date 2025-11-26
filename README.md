@@ -27,3 +27,40 @@ This game is great for people who enjoy challenges that **train memory and focus
 - You can locate my visual component by starting to play a round.
 - You can save the state of my application by pressing "Yes" on the popup that is shown after you choose to exit the application.
 - You can reload played games that were saved to a file by clicking "Yes" on the popup that is shown when the application starts.
+
+# Phase 4: Task 2
+
+## Not loading existing games
+Tue Nov 25 21:13:10 PST 2025
+Starting empty game library
+
+Tue Nov 25 21:13:18 PST 2025
+Created new game with id 1
+
+Tue Nov 25 21:13:21 PST 2025
+Starting new round with random java.util.Random@2f1902b9
+
+Tue Nov 25 21:13:30 PST 2025
+Completed round with score 0 correctly guessed 1/5
+
+Tue Nov 25 21:13:30 PST 2025
+Added new round to the game with id 1
+
+## Loading and saving games
+Tue Nov 25 21:18:27 PST 2025
+Starting empty game library
+
+Tue Nov 25 21:18:29 PST 2025
+Loading game library with next id 4
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 1
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 2
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 3
+
+Tue Nov 25 21:18:39 PST 2025
+Saving game library with next id 4 and 3 games

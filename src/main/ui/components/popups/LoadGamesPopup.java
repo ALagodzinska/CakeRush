@@ -13,17 +13,15 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 @ExcludeFromJacocoGeneratedReport
 // Represents a popup that prompts user to load previously played games into game library.
-public class LoadGamesPopup extends PopupBase {
-    private JsonReader jsonReader;
+public class LoadGamesPopup extends PopupBase {    
     private MainPanel mainPanel;
 
     // EFFECTS: Creates a popup base with specified title and labels, adds action to the popup buttons.
     // Initiazlizes a JsonReader instance.
-    public LoadGamesPopup(MainPanel mainPanel, GameLibrary library) {
+    public LoadGamesPopup(MainPanel mainPanel) {
         super(mainPanel, "LOAD PLAYED GAMES?", "", "NO", "YES");
         this.addActionToCancelButton(new ExitActionListener());
         this.addActionToContinueButton(new LoadActionListener());
-        this.jsonReader = new JsonReader(MainPanel.GAME_STORAGE);        
         this.mainPanel = mainPanel;
     }    
 
@@ -44,6 +42,8 @@ public class LoadGamesPopup extends PopupBase {
         // current game library in the main panel. After action is done closes the popup.
         @Override
         public void actionPerformed(ActionEvent e) {
+            JsonReader jsonReader = new JsonReader(MainPanel.GAME_STORAGE); 
+
             try {
                 GameLibrary library = jsonReader.read();
                 LoadGamesPopup.this.mainPanel.setGameLibrary(library);

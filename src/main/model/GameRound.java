@@ -23,6 +23,7 @@ public class GameRound implements Writable {
     // EFFECTS: Creates a game round with random target cake, default user cake, 
     // victory status set to false, round time and score set to zero.
     public GameRound(Random random) {
+        EventLog.getInstance().logEvent(new Event("Starting new round with random " + random.toString()));
         this.targetCake = new Cake(random);
         this.userCake = new Cake();
         this.isVictory = false;
@@ -76,9 +77,12 @@ public class GameRound implements Writable {
     // EFFECTS: Sets round victory state to true if the target cake and user cake are same otherwise sets to false.
     // Calculates score for the round
     public void finishRound(int roundTime) {
+        EventLog.getInstance().logEvent(new Event("Completed round with score " + score 
+                + " correctly guessed " + userCake.getComparisonAccuracy(targetCake)));
+
         this.roundTime = roundTime;
         this.isVictory = targetCake.compare(userCake);        
-        calculateScore();
+        calculateScore();        
     }
 
     // EFFECTS: Converts and returns round as a JSONobject.

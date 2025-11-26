@@ -57,7 +57,7 @@ public class ElementSelectionButtons extends JPanel {
     // MODIFIES: this
     // EFFECTS: Based on passed boolean value disables or enables all buttons in this button group.
     public void setEnableAll(boolean enable) {
-        Enumeration<AbstractButton> allButtons = this.btnGroup.getElements(); 
+        Enumeration<AbstractButton> allButtons = btnGroup.getElements(); 
 
         while (allButtons.hasMoreElements()) {
             AbstractButton button = (AbstractButton) allButtons.nextElement();

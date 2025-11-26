@@ -12,7 +12,6 @@ import ui.MainPanel;
 import ui.components.GameLogo;
 import ui.components.buttons.MenuButton;
 import ui.components.popups.SaveGamesPopup;
-
 import model.GameLibrary;
 import model.GameSession;
 
@@ -72,7 +71,6 @@ public class MainMenu extends JPanel {
         gameHistory.addActionListener(e -> 
                 mainPanel.displayScreen(new GameList(mainPanel)));
 
-        System.out.println(gameLibrary.getGames().size());
         if (gameLibrary.getGames().size() == 0) {            
             gameHistory.setEnabled(false);
         }
@@ -85,12 +83,11 @@ public class MainMenu extends JPanel {
     // EFFECTS: Creates the exit button, assigns the action event to it and adds it to this panel.
     private void addExitBtn() {
         JButton exit = new MenuButton("EXIT");
-        exit.addActionListener(e -> {
+        exit.addActionListener(e -> {            
             SaveGamesPopup popup = new SaveGamesPopup(mainPanel, gameLibrary);
-            popup.open();
-            System.exit(0);
+            popup.open();                      
         });
         this.add(exit); 
-    }
+    }    
 }
 

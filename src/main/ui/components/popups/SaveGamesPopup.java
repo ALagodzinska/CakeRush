@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+import model.Event;
+import model.EventLog;
 import model.GameLibrary;
 import persistence.JsonWriter;
 import ui.MainPanel;
@@ -13,7 +15,6 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 @ExcludeFromJacocoGeneratedReport
 // Represents a popup that prompts user to save previously played games into game a file.
 public class SaveGamesPopup extends PopupBase {
-    private JsonWriter jsonWriter; 
     private GameLibrary gameLibrary;
 
     // EFFECTS: Creates a popup base with specified title and labels, adds action to the popup buttons.
@@ -22,7 +23,6 @@ public class SaveGamesPopup extends PopupBase {
         super(mainPanel, "SAVE PLAYED GAMES?", library.getGames().size() + " GAMES TO SAVE", "NO", "YES");
         this.addActionToCancelButton(new ExitActionListener());
         this.addActionToContinueButton(new SaveActionListener());
-        this.jsonWriter = new JsonWriter(MainPanel.GAME_STORAGE);
         this.gameLibrary = library;
     }    
 
@@ -30,7 +30,8 @@ public class SaveGamesPopup extends PopupBase {
     // EFFECTS: Closes popup and exits application.
     @Override
     public void close() {
-        this.setVisible(false);           
+        this.setVisible(false);
+        printLog(EventLog.getInstance());           
         System.exit(0);
     }
     
@@ -41,6 +42,8 @@ public class SaveGamesPopup extends PopupBase {
         // After action is done closes the popup.
         @Override
         public void actionPerformed(ActionEvent e) {
+            JsonWriter jsonWriter = new JsonWriter(MainPanel.GAME_STORAGE);
+            
             try {
                 jsonWriter.open();
                 jsonWriter.write(gameLibrary);
@@ -60,6 +63,13 @@ public class SaveGamesPopup extends PopupBase {
         @Override
         public void actionPerformed(ActionEvent e) {
             close();
+        }
+    }
+
+    // EFFECTS: prints all logs stored in the event log.
+    public void printLog(EventLog eventLog) {
+        for (Event event : eventLog) {
+            System.out.println(event + "\n");
         }
     }
 }

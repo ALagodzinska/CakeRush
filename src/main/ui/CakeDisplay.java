@@ -69,7 +69,6 @@ public class CakeDisplay extends JPanel {
     protected void paintComponent(Graphics g) {
         loadImages();
         super.paintComponent(g);
-        System.out.println("HERE");
         drawFirstTier(g);
 
         int numOfTiers = this.cake.getNumberOfTiers();
