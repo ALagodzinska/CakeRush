@@ -28,7 +28,7 @@ public class MainPanel extends JFrame {
     // EFFECTS: Starts the application by openning the popup asking user to load previously 
     // played games.
     public void startGame() {
-        PopupBase loadGamesPopup = new LoadGamesPopup(this, library);
+        PopupBase loadGamesPopup = new LoadGamesPopup(this);
         loadGamesPopup.open();
     }
 

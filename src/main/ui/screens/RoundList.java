@@ -24,8 +24,7 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 // Represents a screen where are displayed all played rounds in a list format.
 public class RoundList extends JPanel {
     private String[] columnNames = {"ROUND NUMBER", "ROUND TIME", "ROUND SCORE", "CORRECTLY GUESSED"};
-    private MainPanel mainPanel;
-    private ListBase listDisplay;
+    private MainPanel mainPanel;    
 
     // EFFECTS: Constructs a round list screen.
     public RoundList(GameSession game, MainPanel mainPanel) {
@@ -44,7 +43,7 @@ public class RoundList extends JPanel {
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 40)));
 
-        this.listDisplay = new ListBase(columnNames, createDataRows(game.getRounds())); 
+        ListBase listDisplay = new ListBase(columnNames, createDataRows(game.getRounds())); 
         this.add(listDisplay); 
 
         addReturnBtn();

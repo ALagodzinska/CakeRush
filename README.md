@@ -27,3 +27,46 @@ This game is great for people who enjoy challenges that **train memory and focus
 - You can locate my visual component by starting to play a round.
 - You can save the state of my application by pressing "Yes" on the popup that is shown after you choose to exit the application.
 - You can reload played games that were saved to a file by clicking "Yes" on the popup that is shown when the application starts.
+
+# Phase 4: Task 2
+
+## Not loading existing games
+Tue Nov 25 21:13:10 PST 2025
+Starting empty game library
+
+Tue Nov 25 21:13:18 PST 2025
+Created new game with id 1
+
+Tue Nov 25 21:13:21 PST 2025
+Starting new round with random java.util.Random@2f1902b9
+
+Tue Nov 25 21:13:30 PST 2025
+Completed round with score 0 correctly guessed 1/5
+
+Tue Nov 25 21:13:30 PST 2025
+Added new round to the game with id 1
+
+## Loading and saving games
+Tue Nov 25 21:18:27 PST 2025
+Starting empty game library
+
+Tue Nov 25 21:18:29 PST 2025
+Loading game library with next id 4
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 1
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 2
+
+Tue Nov 25 21:18:29 PST 2025
+Loaded existing game with id 3
+
+Tue Nov 25 21:18:39 PST 2025
+Saving game library with next id 4 and 3 games
+
+# Phase 4: Task 3
+
+I think a lot can be improved in the UI class because, in the UI, many classes heavily depend on each other. I could split the RoundScreen class into smaller components. For example, one part could handle just the visual display, and the other could depend on GameRound and interact with the model. I think I would be able to remove, in many places, the dependency on both GameRound and GameSession if I added an ID of the game to the GameRound model. Then I will know what GameRound belongs to which GameSession, without the need to have both of them. This way, UI components that relate only to the round would depend solely on GameRound.
+
+I think that, since all the main screens depend on the MainPanel, which in my application acts as the main window that manages showing different screens, I can just use the singleton pattern to create one instance of the panel and remove all the current dependencies. For the model class, I think a good improvement would be converting the enums from CakeElements into separate classes with different subclasses. That would make it easier to add more elements in the future without needing to adjust a lot of code. This would also help reduce repetition in methods related to the enums, as they all look very similar. Then the Cake class could just store a list of different cake elements and perform certain actions based on the object type.

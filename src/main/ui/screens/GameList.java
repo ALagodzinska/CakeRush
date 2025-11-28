@@ -182,8 +182,6 @@ public class GameList extends JPanel {
         List<JPanel> dataRows = new ArrayList<JPanel>();
         List<GameSession> games = this.filteredListOfGames;
 
-        System.out.println(games.get(0).getTotalScore());
-
         for (GameSession game: games) {
             JPanel row = createRowPanel(game);
             dataRows.add(row);

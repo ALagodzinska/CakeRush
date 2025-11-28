@@ -48,10 +48,14 @@ public class GameSession implements Writable {
     // MODIFIES: this
     // EFFECTS: Adds a new round to the list of rounds and updates the game statistics.
     public void addPlayedRound(GameRound round) {
-        rounds.add(round);
-        updateAfterRound(round);
+        EventLog.getInstance().logEvent(new Event("Added new round to the game with id " + gameID));
+        rounds.add(round);      
+
+        updateAfterRound(round);        
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds an existing round to the list of rounds.
     public void addSavedRound(GameRound round) {
         rounds.add(round);
     }
@@ -88,7 +92,10 @@ public class GameSession implements Writable {
         if (!isVictory) {
             livesLeft--;
             if (livesLeft <= 0) {
-                this.isFinished = true;
+                EventLog.getInstance().logEvent(new Event("Game with id " + gameID 
+                        + " is no longer playable: no lives left")); 
+                        
+                this.isFinished = true;                
             }
         }
 

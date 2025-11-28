@@ -17,22 +17,26 @@ public class GameLibrary implements Writable {
 
     // EFFECTS: Creates a game library with empty list of games.
     public GameLibrary() {
+        EventLog.getInstance().logEvent(new Event("Starting empty game library"));
         games = new ArrayList<>();
     }
 
     // EFFECTS: Creates a game library with specified next game id and an empty list of games.
     public GameLibrary(int nextID) {
+        EventLog.getInstance().logEvent(new Event("Loading game library with next id " + nextID));
         nextGameID = nextID;
         games = new ArrayList<>();
     }
 
     // MODIFIES: this
     // EFFECTS: Creates a new game and adds game to the list of games, inreases the next ID by one.
-    public GameSession createGame() {
+    public GameSession createGame() {        
         GameSession game = new GameSession(nextGameID);
-        nextGameID++;
+        EventLog.getInstance().logEvent(new Event("Created new game with id " + game.getGameID()));
 
-        games.add(game);
+        nextGameID++;       
+
+        games.add(game);       
 
         return game;
     }
@@ -40,9 +44,9 @@ public class GameLibrary implements Writable {
     // MODIFIES: this
     // EFFECTS: Creates a game with specified parameters and adds it to the list of games, inreases the next ID by one.
     public void addExistingGame(GameSession game) {
+        EventLog.getInstance().logEvent(new Event("Loaded existing game with id " + game.getGameID()));
         nextGameID = game.getGameID() + 1;
-
-        games.add(game);
+        games.add(game);        
     }
 
     // EFFECTS: Returns a game from the list of all games based on the passed id. 
@@ -72,7 +76,6 @@ public class GameLibrary implements Writable {
     
     // EFFECTS: Returns the list of games that are not finished.
     public List<GameSession> getPlayableGames() {
-        // stub
         return this.games.stream()
                     .filter(game -> game.isFinished() == false)
                     .collect(Collectors.toList());
@@ -81,6 +84,8 @@ public class GameLibrary implements Writable {
     // EFFECTS: Returns game library as a json object.
     @Override
     public JSONObject toJson() {
+        EventLog.getInstance().logEvent(new Event("Saving game library with next id " + nextGameID 
+                + " and " + games.size() + " games"));
         JSONObject json = new JSONObject();
         json.put("nextID", nextGameID);
         json.put("games", gamesToJson());
