@@ -77,12 +77,11 @@ public class GameRound implements Writable {
     // EFFECTS: Sets round victory state to true if the target cake and user cake are same otherwise sets to false.
     // Calculates score for the round
     public void finishRound(int roundTime) {
-        EventLog.getInstance().logEvent(new Event("Completed round with score " + score 
-                + " correctly guessed " + userCake.getComparisonAccuracy(targetCake)));
-
         this.roundTime = roundTime;
         this.isVictory = targetCake.compare(userCake);        
         calculateScore();        
+        EventLog.getInstance().logEvent(new Event("Completed round with score " + score 
+                + " correctly guessed " + userCake.getComparisonAccuracy(targetCake)));
     }
 
     // EFFECTS: Converts and returns round as a JSONobject.
