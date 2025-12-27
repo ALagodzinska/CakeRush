@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-![Gameplay demo](images/demo.gif)
+  <img src="images/demo.gif" width="400" />
 </p>
 
 
