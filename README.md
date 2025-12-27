@@ -1,14 +1,12 @@
 # My Personal Project: “Cake Rush” Game
 
 <p align="center">
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/c0b63e77-8ae5-41e9-b6e7-9030656389ab" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/5d04f556-38d4-4458-a6f1-5bd99d19f6fd" />
 </p>
 
 <p align="center">
-  <img src="images/demo.gif" width="400" />
+  <img src="images/demo.gif" width="600" />
 </p>
-
-
 
 ## Description of the project
 My project is **a game and a memory exercise** where the user plays as a baker who must **recreate a cake from memory**. At the start of each round, the user is shown a randomly generated cake. Once this preview ends, the user has to recreate the image they saw by selecting the correct options from cake elements (number of tiers, color of the cake, glazing color, decorations, etc.). Each element has multiple options to choose from; for example, decorations can include a candle, note, balloon, or flower. If the recreated cake matches the preview cake, the player earns a point and continues to the next round. **The aim is to complete as many rounds as possible.** The game is lost when the player has lost three times. 
