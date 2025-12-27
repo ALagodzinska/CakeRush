@@ -1,5 +1,15 @@
 # My Personal Project: “Cake Rush” Game
 
+<p align="center">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/c0b63e77-8ae5-41e9-b6e7-9030656389ab" />
+</p>
+
+<p align="center">
+![Gameplay demo](images/demo.gif)
+</p>
+
+
+
 ## Description of the project
 My project is **a game and a memory exercise** where the user plays as a baker who must **recreate a cake from memory**. At the start of each round, the user is shown a randomly generated cake. Once this preview ends, the user has to recreate the image they saw by selecting the correct options from cake elements (number of tiers, color of the cake, glazing color, decorations, etc.). Each element has multiple options to choose from; for example, decorations can include a candle, note, balloon, or flower. If the recreated cake matches the preview cake, the player earns a point and continues to the next round. **The aim is to complete as many rounds as possible.** The game is lost when the player has lost three times. 
 
@@ -70,3 +80,7 @@ Saving game library with next id 4 and 3 games
 I think a lot can be improved in the UI class because, in the UI, many classes heavily depend on each other. I could split the RoundScreen class into smaller components. For example, one part could handle just the visual display, and the other could depend on GameRound and interact with the model. I think I would be able to remove, in many places, the dependency on both GameRound and GameSession if I added an ID of the game to the GameRound model. Then I will know what GameRound belongs to which GameSession, without the need to have both of them. This way, UI components that relate only to the round would depend solely on GameRound.
 
 I think that, since all the main screens depend on the MainPanel, which in my application acts as the main window that manages showing different screens, I can just use the singleton pattern to create one instance of the panel and remove all the current dependencies. For the model class, I think a good improvement would be converting the enums from CakeElements into separate classes with different subclasses. That would make it easier to add more elements in the future without needing to adjust a lot of code. This would also help reduce repetition in methods related to the enums, as they all look very similar. Then the Cake class could just store a list of different cake elements and perform certain actions based on the object type.
+
+## Requirements
+
+- JDK 11 (tested with OpenJDK 11.0.28)
